@@ -40,7 +40,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Mabace 2 Website By Logonedigital');
+            ->setTitle('MA.BA.CE.II');
     }
 
     public function configureMenuItems(): iterable
