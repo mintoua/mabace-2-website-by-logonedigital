@@ -27,7 +27,10 @@ class UserCrudController extends AbstractCrudController
                 'User' => 'ROLE_USER',
                 'Employes' => 'ROLE_ADMIN',
                 'Administrateur' => 'ROLE_SUPER_ADMIN'
-            ])->allowMultipleChoices()->setLabel('ROLE(S)'),
+            ])
+            ->allowMultipleChoices()
+            ->autocomplete()
+            ->setLabel('ROLE(S)'),
             EmailField::new('email')->setLabel('Email'),
             BooleanField::new('rgpd')->setLabel('RGPD')->hideOnIndex(),
             BooleanField::new('isVerifyEd')->setLabel('COMPTE ACTIVE')->hideOnIndex(),
