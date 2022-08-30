@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Service;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -11,12 +12,34 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class ServiceCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
         return Service::class;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        $post = $this->getEntityFqcn();
+        return $crud
+            ->setPageTitle('index', 'Gérer les services')
+            ->setPageTitle('new', 'Ajouter un service')
+            ->setPageTitle('detail', "Service")
+            ;
+    }
+
+    public function deleteEntity ( EntityManagerInterface $entityManager , $entityInstance ) : void
+    {
+        $fileImage =  $this->getParameter ("images_directory").'/ServiceImages/'.$entityInstance->getImage();
+        if (file_exists ($fileImage)){
+            unlink ($fileImage);
+        }
+
+        $entityManager->remove ($entityInstance);
+        $entityManager->flush ();
     }
 
     public function configureFields(string $pageName): iterable
@@ -33,18 +56,10 @@ class ServiceCrudController extends AbstractCrudController
             AssociationField::new('ServiceCategory')->setLabel('Catégorie du service'),
             TextareaField::new('description')
                 ->setLabel('Description du service')
+                ->setFormType (CKEditorType::class)
+                ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
                 ->renderAsHtml(),
         ];
-    }
-
-    public function configureCrud(Crud $crud): Crud
-    {
-        $post = $this->getEntityFqcn();
-        return $crud
-            ->setPageTitle('index', 'Gérer les services')
-            ->setPageTitle('new', 'Ajouter un service')
-            ->setPageTitle('detail', "Service")
-            ;
     }
 
     public function configureActions(Actions $actions): Actions

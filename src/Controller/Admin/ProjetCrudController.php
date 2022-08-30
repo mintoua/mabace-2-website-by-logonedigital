@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Projet;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -19,6 +20,25 @@ class ProjetCrudController extends AbstractCrudController
         return Projet::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle('index', 'Gérer vos projets')
+            ->setPageTitle('new', 'Ajouter un nouveau projet')
+            ->setPageTitle('detail', "Projet")
+            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig');
+    }
+
+    public function deleteEntity ( EntityManagerInterface $entityManager , $entityInstance ) : void
+    {
+        $fileImage =  $this->getParameter ("images_directory").'/ProjetsImages/'.$entityInstance->getImage();
+        if (file_exists ($fileImage)){
+            unlink ($fileImage);
+        }
+
+        $entityManager->remove ($entityInstance);
+        $entityManager->flush ();
+    }
 
     public function configureFields(string $pageName): iterable
     {
@@ -33,21 +53,11 @@ class ProjetCrudController extends AbstractCrudController
                 ->setUploadedFileNamePattern('[randomhash].[extension]')->setRequired(false),
             TextareaField::new('description')
                 ->setLabel('Description du projet')
-                ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
                 ->setFormType (CKEditorType::class)
                 ->renderAsHtml (),
         ];
     }
 
-    public function configureCrud(Crud $crud): Crud
-    {
-        $post = $this->getEntityFqcn();
-        return $crud
-            ->setPageTitle('index', 'Gérer vos projets')
-            ->setPageTitle('new', 'Ajouter un nouveau projet')
-            ->setPageTitle('detail', "Projet")
-            ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig');
-    }
 
     public function configureActions(Actions $actions): Actions
     {
