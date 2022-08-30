@@ -1,0 +1,7 @@
+easy_admin:
+  entities:
+    Post:
+      list:
+        actions:
+          - { name: "search", label: "My Search" }
+          - { name: "new", label: "My New action" }

@@ -34,6 +34,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $firstname = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
+
+    #[ORM\Column]
+    private ?bool $isVerifyEd = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isBlocked = null;
+
+    #[ORM\Column]
+    private ?bool $rgpd = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -124,6 +139,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function isIsVerifyEd(): ?bool
+    {
+        return $this->isVerifyEd;
+    }
+
+    public function setIsVerifyEd(bool $isVerifyEd): self
+    {
+        $this->isVerifyEd = $isVerifyEd;
+
+        return $this;
+    }
+
+    public function isIsBlocked(): ?bool
+    {
+        return $this->isBlocked;
+    }
+
+    public function setIsBlocked(?bool $isBlocked): self
+    {
+        $this->isBlocked = $isBlocked;
+
+        return $this;
+    }
+
+    public function isRgpd(): ?bool
+    {
+        return $this->rgpd;
+    }
+
+    public function setRgpd(bool $rgpd): self
+    {
+        $this->rgpd = $rgpd;
 
         return $this;
     }
