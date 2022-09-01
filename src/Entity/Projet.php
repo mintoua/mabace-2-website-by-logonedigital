@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProjetRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
 class Projet
@@ -22,6 +23,12 @@ class Projet
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
+
+    /**
+     * @Gedmo\Slug (fields={"intitule"})
+     */
+    #[ORM\Column(length: 50)]
+    private ?string $slug = null;
 
     public function getId(): ?int
     {
@@ -60,6 +67,18 @@ class Projet
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

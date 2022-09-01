@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ServiceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
 class Service
@@ -26,6 +27,12 @@ class Service
     #[ORM\ManyToOne(inversedBy: 'services')]
     #[ORM\JoinColumn(nullable: false)]
     private ?ServiceCategory $ServiceCategory = null;
+
+    /**
+     * @Gedmo\Slug (fields={"designation"})
+     */
+    #[ORM\Column(length: 50)]
+    private ?string $slug = null;
 
     public function getId(): ?int
     {
@@ -76,6 +83,18 @@ class Service
     public function setServiceCategory(?ServiceCategory $ServiceCategory): self
     {
         $this->ServiceCategory = $ServiceCategory;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
