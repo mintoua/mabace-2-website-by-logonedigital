@@ -36,17 +36,6 @@ class DefaultController extends AbstractController
         return $this->render('default/about-us.html.twig');
     }
 
-    #[Route('/blog', name: 'app_blog')]
-    public function blog(): Response
-    {
-        return $this->render('default/blog.html.twig');
-    }
-    #[Route('/blog-1', name: 'app_blog_detail')]
-    public function blogDetail(): Response
-    {
-        return $this->render('default/blog-single.html.twig');
-    }
-
     #[Route('/contact', name: 'app_contact')]
     public function contact(
         Request $req,

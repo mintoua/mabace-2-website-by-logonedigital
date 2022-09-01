@@ -1,29 +1,8 @@
 {% extends "base.html.twig" %} {% block title %} Accueil | MA.BA.CE.&#x2161; {%
 endblock %} {% block body %}
 <div id="cursor"></div>
-<!-- Header -->
-
-<!-- Header -->
 {{ include("./includes/navbar.html.twig") }}
 
-<!-- Custom Cursor -->
-
-<!-- end Custom Cursor -->
-
-<!-- Google Maps -->
-{#
-<div class="container-fluid padding-0">
-  <div
-    id="map1"
-    class="gmap gmap-xl"
-    data-latitude="51.513569"
-    data-longitude="-0.123443"
-  ></div>
-</div>
-#}
-<!-- end Google Maps -->
-
-<!-- Contact section -->
 <div class="section">
   <div class="container">
     <div class="row g-4">
@@ -44,50 +23,62 @@ endblock %} {% block body %}
       <div class="col-12 col-md-8">
         <div class="contact-form text-md-end">
           {{ form_start(form) }}
-            <div class="row gx-3 gy-0">
-              <div class="col-12 col-sm-6">
-                {{
-                form_row(form.nom, {
+          <div class="row gx-3 gy-0">
+            <div class="col-12 col-sm-6">
+              {{
+                form_row(form.firstname, {
                   label: false,
                   attr: {
-                    class: "form-input",
                     placeholder: "Nom"
                   }
                 })
-                }}
-              </div>
-              <div class="col-12 col-sm-6">
-                {{
-                form_row(form.email, {
+              }}
+            </div>
+            <div class="col-12 col-sm-6">
+              {{
+                form_row(form.lastname, {
                   label: false,
                   attr: {
-                    class: "form-input",
-                    placeholder: "Email"
+                    placeholder: "Prénom"
                   }
+                })
+              }}
+            </div>
+            {{
+              form_row(form.email, {
+                label: false,
+                attr: {
+                  placeholder: "E-mail"
+                }
+              })
+            }}
+            <div class="col-12 col-md-8">
+              <div class="col-12 col-sm-6">
+                {{
+                form_row(form.rgpd, {
+                label: false,
+                attr: {
+                    class: "form-check-input",
+                                            
+                }
                 })
                 }}
               </div>
+              <div class="col-12 col-sm-6">
+                J'accepte les
+                <a href="#" class="cgu-link"
+                  >conditions générales d'utilisation</a
+                >
+              </div>
             </div>
-            {{
-            form_row(form.message, {
-              label: false,
-              attr: {
-                placeholder: "Laissez nous un message..."
-              }
-            })
-            }}
-            <button
-              class="button button-lg button-radius button-outline-dark-2"
-              type="submit"
-            >
-              Send Message
-            </button>
-          {{ form_end(form) }}
-          <!-- Submit result -->
-          <div class="submit-result">
-            <span id="success">Thank you! Your Message has been sent.</span>
-            <span id="error">Something went wrong, Please try again!</span>
           </div>
+          <button
+            class="button button-lg button-radius button-outline-dark-2"
+            type="submit"
+          >
+            Envoyer ma demande
+          </button>
+          {{ form_end(form) }}
         </div>
       </div>
     </div>

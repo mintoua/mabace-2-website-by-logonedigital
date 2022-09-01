@@ -1,0 +1,185 @@
+body {
+  font-family: arial;
+  background-color: rgba(147, 197, 253, 0.1);
+}
+a {
+  text-decoration: none;
+  color: none;
+}
+
+input {
+  background-color: transparent;
+}
+
+.custom-form {
+  padding: 10px 30px 0 30px;
+  padding-bottom: 30px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: white;
+  border: 1px solid lightgrey;
+}
+
+.home-logo-link {
+  position: relative;
+  top: -30px;
+  margin-bottom: -30px;
+  width: 150px;
+  padding: 0;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.form-logo {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+.link-2 {
+  margin-top: 8px;
+}
+
+.custom-form h1 {
+  font-family: Raleway, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.custom-form h4 {
+  font-family: Raleway, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.form-link {
+  color: #acc90f;
+}
+.form-link:hover {
+  color: #acc90f;
+}
+
+.custom-form .seperator {
+  float: left;
+  width: 100%;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  margin: 15px 0 -25px;
+}
+
+.forgot-password-link {
+  font-size: 12px;
+}
+.custom-form .seperator b {
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 40px;
+  background: #fff;
+  display: inline-block;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  position: relative;
+  top: -22px;
+  z-index: 1;
+}
+
+.social-button i {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.back_button {
+  margin-top: 5px;
+}
+
+.back_button a {
+  display: inline-block;
+  width: 50px;
+  padding: none;
+  color: #acc90f;
+}
+
+.create-by-link {
+  font-size: 10px;
+  margin-top: 10px;
+  margin-bottom: -10px;
+}
+
+.__dev {
+  margin-left: 2px;
+  color: #acc90f;
+  transition: text-decoration 0.5s;
+}
+
+.__dev:hover {
+  text-decoration: underline;
+  color: #acc90f;
+}
+.cgu-link {
+  margin-left: 2px;
+  color: #3daa35;
+  transition: text-decoration 0.5s;
+}
+
+.cgu-link:hover {
+  text-decoration: underline;
+  color: #3daa35;
+}
+
+.cgu-wrapper {
+  color: #acc90f;
+}
+
+.create-by-link {
+  color: #3daa35;
+}
+
+#user_password_first_help {
+  font-size: 10px !important;
+  line-height: normal !important;
+  color: lightgrey;
+  font-weight: bold;
+}
+
+#reset_password_new_password_first_help {
+  font-size: 10px !important;
+  line-height: normal !important;
+  color: lightgrey;
+  font-weight: bold;
+}
+
+.form-error-icon {
+  display: none;
+}
+.d-block {
+  margin-top: -10px !important;
+}
+.form-error-message {
+  display: inline-block;
+  width: 100%;
+  font-size: 10px !important;
+}
+
+.btn-form {
+  width: 100%;
+  text-transform: uppercase;
+  background-color: #3daa35;
+  outline: none;
+  border: none;
+  touch-action: manipulation;
+  transition: background-color 0.5s;
+}
+.btn-form:hover {
+  background-color: #acc90f;
+}
+
+.fl-message {
+  text-transform: uppercase;
+  font-weight: bold;
+}

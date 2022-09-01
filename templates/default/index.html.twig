@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %} {% block title %} Accueil | MA.BA.CE.&#x2161; {%
 endblock %} {% block body %}
-
+<div id="cursor"></div>
 <!-- Header -->
 {{ include("./includes/navbar.html.twig") }}
 <!-- end Header -->
@@ -15,7 +15,7 @@ endblock %} {% block body %}
   <!-- Slider Item 1 -->
   <div
     class="bg-image"
-    data-bg-src="{{ asset('frontoffice/') }}images/background.jpg"
+    data-bg-src="{{ asset('frontoffice/') }}images/home-3.jpg"
   >
     <div class="section-xl bg-black-03">
       <div class="container text-center">
@@ -24,14 +24,14 @@ endblock %} {% block body %}
             <h6
               class="uppercase fw-light letter-spacing-1 margin-bottom-20 text-white"
             >
-              Hello there! This Template is
+              manjo bangangte central &#x2161;
             </h6>
             <h1 class="fw-bold uppercase letter-spacing-1">
-              Made for your Business
+              MA.BA.CE.&#x2161;
             </h1>
             <a
               class="button button-xl button-radius button-outline-white margin-top-20 button-font-2"
-              href="#"
+              href="{{ path('app_about') }}"
               >Explore</a
             >
           </div>
@@ -44,7 +44,7 @@ endblock %} {% block body %}
   <!-- Slider Item 2 -->
   <div
     class="bg-image"
-    data-bg-src="{{ asset('frontoffice/') }}images/background.jpg"
+    data-bg-src="{{ asset('frontoffice/') }}images/home-1.jpg"
   >
     <div class="section-xl bg-black-03">
       <div class="container text-center">
@@ -53,14 +53,14 @@ endblock %} {% block body %}
             <h5
               class="uppercase fw-light letter-spacing-1 margin-bottom-20 text-white"
             >
-              Hello there! This Template is
+              manjo bangangte central &#x2161;
             </h5>
             <h1 class="fw-bold uppercase letter-spacing-1">
-              Made for your Business
+              MA.BA.CE.&#x2161;
             </h1>
             <a
               class="button button-xl button-radius button-outline-white margin-top-20 button-font-2"
-              href="#"
+              href="{{ path('app_about') }}"
               >Explore</a
             >
           </div>
