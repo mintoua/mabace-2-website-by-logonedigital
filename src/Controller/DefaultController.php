@@ -2,19 +2,25 @@
 
 namespace App\Controller;
 
-use App\Entity\Projet;
+use App\Entity\Contact;
 use App\Entity\Service;
 use App\Entity\ServiceCategory;
+use App\Form\ContactType;
+use App\Services\CurlService;
 use Doctrine\ORM\EntityManagerInterface;
+use Flasher\Prime\FlasherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class DefaultController extends AbstractController
 {
 
     public function __construct (
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
+        private FlasherInterface $flasher
     )
     {}
 
@@ -42,35 +48,29 @@ class DefaultController extends AbstractController
     }
 
     #[Route('/contact', name: 'app_contact')]
-    public function contact(): Response
+    public function contact(
+        Request $req,
+        EntityManagerInterface $em,
+    ): Response
     {
-        return $this->render('default/contact.html.twig');
-    }
+        $contact = new Contact();
+        $form = $this->createForm(ContactType::class, $contact);
 
-    #[Route('/petites-annonces', name: 'app_services')]
-    public function services(): Response
-    {
-        $services = $this->entityManager->getRepository (Service::class)->findAll ();
-        $categoriesServices = $this->entityManager->getRepository (ServiceCategory::class)->findAll ();
 
-        return $this->render('default/services.html.twig',[
-            'services'=>$services,
-            'categoriesServices'=>$categoriesServices
+        $form->handleRequest($req);
+
+        if($form->isSubmitted() and $form->isValid()){
+
+                    $em->persist($contact);
+                    $em->flush();
+                    $this->flasher->addSuccess("Votre demande a bien été prise en compte.");
+                    return $this->redirectToRoute('app_contact');
+        }
+
+        return $this->render('default/contact.html.twig', [
+            'form'=>$form->createView()
         ]);
     }
 
-    #[Route('/nos-projets', name: 'app_projet')]
-    public function projet(): Response
-    {
-        $projects = $this->entityManager->getRepository (Projet::class)->findAll ();
-        return $this->render('default/projets.html.twig',[
-            'projets' => $projects
-        ]);
-    }
 
-    #[Route('/nos-projets-1', name: 'app_projet_detail')]
-    public function projetDetail(): Response
-    {
-        return $this->render('default/projet-single.html.twig');
-    }
 }
