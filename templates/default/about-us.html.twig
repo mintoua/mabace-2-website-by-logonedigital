@@ -1,0 +1,197 @@
+{% extends "base.html.twig" %} {% block title %} Accueil | MA.BA.CE.&#x2161; {%
+endblock %} {% block body %}
+
+<!-- Header -->
+{{ include("./includes/navbar.html.twig") }}
+<!-- end Header -->
+
+<!-- About section -->
+<div class="section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-12 col-lg-5">
+        <h3 class="fw-light">
+          We're a team of professionals who loves what they do
+        </h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+          massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+          nascetur ridiculus mus.
+        </p>
+        <a
+          class="button button-lg button-rounded button-reveal-right-dark margin-top-30"
+          href="#"
+          ><span>Get In Touch</span><i class="bi bi-arrow-right"></i
+        ></a>
+      </div>
+      <div class="col-12 col-lg-7">
+        <div class="row gallery-wrapper g-2">
+          <!-- Gallery image box 1 -->
+          <div class="col-6 gallery-box">
+            <div class="gallery-img">
+              <a
+                href="{{ asset('frontoffice/') }}images/col-2-tall.jpg"
+                data-gallery-title="Gallery Image 1"
+              >
+                <img
+                  src="{{ asset('frontoffice/') }}images/col-2-tall.jpg"
+                  alt=""
+                />
+              </a>
+            </div>
+          </div>
+          <!-- Gallery image box 2 -->
+          <div class="col-6 gallery-box">
+            <div class="gallery-img">
+              <a
+                href="{{ asset('frontoffice/') }}images/col-2-tall.jpg"
+                data-gallery-title="Gallery Image 2"
+              >
+                <img
+                  src="{{ asset('frontoffice/') }}images/col-2-tall.jpg"
+                  alt=""
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- end row/gallery-wrapper -->
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+</div>
+<!-- end About section -->
+
+<!-- Services section -->
+<div class="container">
+  <div class="row g-3 icon-5xl text-center">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="border-all border-radius padding-30">
+        <i class="margin-top-10 ti-ruler-pencil text-dark"></i>
+        <h5 class="fw-normal margin-top-10">Graphic Design</h5>
+        <p class="margin-bottom-10">
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+          commodo ligula eget dolor.
+        </p>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="border-all border-radius padding-30">
+        <i class="margin-top-10 ti-camera text-dark"></i>
+        <h5 class="fw-normal margin-top-10">Photography</h5>
+        <p class="margin-bottom-10">
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+          commodo ligula eget dolor.
+        </p>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="border-all border-radius padding-30">
+        <i class="margin-top-10 ti-star text-dark"></i>
+        <h5 class="fw-normal margin-top-10">Social Marketing</h5>
+        <p class="margin-bottom-10">
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+          commodo ligula eget dolor.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+</div>
+<!-- end container -->
+<!-- end Services section -->
+
+<!-- Clients section -->
+<div class="section">
+  <div class="container">
+    <div class="margin-bottom-70">
+      <div class="row text-center">
+        <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+          <h2 class="fw-light">Our Clients</h2>
+          <div class="divider-width-50px">
+            <hr class="bg-black-07" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="clients-grid column-5">
+      <!-- 1 -->
+      <li>
+        <a href="#">
+          <img src="{{ asset('frontoffice/') }}images/col-5.jpg" alt="" />
+        </a>
+      </li>
+      <!-- 2 -->
+      <li>
+        <a href="#">
+          <img src="{{ asset('frontoffice/') }}images/col-5.jpg" alt="" />
+        </a>
+      </li>
+      <!-- 3 -->
+      <li>
+        <a href="#">
+          <img src="{{ asset('frontoffice/') }}images/col-5.jpg" alt="" />
+        </a>
+      </li>
+      <!-- 4 -->
+      <li>
+        <a href="#">
+          <img src="{{ asset('frontoffice/') }}images/col-5.jpg" alt="" />
+        </a>
+      </li>
+      <!-- 5 -->
+      <li>
+        <a href="#">
+          <img src="{{ asset('frontoffice/') }}images/col-5.jpg" alt="" />
+        </a>
+      </li>
+      <!-- 6 -->
+      <li>
+        <a href="#">
+          <img src="{{ asset('frontoffice/') }}images/col-5.jpg" alt="" />
+        </a>
+      </li>
+      <!-- 7 -->
+      <li>
+        <a href="#">
+          <img src="{{ asset('frontoffice/') }}images/col-5.jpg" alt="" />
+        </a>
+      </li>
+      <!-- 8 -->
+      <li>
+        <a href="#">
+          <img src="{{ asset('frontoffice/') }}images/col-5.jpg" alt="" />
+        </a>
+      </li>
+      <!-- 9 -->
+      <li>
+        <a href="#">
+          <img src="{{ asset('frontoffice/') }}images/col-5.jpg" alt="" />
+        </a>
+      </li>
+      <!-- 10 -->
+      <li>
+        <a href="#">
+          <img src="{{ asset('frontoffice/') }}images/col-5.jpg" alt="" />
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- end container -->
+</div>
+<!-- end Clients section -->
+
+{{ include("./includes/footer.html.twig") }}
+
+<!-- Scroll to top button -->
+<div class="scrolltotop">
+  <a class="button-circle button-circle-sm button-circle-dark" href="#"
+    ><i class="bi bi-arrow-up"></i
+  ></a>
+</div>
+<!-- end Scroll to top button -->
+
+<!-- ***** JAVASCRIPTS ***** -->
+{% endblock %}

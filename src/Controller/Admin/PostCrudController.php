@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Post;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -19,6 +20,16 @@ class PostCrudController extends AbstractCrudController
         return Post::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        $post = $this->getEntityFqcn();
+        return $crud
+        ->setPageTitle('index', 'Gérer vos articles')
+        ->setPageTitle('new', 'Ajouter un nouvelle articles')
+        ->setPageTitle('detail', "Article")
+        ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
+        ;
+    }
     
     public function configureFields(string $pageName): iterable
     {
@@ -33,21 +44,14 @@ class PostCrudController extends AbstractCrudController
             //TextareaField::new('content'),
             AssociationField::new('categoryPost')->setLabel('Thématique'),
             TextareaField::new('content')
-                ->setLabel('Content')
+                ->setLabel('Contenu')
+                ->setFormType(CKEditorType::class)
                 ->hideOnIndex()
                 ->renderAsHtml(),
         ];
     }
 
-    public function configureCrud(Crud $crud): Crud
-    {
-        $post = $this->getEntityFqcn();
-        return $crud
-        ->setPageTitle('index', 'Gérer vos articles')
-        ->setPageTitle('new', 'Ajouter un nouvelle articles')
-        ->setPageTitle('detail', "Article")
-        ;
-    }
+    
 
     public function configureActions(Actions $actions): Actions
     {

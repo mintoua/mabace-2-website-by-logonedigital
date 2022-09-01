@@ -1,0 +1,106 @@
+//
+// Section Dividers //
+//
+.section-divider-waves-top {
+  position: relative;
+  overflow: hidden;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include transform(rotate(180deg));
+    background-image: url("../../../svg/waves.svg");
+    width: 100%;
+    height: 70px;
+  }
+}
+.section-divider-waves-bottom {
+  position: relative;
+  overflow: hidden;
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-image: url("../../../svg/waves.svg");
+    width: 100%;
+    height: 70px;
+  }
+}
+.section-divider-wavesOpacity-top {
+  position: relative;
+  overflow: hidden;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url("../../../svg/wavesOpacity.svg");
+    width: 122%;
+    height: 70px;
+  }
+}
+.section-divider-wavesOpacity-bottom {
+  position: relative;
+  overflow: hidden;
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    @include transform(rotate(180deg));
+    background-image: url("../../../svg/wavesOpacity.svg");
+    width: 122%;
+    height: 70px;
+  }
+}
+.section-divider-curve-top {
+  position: relative;
+  overflow: hidden;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -5%;
+    @include transform(rotate(180deg));
+    background-image: url("../../../svg/curve.svg");
+    width: 110%;
+    height: 60px;
+  }
+}
+.section-divider-curve-bottom {
+  position: relative;
+  overflow: hidden;
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -5%;
+    background-image: url("../../../svg/curve.svg");
+    width: 110%;
+    height: 60px;
+  }
+}
+@include breakpoint-less(md) {
+  .section-divider-waves-top,
+  .section-divider-waves-bottom {
+    &:before {
+      width: 140%;
+      height: 50px;
+    }
+  }
+  .section-divider-wavesOpacity-top,
+  .section-divider-wavesOpacity-bottom {
+    &:before {
+      width: 160%;
+      height: 50px;
+    }
+  }
+  .section-divider-curve-top,
+  .section-divider-curve-bottom {
+    &:before {
+      height: 50px;
+    }
+  }
+}
