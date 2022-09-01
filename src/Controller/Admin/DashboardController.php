@@ -47,13 +47,23 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
-        yield MenuItem::linkToCrud('Les Projets', 'fas fa-tarp', Projet::class);
-        yield MenuItem::linkToCrud('Categorie des Services', 'fas fa-list', ServiceCategory::class);
-        yield MenuItem::linkToCrud('Services', 'fas fa-newspaper', Service::class);
-        yield MenuItem::linkToCrud('Thématiques blog', 'fas fa-list', CategoryPost::class);
-        yield MenuItem::linkToCrud('Articles blog', 'fas fa-newspaper', Post::class);
-        yield MenuItem::linkToCrud('Courriel', 'fas fa-envelope', Contact::class);
+
+        return [
+            MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
+            MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class),
+            MenuItem::section  ('',''),
+
+            MenuItem::subMenu('Blog', 'fas fa-list')->setSubItems([
+                MenuItem::linkToCrud('Thématiques blog', 'fa fa-tags', CategoryPost::class),
+                MenuItem::linkToCrud('Posts', 'fa fa-file-text', Post::class),
+            ]),
+            MenuItem::subMenu('Services', 'fas fa-list')->setSubItems([
+                 MenuItem::linkToCrud('Categorie', 'fa fa-tags', ServiceCategory::class),
+                 MenuItem::linkToCrud('Les Services', 'fas fa-newspaper', Service::class),
+            ]),
+            MenuItem::section  ('',''),
+            MenuItem::linkToCrud('Courriel', 'fas fa-envelope', Contact::class)
+            // ...
+        ];
     }
 }
