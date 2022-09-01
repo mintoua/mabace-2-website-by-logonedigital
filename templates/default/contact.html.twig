@@ -43,46 +43,46 @@ endblock %} {% block body %}
       </div>
       <div class="col-12 col-md-8">
         <div class="contact-form text-md-end">
-          <form method="post" id="contactform">
+          {{ form_start(form) }}
             <div class="row gx-3 gy-0">
               <div class="col-12 col-sm-6">
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Name"
-                  required
-                />
+                {{
+                form_row(form.nom, {
+                  label: false,
+                  attr: {
+                    class: "form-input",
+                    placeholder: "Nom"
+                  }
+                })
+                }}
               </div>
               <div class="col-12 col-sm-6">
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="E-Mail"
-                  required
-                />
+                {{
+                form_row(form.email, {
+                  label: false,
+                  attr: {
+                    class: "form-input",
+                    placeholder: "Email"
+                  }
+                })
+                }}
               </div>
             </div>
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              placeholder="Subject"
-              required
-            />
-            <textarea
-              name="message"
-              id="message"
-              placeholder="Message"
-            ></textarea>
+            {{
+            form_row(form.message, {
+              label: false,
+              attr: {
+                placeholder: "Laissez nous un message..."
+              }
+            })
+            }}
             <button
               class="button button-lg button-radius button-outline-dark-2"
               type="submit"
             >
               Send Message
             </button>
-          </form>
+          {{ form_end(form) }}
           <!-- Submit result -->
           <div class="submit-result">
             <span id="success">Thank you! Your Message has been sent.</span>

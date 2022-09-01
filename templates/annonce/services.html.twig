@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %} {% block title %} Accueil | MA.BA.CE.&#x2161; {%
+endblock %} {% block body %}
+
+<!-- Header -->
+{{ include("./includes/navbar.html.twig") }}
+
+<div
+  class="section-lg bg-image bg-image-gradient-top parallax"
+  data-bg-src="{{ asset('frontoffice/') }}images/background.jpg"
+>
+  <div class="bg-white-06">
+    <div class="container text-center">
+      <div class="row g-4">
+        <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+          <h1 class="fw-light margin-0">
+            Team of highly skilled people are ready to work with you
+          </h1>
+        </div>
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- end container -->
+  </div>
+</div>
+
+<div class="section padding-top-0">
+  <div class="container">
+    <div class="row icon-5xl g-4 text-center">
+      {% for service in services %}
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="border-all border-radius padding-40 hover-shadow">
+          <h5 class="fw-normal margin-top-10">{{ service.designation }}</h5>
+          <p>
+            {{ service.description | striptags | slice(0, 200) }}
+          </p>
+          <a class="button-text-2 margin-top-20" href="#">intéressé(e)</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+</div>
+
+{{ include("./includes/footer.html.twig") }}
+
+<!-- Scroll to top button -->
+<div class="scrolltotop">
+  <a class="button-circle button-circle-sm button-circle-dark" href="#"
+    ><i class="bi bi-arrow-up"></i
+  ></a>
+</div>
+<!-- end Scroll to top button -->
+
+<!-- ***** JAVASCRIPTS ***** -->
+
+<!-- ***** JAVASCRIPTS ***** -->
+{% endblock %}

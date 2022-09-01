@@ -56,6 +56,15 @@
             "./config/packages/fos_ckeditor.yaml"
         ]
     },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.9.0"
+    },
+    "mercuryseries/flashy-bundle": {
+        "version": "v5.1.0"
+    },
+    "php-flasher/flasher-symfony": {
+        "version": "v1.7.0"
+    },
     "phpunit/phpunit": {
         "version": "9.5",
         "recipe": {
