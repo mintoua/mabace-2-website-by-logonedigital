@@ -1,12 +1,18 @@
-<div class="header center dark sticky-autohide">
+<div class="header right sticky-autohide">
   <div class="container">
     <!-- Logo -->
     <div class="header-logo">
-      <h3><a href="#">mono</a></h3>
-      <!-- 
-					<img class="logo-dark" src="{{ asset('frontoffice/') }}images/your-logo-dark.png" alt="">
-					<img class="logo-light" src="{{ asset('frontoffice/') }}images/your-logo-light.png" alt=""> 
-					-->
+      {#
+      <img
+        class="logo-dark"
+        src="{{ asset('frontoffice/') }}images/your-logo-dark.png"
+        alt=""
+      />
+      #}
+      <img
+        src="{{ asset('frontoffice/') }}images/logo-1.png"
+        alt="logo mabace deux"
+      />
     </div>
     <!-- Menu -->
     <div class="header-menu">
@@ -20,15 +26,20 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ path('app_services') }}"
-            >Services</a
-          >
+          <a class="nav-link" href="{{ path('app_services') }}">Services</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="{{ path('app_blog') }}">Blog</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link" href="{{ path('app_projet') }}">Projets</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_new_member') }}"
+            >Devenir Membre</a
+          >
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ path('app_contact') }}"
@@ -100,13 +111,12 @@
     <div class="header-menu-extra">
       <ul class="list-inline">
         <li>
+          <a href="{{ path('app_register') }}"
+            ><i class="bi bi-person-circle"></i
+          ></a>
+        </li>
+        <li>
           <a href="#"><i class="bi bi-facebook"></i></a>
-        </li>
-        <li>
-          <a href="#"><i class="bi bi-twitter"></i></a>
-        </li>
-        <li>
-          <a href="#"><i class="bi bi-linkedin"></i></a>
         </li>
         <li>
           <a href="#"><i class="bi bi-linkedin"></i></a>

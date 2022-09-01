@@ -1,0 +1,132 @@
+{% extends "base_form.html.twig" %} {% block body %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-5 col-lg-5 col-xl-5">
+      {% form_theme form 'bootstrap_4_layout.html.twig' %}
+      {{form_start(form, { attr:{class:'custom-form'}})}}
+      <div class="row back_button">
+        <a href="{{ app.request.headers.get('referer') }}"
+          ><i class="fas fa-arrow-left" style="font-size: 25px"></i>
+        </a>
+      </div>
+      <div class="row justify-content-center">
+        <a
+          href="{{ path('app_home') }}"
+          class="home-logo-link"
+          style="text-align: center"
+        >
+          <img
+            class="form-logo"
+            src="{{ asset('frontoffice/') }}images/logo-1.png"
+            alt="logo mabace deux"
+          />
+        </a>
+      </div>
+
+      <div class="row">
+        <h4>Créer un compte</h4>
+      </div>
+      <div class="mb-3">
+        {{
+                form_row(form.lastname, {
+                label: "Nom",
+                attr: {
+                    class: "form-control",                       
+                }
+                })
+        }}
+      </div>
+      <div class="mb-3">
+        {{
+                form_row(form.firstname, {
+                label: "Prenom",
+                attr: {
+                    class: "form-control",
+                                            
+                }
+                })
+        }}
+      </div>
+      <div class="mb-3">
+        {{
+                form_row(form.email, {
+                label: "Email",
+                attr: {
+                    class: "form-control",                        
+                }
+                })
+        }}
+      </div>
+      <div class="mb-3">
+        {{
+                form_row(form.password.first, {
+                label: "Mot de passe",
+                attr: {
+                    class: "form-control",                        
+                }
+                })
+        }}
+      </div>
+      <div class="mb-3">
+        {{
+                form_row(form.password.second, {
+                label: "Confirmez votre mot de passe",
+                attr: {
+                    class: "form-control",
+                                            
+                }
+                })
+        }}
+      </div>
+      <div class="row mb-3">
+        <div class="col-1 col-lg-1">
+          {{
+                form_row(form.rgpd, {
+                label: false,
+                attr: {
+                    class: "form-check-input",
+                                            
+                }
+                })
+          }}
+        </div>
+        <div class="col-11 cgu-wrapper">
+          J'accepte les
+          <a href="#" class="cgu-link">conditions générales d'utilisation</a>
+        </div>
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-success btn-form">
+          Se connecter
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-12 col-lg-4 d-flex justify-content-start">
+          <a href="#" class="form-link forgot-password-link"
+            >Mot de passe oublié</a
+          >
+        </div>
+        <div class="col-12 col-lg-8 d-flex justify-content-end">
+          <a
+            href="#"
+            class="form-link forgot-password-link"
+            style="text-align: right"
+            >Créer un compte compte</a
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-lg-12">
+          <span class="create-by-link d-flex justify-content-center"
+            >Created by
+            <a class="__dev" href="https://logonedigital.com/" target="_blank"
+              >Logonedigital</a
+            >
+          </span>
+        </div>
+      </div>
+      {{ form_end(form) }}
+    </div>
+  </div>
+</div>
+{% endblock %}

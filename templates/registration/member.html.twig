@@ -1,0 +1,98 @@
+{% extends "base.html.twig" %} {% block title %} Accueil | MA.BA.CE.&#x2161; {%
+endblock %} {% block body %}
+<div id="cursor"></div>
+{{ include("./includes/navbar.html.twig") }}
+
+<div class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-12 col-md-4">
+        <div class="margin-bottom-30">
+          <h6 class="fw-normal margin-0">Phone:</h6>
+          <p>+(987) 654 321 01</p>
+        </div>
+        <div class="margin-bottom-30">
+          <h6 class="fw-normal margin-0">Email:</h6>
+          <p>contact@email.com</p>
+        </div>
+        <div>
+          <h6 class="fw-normal margin-0">Address:</h6>
+          <p>121 King St, Melbourne VIC 3000</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-8">
+        <div class="contact-form text-md-end">
+          {{ form_start(form) }}
+          <div class="row gx-3 gy-0">
+            <div class="col-12 col-sm-6">
+              {{
+                form_row(form.firstname, {
+                  label: false,
+                  attr: {
+                    placeholder: "Nom"
+                  }
+                })
+              }}
+            </div>
+            <div class="col-12 col-sm-6">
+              {{
+                form_row(form.lastname, {
+                  label: false,
+                  attr: {
+                    placeholder: "Prénom"
+                  }
+                })
+              }}
+            </div>
+            {{
+              form_row(form.email, {
+                label: false,
+                attr: {
+                  placeholder: "E-mail"
+                }
+              })
+            }}
+            <div class="col-12 col-md-8">
+              <div class="col-12 col-sm-6">
+                {{
+                form_row(form.rgpd, {
+                label: false,
+                attr: {
+                    class: "form-check-input",
+                                            
+                }
+                })
+                }}
+              </div>
+              <div class="col-12 col-sm-6">
+                J'accepte les
+                <a href="#" class="cgu-link"
+                  >conditions générales d'utilisation</a
+                >
+              </div>
+            </div>
+          </div>
+          <button
+            class="button button-lg button-radius button-outline-dark-2"
+            type="submit"
+          >
+            Envoyer ma demande
+          </button>
+          {{ form_end(form) }}
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+</div>
+<!-- end Contact section -->
+
+{{ include("./includes/footer.html.twig") }}
+<div class="scrolltotop">
+  <a class="button-circle button-circle-sm button-circle-dark" href="#"
+    ><i class="bi bi-arrow-up"></i
+  ></a>
+</div>
+<!-- ***** JAVASCRIPTS ***** -->
+{% endblock %}
