@@ -1,0 +1,32 @@
+fos_http_cache:
+  cache_control:
+    defaults:
+      overwrite: false
+    rules:
+      - match:
+          path: ^/admin
+        headers:
+          cache_control:
+            public: false
+            max_age: 0
+            no_cache: true
+            no_store: true
+            must_revalidate: true
+      - match:
+          path: ^/mot-de-passe-oublie
+        headers:
+          cache_control:
+            public: false
+            max_age: 0
+            no_cache: true
+            no_store: true
+            must_revalidate: true
+      - match:
+          path: ^/s-inscrire
+        headers:
+          cache_control:
+            public: false
+            max_age: 0
+            no_cache: true
+            no_store: true
+            must_revalidate: true

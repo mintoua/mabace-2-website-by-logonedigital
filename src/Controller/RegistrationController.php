@@ -143,7 +143,7 @@ class RegistrationController extends AbstractController
         $user->setIsVerifyEd(true);
         $entityManager->flush();
 
-        $this->flasher->addSuccess('Votre email a bien été confirmer!.');
+        $this->flasher->addSuccess('Votre email a bien été confirmé.');
 
         return $this->redirectToRoute('app_home');
     }
@@ -179,7 +179,7 @@ class RegistrationController extends AbstractController
             );
 
             // do anything else you need here, like send an email
-            $content = "Bonjour ".$user->getFirstname().' '.$user->getLastname()."Nous vous remercions pour votre inscription sur le site MA.BA.CE.&#x2161; </br>";
+            $content = "Bonjour ".$user->getFirstname().' '.$user->getLastname()."nous vous remercions pour votre inscription sur le site MA.BA.CE.&#x2161; </br>";
             $content .="Merci de bien vouloir cliquez sur le lien suivant pour <a href='".$signatureComponents->getSignedUrl()."'>afin de valider votre email</a>.";
 
             $this->sender->send(
