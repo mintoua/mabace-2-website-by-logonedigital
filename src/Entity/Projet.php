@@ -30,6 +30,12 @@ class Projet
     #[ORM\Column(length: 50)]
     private ?string $slug = null;
 
+    /**
+     * @Gedmo\Timestampable(on="create")
+     */
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -79,6 +85,18 @@ class Projet
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

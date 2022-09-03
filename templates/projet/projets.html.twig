@@ -34,12 +34,12 @@ MA.BA.CE.&#x2161; {% endblock %} {% block body %}
                 >
               </div>
               <div class="d-inline-flex">
-                <span class="font-small">Jan 24, 2019</span>
+                <span class="font-small">{{ projet.createdAt | date("d/m/Y") }}</span>
               </div>
             </div>
             <h5><a href="{{ path('app_projet_detail',{slug: projet.slug}) }}">{{ projet.intitule }}</a></h5>
             <p>
-              {{ projet.description | raw }}
+              {{ projet.description | striptags | slice(0, 900) }}
             </p>
             <div class="margin-top-20">
               <a class="button-text-1" href="{{ path('app_projet_detail',{slug: projet.slug}) }}"

@@ -1,6 +1,45 @@
 {% extends "base.html.twig" %} {% block title %} Accueil | MA.BA.CE.&#x2161; {%
-endblock %} {% block body %}
+endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+{% endblock %}
+
+{% block javascripts %}
+
+  <script>
+    function chooseCategory(cat,slug) {
+      const url = new URL(window.location.href);
+
+      fetch(url.pathname + "?" + "catSlug=" + slug.toString() + "&ajax=1", {
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      })
+              .then((response) => response.json())
+              .then((data) => {
+                var content = document.getElementById("services_content");
+                var newLabel = document.getElementById("labelChoosen");
+                //console.log(data.content)
+                newLabel.innerHTML =
+                        slug + '<i class="uil iconify" data-icon="mdi:chevron-down"></i>';
+
+                content.innerHTML = data.content;
+                history.pushState(
+                        {},
+                        null,
+                        url.pathname + "?" + "catSlug=" + slug.toString()
+                );
+              })
+              .catch((e) => console.log(e));
+    }
+  </script>
+{% endblock%}
+
+{% block body %}
+  {% set queryParams = app.request.query.all
+    |filter((v,k)=>k!="page") %}
 <!-- Header -->
 {{ include("./includes/navbar.html.twig") }}
 
@@ -22,22 +61,55 @@ endblock %} {% block body %}
     <!-- end container -->
   </div>
 </div>
-
-<div class="section padding-top-0">
-  <div class="container">
-    <div class="row icon-5xl g-4 text-center">
-      {% for service in services %}
-      <div class="col-12 col-md-6 col-lg-4">
-        <div class="border-all border-radius padding-40 hover-shadow">
-          <h5 class="fw-normal margin-top-10">{{ service.designation }}</h5>
-          <p>
-            {{ service.description | striptags | slice(0, 200) }}
-          </p>
-          <a class="button-text-2 margin-top-20" href="#">intéressé(e)</a>
-        </div>
-      </div>
+<div class="sec-center">
+  <div class="dropdown">
+    {% if queryParams is not empty and queryParams.catSlug is not empty %}
+      {% if queryParams.catSlug == "Tous" %}
+        <button class="button button-lg button-radius button-outline-dark-2 dropdown-toggle" type="button"
+               id="labelChoosen" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tous
+          <i class="uil iconify" data-icon="mdi:chevron-down"></i>
+        </button>
+      {% else %}
+        {% for cat in categoriesServices %}
+          {% if cat.intitule == queryParams.catSlug %}
+        <button class="button button-lg button-radius button-outline-dark-2 dropdown-toggle" type="button"
+               id="labelChoosen" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ cat.intitule }}
+          <i class="uil iconify" data-icon="mdi:chevron-down"></i>
+        </button>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% else%}
+      <button class="button button-lg button-radius button-outline-dark-2 dropdown-toggle" type="button"
+             id="labelChoosen" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Filtrer selon la categorie
+        <i class="uil iconify" data-icon="mdi:chevron-down"></i>
+      </button>
+    {% endif %}
+    <div class="dropdown-menu" aria-labelledby="labelChoosen">
+      <a class="dropdown-item" href="javascript:chooseCategory(0,'Tous');"
+      >Tous <i class="uil uil-arrow-right"></i
+        ></a>
+      {% for category in categoriesServices %}
+        <a
+                class="dropdown-item"
+                href="javascript:chooseCategory({{ category.id }},'{{ category.intitule }}');"
+        >{{ category.intitule }} <i class="uil uil-arrow-right"></i
+          ></a>
       {% endfor %}
     </div>
+  </div>
+</div>
+<div class="section padding-top-0">
+  <div class="container">
+    <div class="row icon-5xl g-4 text-center" id="services_content">
+      {% include "annonce/serviceList.html.twig" %}
+    </div>
+    <nav>
+      {{ knp_pagination_render(services,"pagination.html.twig") }}
+    </nav>
     <!-- end row -->
   </div>
   <!-- end container -->
@@ -51,9 +123,5 @@ endblock %} {% block body %}
     ><i class="bi bi-arrow-up"></i
   ></a>
 </div>
-<!-- end Scroll to top button -->
 
-<!-- ***** JAVASCRIPTS ***** -->
-
-<!-- ***** JAVASCRIPTS ***** -->
 {% endblock %}

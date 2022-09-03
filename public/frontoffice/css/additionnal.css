@@ -1,0 +1,7 @@
+.sec-center {
+    position: relative;
+    max-width: 20%;
+    text-align: center;
+    z-index: 200;
+    margin-bottom: 2%;
+}

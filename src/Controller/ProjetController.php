@@ -21,11 +21,11 @@ class ProjetController extends AbstractController
     #[Route('/nos-projets', name: 'app_projet')]
     public function index(Request $request): Response
     {
-        $projects = $this->entityManager->getRepository (Projet::class)->findAll ();
+        $_projects = $this->entityManager->getRepository (Projet::class)->findAll ();
         $projects = $this->paginator->paginate(
-            $projects,
+            $_projects,
             $request->query->getInt('page', 1),
-            2
+            3
         );
 
         return $this->render('projet/projets.html.twig', [
