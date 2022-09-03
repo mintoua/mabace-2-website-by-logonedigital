@@ -56,11 +56,26 @@
             "./config/packages/fos_ckeditor.yaml"
         ]
     },
+    "friendsofsymfony/http-cache-bundle": {
+        "version": "2.13.0"
+    },
     "knplabs/knp-paginator-bundle": {
         "version": "v5.9.0"
     },
     "mercuryseries/flashy-bundle": {
         "version": "v5.1.0"
+    },
+    "nyholm/psr7": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "0cd4d2d0e7f646fda75f9944f747a56e6ed13d4c"
+        },
+        "files": [
+            "./config/packages/nyholm_psr7.yaml"
+        ]
     },
     "php-flasher/flasher-symfony": {
         "version": "v1.7.0"
