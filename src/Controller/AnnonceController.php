@@ -4,28 +4,64 @@ namespace App\Controller;
 
 use App\Entity\Service;
 use App\Entity\ServiceCategory;
+use App\Services\DefaultService;
 use Doctrine\ORM\EntityManagerInterface;
 use Flasher\Prime\FlasherInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AnnonceController extends AbstractController
 {
     public function __construct (
-        private EntityManagerInterface $entityManager
+        private EntityManagerInterface $entityManager,
+        private DefaultService $defaultService
     )
     {}
 
     #[Route('/petites-annonces', name: 'app_services')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $services = $this->entityManager->getRepository (Service::class)->findAll ();
+        $_services = $this->entityManager->getRepository (Service::class)->findAll ();
+
+        $cat = $request->get("catSlug", 'Tous');
+        if ( $request -> get ( 'ajax' ) ){
+
+            if ($cat != 'Tous' ){
+
+                $_services = $this->entityManager->getRepository (Service::class)
+                    ->findAllServicesByCategory($cat);
+
+                return new JsonResponse([
+                    'content'=> $this->renderView ('annonce/serviceList.html.twig',[
+                        'services'=> $this->defaultService->toPaginate ($_services, $request, 9 )
+                    ])
+                ]);
+            }
+            else{
+                return new JsonResponse([
+                    'content'=> $this->renderView ('annonce/serviceList.html.twig',[
+                        'services'=> $this->defaultService->toPaginate ($_services, $request, 9 )
+                    ])
+                ]);
+            }
+        }
+
         $categoriesServices = $this->entityManager->getRepository (ServiceCategory::class)->findAll ();
 
+        $services = $this->defaultService->toPaginate ( $_services, $request, 9 );
         return $this->render('annonce/services.html.twig',[
             'services'=>$services,
             'categoriesServices'=>$categoriesServices
         ]);
+    }
+
+    #[Route('/petites-annonces/interesse', name: 'app_services_apply')]
+    public function apply(Request $request)
+    {
+        dd ("here");
     }
 }

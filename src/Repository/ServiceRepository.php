@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Service;
+use App\Entity\ServiceCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,21 @@ class ServiceRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findAllServicesByCategory($filter){
+        $query = $this
+            ->createQueryBuilder('s')
+            ->select('c','s')
+            ->join('s.ServiceCategory', 'c');
+
+
+        $query = $query
+            ->andWhere('c.intitule LIKE :categorie')
+            ->setParameter('categorie', $filter);
+
+
+        return $query->getQuery()->getResult();
     }
 
 //    /**
