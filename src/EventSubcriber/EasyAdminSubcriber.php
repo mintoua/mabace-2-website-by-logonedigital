@@ -3,6 +3,9 @@
 namespace App\EventSubcriber;
 
 use App\Entity\Post;
+use App\Entity\Projet;
+use App\Entity\Service;
+use App\Entity\ServiceCategory;
 use App\Entity\User;
 use DateTimeImmutable;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityDeletedEvent;
@@ -29,11 +32,67 @@ class EasyAdminSubcriber implements EventSubscriberInterface
     {
         return[
             BeforeEntityPersistedEvent::class=>['persistanceProcess'],
-            BeforeEntityUpdatedEvent::class=>['updatedProcess']
+            BeforeEntityUpdatedEvent::class=>['updatedProcess'],
+            AfterEntityPersistedEvent::class => ['clearCacheAfter'],
+            AfterEntityDeletedEvent::class => ['clearCacheAfterDeleted'],
+            AfterEntityUpdatedEvent::class => ['clearCacheAfterUpdated'],
         ];
     }
 
-   
+    public function clearCacheAfter(AfterEntityPersistedEvent $event){
+        $entity = $event->getEntityInstance();
+
+        if($entity instanceof Projet){
+            $this->cache->delete ('projets');
+        }
+
+        if ($entity instanceof Service){
+            $this->cache->delete ('services');
+            $this->cache->delete ('service_categories');
+        }
+
+        if ($entity instanceof ServiceCategory){
+            $this->cache->delete ('services');
+            $this->cache->delete ('service_categories');
+        }
+    }
+
+    public function clearCacheAfterDeleted(AfterEntityDeletedEvent $event){
+        $entity = $event->getEntityInstance();
+
+        if($entity instanceof Projet){
+            $this->cache->delete ('projets');
+        }
+
+        if ($entity instanceof Service){
+            $this->cache->delete ('services');
+            $this->cache->delete ('service_categories');
+        }
+
+        if ($entity instanceof ServiceCategory){
+            $this->cache->delete ('services');
+            $this->cache->delete ('service_categories');
+        }
+    }
+
+    public function clearCacheAfterUpdated(AfterEntityUpdatedEvent $event){
+        $entity = $event->getEntityInstance();
+
+        if($entity instanceof Projet){
+            $this->cache->delete ('projets');
+        }
+
+        if ($entity instanceof Service){
+            $this->cache->delete ('services');
+            $this->cache->delete ('service_categories');
+        }
+
+        if ($entity instanceof ServiceCategory){
+            $this->cache->delete ('services');
+            $this->cache->delete ('service_categories');
+        }
+    }
+
 
     //permet de faire des actions sur l'utisateur lorsqu'il est ajouter depuis le dashboard
     public function persistanceProcess(BeforeEntityPersistedEvent $event){

@@ -27,14 +27,16 @@ MA.BA.CE.&#x2161; {% endblock %} {% block body %}
           <div class="margin-top-30">
             <div class="d-flex justify-content-between margin-bottom-10">
               <div class="d-inline-flex">
-                <a
+               {#  <a
                   class="font-family-tertiary font-small fw-normal uppercase"
-                  href="{{ path('app_projet_detail',{slug: projet.slug}) }}"
+                  href=""
                   >Lifestyle</a
-                >
+                > #}
               </div>
               <div class="d-inline-flex">
-                <span class="font-small">{{ projet.createdAt | date("d/m/Y") }}</span>
+                <span class="font-small">{{ projet.getCreatedAt().format("M") }}
+                  {{ projet.getCreatedAt().format("j") }},
+                  {{ projet.getCreatedAt().format("Y") }}</span>
               </div>
             </div>
             <h5><a href="{{ path('app_projet_detail',{slug: projet.slug}) }}">{{ projet.intitule }}</a></h5>

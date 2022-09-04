@@ -16,9 +16,13 @@ class ClientType extends AbstractType
     {
         $builder
             ->add('nom',TextType::class)
-            ->add('prenom', TextType::class)
+            ->add('prenom', TextType::class,[
+                'required'=>false
+            ])
             ->add('tel')
-            ->add('email',EmailType::class)
+            ->add('email',EmailType::class,[
+                'required'=>false
+            ])
             ->add('rgpd', CheckboxType::class, [
                 'constraints' => [
                     new \Symfony\Component\Validator\Constraints\IsTrue([
