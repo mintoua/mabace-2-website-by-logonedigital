@@ -1,3 +1,4 @@
+
 {% for service in services %}
     <div class="col-12 col-md-6 col-lg-4">
         <div class="border-all border-radius padding-40 hover-shadow">
@@ -5,9 +6,11 @@
             <p>
                 {{ service.description | striptags | slice(0, 200) }}
             </p>
-            {% set _slug = service.slug %}
-            <a class="button-text-2 margin-top-20"
-               data-toggle="modal" data-target="#exampleModalCenter">Intéressé(e)</a>
+            <button type="button" class="button-text-2 margin-top-20" href="{{ path('app_services_apply', {'slug': service.slug}) }}"
+                    data-toggle="modal" data-target="#exampleModalCenter" data-whatever="{{ service.slug }}">Intéressé(e)</button>
+
         </div>
     </div>
 {% endfor %}
+    {% set submit_url = path('app_services_apply', { slug: "Web Developer"}) %}
+    {% include 'annonce/modal.html.twig' with {url: submit_url} %}
