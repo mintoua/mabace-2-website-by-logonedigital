@@ -6,8 +6,10 @@ use App\Repository\ProjetRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
+#[UniqueEntity(fields: ['intitule'], message:'ce projet existe déjà !')]
 class Projet
 {
     #[ORM\Id]

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
@@ -27,6 +29,20 @@ class Client
 
     #[ORM\Column]
     private ?bool $rgpd = null;
+
+    #[ORM\OneToMany(mappedBy: 'clients', targetEntity: Service::class, orphanRemoval: true)]
+    private Collection $service;
+
+    public function __toString(): string
+    {
+        // TODO: Implement __toString() method.
+        return $this->getEmail();
+    }
+
+    public function __construct()
+    {
+        $this->service = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +105,36 @@ class Client
     public function setRgpd(bool $rgpd): self
     {
         $this->rgpd = $rgpd;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getService(): Collection
+    {
+        return $this->service;
+    }
+
+    public function addService(Service $service): self
+    {
+        if (!$this->service->contains($service)) {
+            $this->service->add($service);
+            $service->setClients($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): self
+    {
+        if ($this->service->removeElement($service)) {
+            // set the owning side to null (unless already changed)
+            if ($service->getClients() === $this) {
+                $service->setClients(null);
+            }
+        }
 
         return $this;
     }

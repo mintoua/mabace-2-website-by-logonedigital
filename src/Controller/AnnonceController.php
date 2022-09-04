@@ -27,9 +27,7 @@ class AnnonceController extends AbstractController
     #[Route('/petites-annonces', name: 'app_services')]
     public function index(Request $request): Response
     {
-        $client = new Client();
 
-        $form = $this->createForm(ClientType::class,$client);
         $_services = $this->entityManager->getRepository (Service::class)->findAll ();
 
         $cat = $request->get("catSlug", 'Tous');
@@ -54,19 +52,17 @@ class AnnonceController extends AbstractController
                 ]);
             }
         }
-
         $categoriesServices = $this->entityManager->getRepository (ServiceCategory::class)->findAll ();
 
         $services = $this->defaultService->toPaginate ( $_services, $request, 9 );
         return $this->render('annonce/services.html.twig',[
             'services'=>$services,
             'categoriesServices'=>$categoriesServices,
-            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/petites-annonces/{slug}', name: 'app_services_apply')]
-    public function apply(Request $request, $slug)
+    public function apply(Request $request, Service $service)
     {
         $client = new Client();
 
@@ -75,9 +71,12 @@ class AnnonceController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
 
-            dd ($client);
+            $client->addService ($service);
+            $this->entityManager->persist ($client);
+            $this->entityManager->flush ();
+            return $this->redirectToRoute('app_services');
         }
-        return $this->render('annonce/modal.html.twig', [
+        return $this->render('annonce/apply.html.twig', [
             'form' => $form->createView(),
         ]);
     }
