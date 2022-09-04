@@ -1,5 +1,5 @@
-{% extends "base.html.twig" %} {% block title %} Accueil | MA.BA.CE.&#x2161; {%
-endblock %} {% block body %}
+{% extends "base.html.twig" %} {% block title %} {{ post.title }} |
+MA.BA.CE.&#x2161; {% endblock %} {% block body %}
 
 <!-- Header -->
 {{ include("./includes/navbar.html.twig") }}
@@ -8,7 +8,7 @@ endblock %} {% block body %}
 
 <div class="section-sm bg-grey-lighter">
   <div class="container text-center">
-    <h3 class="font-family-secondary">mono blog.</h3>
+    <h3 class="font-family-secondary">{{ post.title }}</h3>
   </div>
   <!-- end container -->
 </div>
@@ -22,8 +22,14 @@ endblock %} {% block body %}
         <!-- Blog Post box 1 -->
         <div class="margin-bottom-50">
           <div class="hoverbox-8">
-            <a href="#">
-              <img src="{{ asset('frontoffice/') }}images/col-1.jpg" alt="" />
+            <a>
+              <img
+                src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
+                data-src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
+                alt="image faisant référent notre articles {{
+                  post.slug
+                }} dans le blog de MA.BA.CE.&#x2161;"
+              />
             </a>
           </div>
           <div class="margin-top-30">
@@ -32,104 +38,24 @@ endblock %} {% block body %}
                 <a
                   class="font-family-tertiary font-small fw-normal uppercase"
                   href="#"
-                  >Lifestyle</a
+                  >{{ post.categoryPost }}</a
                 >
               </div>
               <div class="d-inline-flex">
-                <span class="font-small">Jan 24, 2019</span>
-              </div>
-            </div>
-            <h5><a href="#">Benefits of Minimalism</a></h5>
-            <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-              commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-              penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-              Donec quam felis, ultricies nec, pellentesque eu, pretium quis,
-              sem.
-            </p>
-            <div class="margin-top-20">
-              <a class="button-text-1" href="#">Read More</a>
-            </div>
-          </div>
-        </div>
-        <!-- Blog Post box 2 -->
-        <div class="margin-bottom-50">
-          <div class="hoverbox-8">
-            <a href="#">
-              <img src="{{ asset('frontoffice/') }}images/col-1.jpg" alt="" />
-            </a>
-          </div>
-          <div class="margin-top-30">
-            <div class="d-flex justify-content-between margin-bottom-10">
-              <div class="d-inline-flex">
-                <a
-                  class="font-family-tertiary font-small fw-normal uppercase"
-                  href="#"
-                  >Knowledge</a
+                <span class="font-small"
+                  >{{ post.getCreatedAt().format("M") }}
+                  {{ post.getCreatedAt().format("j") }},
+                  {{ post.getCreatedAt().format("Y") }}</span
                 >
               </div>
-              <div class="d-inline-flex">
-                <span class="font-small">Jan 24, 2019</span>
-              </div>
             </div>
-            <h5><a href="#">10 Books that I will recommend</a></h5>
+            <h5>{{ post.title }}</h5>
             <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-              commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-              penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-              Donec quam felis, ultricies nec, pellentesque eu, pretium quis,
-              sem.
+              {{ post.content | raw }}
             </p>
-            <div class="margin-top-20">
-              <a class="button-text-1" href="#">Read More</a>
-            </div>
-          </div>
-        </div>
-        <!-- Blog Post box 3 -->
-        <div class="margin-bottom-50">
-          <div class="hoverbox-8">
-            <a href="#">
-              <img src="{{ asset('frontoffice/') }}images/col-1.jpg" alt="" />
-            </a>
-          </div>
-          <div class="margin-top-30">
-            <div class="d-flex justify-content-between margin-bottom-10">
-              <div class="d-inline-flex">
-                <a
-                  class="font-family-tertiary font-small fw-normal uppercase"
-                  href="#"
-                  >Health</a
-                >
-              </div>
-              <div class="d-inline-flex">
-                <span class="font-small">Jan 24, 2019</span>
-              </div>
-            </div>
-            <h5><a href="#">Benefits of house plants</a></h5>
-            <p>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-              commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-              penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-              Donec quam felis, ultricies nec, pellentesque eu, pretium quis,
-              sem.
-            </p>
-            <div class="margin-top-20">
-              <a class="button-text-1" href="#">Read More</a>
-            </div>
           </div>
         </div>
         <!-- Pagination -->
-        <nav>
-          <ul class="pagination justify-content-center margin-top-70">
-            <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-          </ul>
-        </nav>
       </div>
       <!-- end Blog Posts -->
 
@@ -137,15 +63,15 @@ endblock %} {% block body %}
       <div class="col-12 col-lg-4 sidebar-wrapper">
         <!-- Sidebar box 1 - About me -->
         <div class="sidebar-box text-center">
-          <h6 class="font-small fw-normal uppercase">About Me</h6>
+          <h6 class="font-small fw-normal uppercase">Auteur</h6>
           <img
             class="img-circle-md margin-bottom-20"
-            src="{{ asset('frontoffice/') }}images/img-circle-medium.jpg"
+            src="{{ asset('frontoffice/') }}images/image-blank-author.jpg"
             alt=""
           />
           <p>
-            Aenean massa. Cum sociis natoque penatibus et magnis dis parturient
-            montes, nascetur ridiculus mus.
+            Cette articles a été redigé par l'administrateur du site
+            MA.BA.CE.&#x2161;
           </p>
           <ul class="list-inline margin-top-20">
             <li>
@@ -164,52 +90,57 @@ endblock %} {% block body %}
         </div>
         <!-- Sidebar box 2 - Categories -->
         <div class="sidebar-box">
-          <h6 class="font-small fw-normal uppercase">Categories</h6>
+          <h6 class="font-small fw-normal uppercase">Nos Thématiques</h6>
           <ul class="list-category">
+            {% for category in categoriesPost %}
             <li>
-              <a href="#">Art <span>11</span></a>
+              <a
+                href="{{
+                  path('app_blog_by_category', { slug: category.slug })
+                }}"
+                >{{ category.designation }}
+                <span>{{ category.posts | length }}</span></a
+              >
             </li>
-            <li>
-              <a href="#">Fashion <span>4</span></a>
-            </li>
-            <li>
-              <a href="#">Lifestyle <span>12</span></a>
-            </li>
-            <li>
-              <a href="#">Nature <span>8</span></a>
-            </li>
-            <li>
-              <a href="#">Travel <span>15</span></a>
-            </li>
+            {% endfor %}
           </ul>
         </div>
         <!-- Sidebar box 3 - Popular Posts -->
         <div class="sidebar-box">
-          <h6 class="font-small fw-normal uppercase">Popular Posts</h6>
-          <!-- Popular post 1 -->
+          <h6 class="font-small fw-normal uppercase">Nos derniers posts</h6>
+          {% for lastPost in lastPosts %}
           <div class="popular-post">
-            <a href="#">
-              <img src="{{ asset('frontoffice/') }}images/img-circle-small.jpg" alt="" />
+            <a href="{{ path('app_blog_detail', { slug: lastPost.slug }) }}">
+              <img
+                src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
+                alt=" {{ lastPost.slug }} "
+              />
             </a>
             <div>
-              <h6 class="fw-normal"><a href="#">Blog Post with Image</a></h6>
-              <span>January 07, 2018</span>
+              <h6 class="fw-normal">
+                <a
+                  href="{{ path('app_blog_detail', { slug: lastPost.slug }) }}"
+                  >{{ lastPost.title | slice(0,30) }}</a
+                >
+              </h6>
+              <span
+                >{{ lastPost.getCreatedAt().format("M") }}
+                {{ lastPost.getCreatedAt().format("j") }},
+                {{ lastPost.getCreatedAt().format("Y") }}</span
+              >
             </div>
           </div>
-          <!-- Popular post 2 -->
+          {% endfor %}
+        </div>
+        {#
+        <div class="sidebar-box">
+          <h6 class="font-small fw-normal uppercase">Nos derniers posts</h6>
           <div class="popular-post">
             <a href="#">
-              <img src="{{ asset('frontoffice/') }}images/img-circle-small.jpg" alt="" />
-            </a>
-            <div>
-              <h6 class="fw-normal"><a href="#">Blog Post with Image</a></h6>
-              <span>January 07, 2018</span>
-            </div>
-          </div>
-          <!-- Popular post 3 -->
-          <div class="popular-post">
-            <a href="#">
-              <img src="{{ asset('frontoffice/') }}images/img-circle-small.jpg" alt="" />
+              <img
+                src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
+                alt=""
+              />
             </a>
             <div>
               <h6 class="fw-normal"><a href="#">Blog Post with Image</a></h6>
@@ -217,35 +148,19 @@ endblock %} {% block body %}
             </div>
           </div>
         </div>
+        #}
         <!-- Sidebar box 4 - Banner Image -->
         <div class="margin-bottom-20">
           <a href="#">
             <img src="{{ asset('frontoffice/') }}images/col-3.jpg" alt="" />
           </a>
         </div>
-        <!-- Sidebar box 5 - Tags -->
-        <div class="sidebar-box">
-          <h6 class="font-small fw-normal uppercase">Tags</h6>
-          <ul class="tags">
-            <li><a href="#">Art</a></li>
-            <li><a href="#">Design</a></li>
-            <li><a href="#">Event</a></li>
-            <li><a href="#">Fashion</a></li>
-            <li><a href="#">Food</a></li>
-            <li><a href="#">Inspiration</a></li>
-            <li><a href="#">Movie</a></li>
-            <li><a href="#">Music</a></li>
-            <li><a href="#">Nature</a></li>
-            <li><a href="#">Office</a></li>
-            <li><a href="#">Painting</a></li>
-            <li><a href="#">Photography</a></li>
-            <li><a href="#">People</a></li>
-            <li><a href="#">Work</a></li>
-          </ul>
-        </div>
+
         <!-- Sidebar box 6 - Facebook Like box -->
         <div class="sidebar-box text-center">
-          <h6 class="font-small fw-normal uppercase">Follow on</h6>
+          <h6 class="font-small fw-normal uppercase">
+            partager cette article sur
+          </h6>
           <ul class="list-inline">
             <li>
               <a href="#"><i class="bi bi-facebook"></i></a>

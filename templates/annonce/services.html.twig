@@ -1,45 +1,41 @@
 {% extends "base.html.twig" %} {% block title %} Accueil | MA.BA.CE.&#x2161; {%
-endblock %}
+endblock %} {% block stylesheets %}
+{{ parent() }}
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+/>
+{% endblock %} {% block javascripts %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-{% endblock %}
+<script>
+  function chooseCategory(cat, slug) {
+    const url = new URL(window.location.href);
 
-{% block javascripts %}
+    fetch(url.pathname + "?" + "catSlug=" + slug.toString() + "&ajax=1", {
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        var content = document.getElementById("services_content");
+        var newLabel = document.getElementById("labelChoosen");
+        //console.log(data.content)
+        newLabel.innerHTML =
+          slug + '<i class="uil iconify" data-icon="mdi:chevron-down"></i>';
 
-  <script>
-    function chooseCategory(cat,slug) {
-      const url = new URL(window.location.href);
-
-      fetch(url.pathname + "?" + "catSlug=" + slug.toString() + "&ajax=1", {
-        headers: {
-          "X-Requested-With": "XMLHttpRequest",
-        },
+        content.innerHTML = data.content;
+        history.pushState(
+          {},
+          null,
+          url.pathname + "?" + "catSlug=" + slug.toString()
+        );
       })
-              .then((response) => response.json())
-              .then((data) => {
-                var content = document.getElementById("services_content");
-                var newLabel = document.getElementById("labelChoosen");
-                //console.log(data.content)
-                newLabel.innerHTML =
-                        slug + '<i class="uil iconify" data-icon="mdi:chevron-down"></i>';
-
-                content.innerHTML = data.content;
-                history.pushState(
-                        {},
-                        null,
-                        url.pathname + "?" + "catSlug=" + slug.toString()
-                );
-              })
-              .catch((e) => console.log(e));
-    }
-  </script>
-{% endblock%}
-
-{% block body %}
-  {% set queryParams = app.request.query.all
-    |filter((v,k)=>k!="page") %}
+      .catch((e) => console.log(e));
+  }
+</script>
+{% endblock%} {% block body %} {% set queryParams = app.request.query.all
+|filter((v,k)=>k!="page") %}
 <!-- Header -->
 {{ include("./includes/navbar.html.twig") }}
 
@@ -63,41 +59,57 @@ endblock %}
 </div>
 <div class="sec-center">
   <div class="dropdown">
-    {% if queryParams is not empty and queryParams.catSlug is not empty %}
-      {% if queryParams.catSlug == "Tous" %}
-        <button class="button button-lg button-radius button-outline-dark-2 dropdown-toggle" type="button"
-               id="labelChoosen" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Tous
-          <i class="uil iconify" data-icon="mdi:chevron-down"></i>
-        </button>
-      {% else %}
-        {% for cat in categoriesServices %}
-          {% if cat.intitule == queryParams.catSlug %}
-        <button class="button button-lg button-radius button-outline-dark-2 dropdown-toggle" type="button"
-               id="labelChoosen" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ cat.intitule }}
-          <i class="uil iconify" data-icon="mdi:chevron-down"></i>
-        </button>
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-    {% else%}
-      <button class="button button-lg button-radius button-outline-dark-2 dropdown-toggle" type="button"
-             id="labelChoosen" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Filtrer selon la categorie
-        <i class="uil iconify" data-icon="mdi:chevron-down"></i>
-      </button>
+    {% if queryParams is not empty and queryParams.catSlug is not empty %} {% if
+    queryParams.catSlug == "Tous" %}
+    <button
+      class="button button-lg button-radius button-outline-dark-2 dropdown-toggle"
+      type="button"
+      id="labelChoosen"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Tous
+      <i class="uil iconify" data-icon="mdi:chevron-down"></i>
+    </button>
+    {% else %} {% for cat in categoriesServices %} {% if cat.intitule ==
+    queryParams.catSlug %}
+    <button
+      class="button button-lg button-radius button-outline-dark-2 dropdown-toggle"
+      type="button"
+      id="labelChoosen"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      {{ cat.intitule }}
+      <i class="uil iconify" data-icon="mdi:chevron-down"></i>
+    </button>
+    {% endif %} {% endfor %} {% endif %} {% else%}
+    <button
+      class="button button-lg button-radius button-outline-dark-2 dropdown-toggle"
+      type="button"
+      id="labelChoosen"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Filtrer selon la categorie
+      <i class="uil iconify" data-icon="mdi:chevron-down"></i>
+    </button>
     {% endif %}
     <div class="dropdown-menu" aria-labelledby="labelChoosen">
       <a class="dropdown-item" href="javascript:chooseCategory(0,'Tous');"
-      >Tous <i class="uil uil-arrow-right"></i
-        ></a>
+        >Tous <i class="uil uil-arrow-right"></i
+      ></a>
       {% for category in categoriesServices %}
-        <a
-                class="dropdown-item"
-                href="javascript:chooseCategory({{ category.id }},'{{ category.intitule }}');"
+      <a
+        class="dropdown-item"
+        href="javascript:chooseCategory({{ category.id }},'{{
+          category.intitule
+        }}');"
         >{{ category.intitule }} <i class="uil uil-arrow-right"></i
-          ></a>
+      ></a>
       {% endfor %}
     </div>
   </div>
@@ -108,7 +120,7 @@ endblock %}
       {% include "annonce/serviceList.html.twig" %}
     </div>
     <nav>
-      {{ knp_pagination_render(services,"pagination.html.twig") }}
+      {{ knp_pagination_render(services, "pagination.html.twig") }}
     </nav>
     <!-- end row -->
   </div>

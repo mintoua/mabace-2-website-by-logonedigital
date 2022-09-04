@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %} {% block title %} Accueil | MA.BA.CE.&#x2161; {%
+{% extends "base.html.twig" %} {% block title %} Blog | MA.BA.CE.&#x2161; {%
 endblock %} {% block body %}
 
 <!-- Header -->
@@ -8,7 +8,9 @@ endblock %} {% block body %}
 
 <div class="section-sm bg-grey-lighter">
   <div class="container text-center">
-    <h3 class="font-family-secondary">mono blog.</h3>
+    <h3 class="font-family-secondary">
+      Découvrez toutes les actualités autour de MA.BA.CE.&#x2161;
+    </h3>
   </div>
   <!-- end container -->
 </div>
@@ -16,149 +18,118 @@ endblock %} {% block body %}
 <!-- Blog Posts -->
 <div class="section">
   <div class="container">
+{# <div class="sec-center">
+  <div class="dropdown">
+    {% if queryParams is not empty and queryParams.catSlug is not empty %} {% if
+    queryParams.catSlug == "Tous" %}
+    <button
+      class="button button-lg button-radius button-outline-dark-2 dropdown-toggle"
+      type="button"
+      id="labelChoosen"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Tous
+      <i class="uil iconify" data-icon="mdi:chevron-down"></i>
+    </button>
+    {% else %} {% for cat in categoriesServices %} {% if cat.intitule ==
+    queryParams.catSlug %}
+    <button
+      class="button button-lg button-radius button-outline-dark-2 dropdown-toggle"
+      type="button"
+      id="labelChoosen"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      {{ cat.intitule }}
+      <i class="uil iconify" data-icon="mdi:chevron-down"></i>
+    </button>
+    {% endif %} {% endfor %} {% endif %} {% else%}
+    <button
+      class="button button-lg button-radius button-outline-dark-2 dropdown-toggle"
+      type="button"
+      id="labelChoosen"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      Filtrer selon la categorie
+      <i class="uil iconify" data-icon="mdi:chevron-down"></i>
+    </button>
+    {% endif %}
+    <div class="dropdown-menu" aria-labelledby="labelChoosen">
+      <a class="dropdown-item" href="javascript:chooseCategory(0,'Tous');"
+        >Tous <i class="uil uil-arrow-right"></i
+      ></a>
+      {% for category in categoriesServices %}
+      <a
+        class="dropdown-item"
+        href="javascript:chooseCategory({{ category.id }},'{{
+          category.intitule
+        }}');"
+        >{{ category.intitule }} <i class="uil uil-arrow-right"></i
+      ></a>
+      {% endfor %}
+    </div>
+  </div>
+</div> #}
     <div class="masonry masonry-column-3 masonry-spacing-40">
-      <!-- Masonry Item 1 -->
+      <!-- Masonry Items -->
+      {% for post in posts %}
       <div class="masonry-item">
         <div class="hoverbox-9 margin-bottom-20">
-          <a href="#">
+          <a href="{{ path('app_blog_detail', {slug:post.slug}) }}">
             <img
-              src="{{ asset('frontoffice/') }}images/col-2-square.jpg"
-              alt=""
+              src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
+              data-src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
+              alt="image faisant référent notre articles {{
+                post.slug
+              }} dans le blog de MA.BA.CE.&#x2161;"
             />
             <div class="content bg-black-04">
               <span
                 class="font-family-tertiary font-small fw-normal uppercase text-white"
-                >Feb 6</span
+                >{{post.getCreatedAt().format("j")}} {{ post.getCreatedAt().format("M") }} {{post.getCreatedAt().format("Y")}}</span
               >
             </div>
           </a>
         </div>
+        <div class="d-flex justify-content-between margin-bottom-10">
+              <div class="d-inline-flex">
+                <a style="font-size: 11px;"
+                  class="font-family-tertiary fw-normal uppercase"
+                  >{{ post.categoryPost.designation }}</a
+                >
+              </div>
+              <div class="d-inline-flex">
+                <span style="font-size: 11px;" class="font-small"
+                  >{{ post.getCreatedAt().format("M") }}
+                  {{ post.getCreatedAt().format("j") }},
+                  {{ post.getCreatedAt().format("Y") }}</span
+                >
+              </div>
+            </div>
         <h5 class="fw-normal">
-          <a href="{{ path('app_blog_detail') }}">Blog Post with Image</a>
+          <a href="{{ path('app_blog_detail', {slug:post.slug}) }}">{{ post.title }}</a>
         </h5>
         <p>
-          Aenean commodo ligula eget dolor. Cum sociis natoque penatibus et
-          magnis dis parturient montes, nascetur ridiculus mus...
+          <p style="justify-content:center;">
+          {{ post.content | striptags | slice(0,200)  | raw }} <br />
+          ...
         </p>
-      </div>
-      <!-- Masonry Item 2 -->
-      <div class="masonry-item">
-        <div class="hoverbox-9 margin-bottom-20">
-          <a href="#">
-            <img src="{{ asset('frontoffice/') }}images/col-2.jpg" alt="" />
-            <div class="content bg-black-04">
-              <span
-                class="font-family-tertiary font-small fw-normal uppercase text-white"
-                >Feb 6</span
-              >
+        </p>
+        <div class="margin-top-20">
+              <a class="button-text-1" href="{{ path('app_blog_detail', {slug:post.slug}) }}">Voir plus</a>
             </div>
-          </a>
-        </div>
-        <h5 class="fw-normal">
-          <a href="{{ path('app_blog_detail') }}">Blog Post with Image</a>
-        </h5>
-        <p>
-          Aenean commodo ligula eget dolor. Cum sociis natoque penatibus et
-          magnis dis parturient montes, nascetur ridiculus mus...
-        </p>
       </div>
-      <!-- Masonry Item 3 -->
-      <div class="masonry-item">
-        <div class="hoverbox-9 margin-bottom-20">
-          <a href="#">
-            <img
-              src="{{ asset('frontoffice/') }}images/col-2-square.jpg"
-              alt=""
-            />
-            <div class="content bg-black-04">
-              <span
-                class="font-family-tertiary font-small fw-normal uppercase text-white"
-                >Feb 6</span
-              >
-            </div>
-          </a>
-        </div>
-        <h5 class="fw-normal">
-          <a href="{{ path('app_blog_detail') }}">Blog Post with Image</a>
-        </h5>
-        <p>
-          Aenean commodo ligula eget dolor. Cum sociis natoque penatibus et
-          magnis dis parturient montes, nascetur ridiculus mus...
-        </p>
-      </div>
-      <!-- Masonry Item 4 -->
-      <div class="masonry-item">
-        <div class="hoverbox-9 margin-bottom-20">
-          <a href="#">
-            <img
-              src="{{ asset('frontoffice/') }}images/col-2-square.jpg"
-              alt=""
-            />
-            <div class="content bg-black-04">
-              <span
-                class="font-family-tertiary font-small fw-normal uppercase text-white"
-                >Feb 6</span
-              >
-            </div>
-          </a>
-        </div>
-        <h5 class="fw-normal">
-          <a href="{{ path('app_blog_detail') }}">Blog Post with Image</a>
-        </h5>
-        <p>
-          Aenean commodo ligula eget dolor. Cum sociis natoque penatibus et
-          magnis dis parturient montes, nascetur ridiculus mus...
-        </p>
-      </div>
-      <!-- Masonry Item 5 -->
-      <div class="masonry-item">
-        <div class="hoverbox-9 margin-bottom-20">
-          <a href="#">
-            <img src="{{ asset('frontoffice/') }}images/col-2.jpg" alt="" />
-            <div class="content bg-black-04">
-              <span
-                class="font-family-tertiary font-small fw-normal uppercase text-white"
-                >Feb 6</span
-              >
-            </div>
-          </a>
-        </div>
-        <h5 class="fw-normal"><a href="#">Blog Post with Image</a></h5>
-        <p>
-          Aenean commodo ligula eget dolor. Cum sociis natoque penatibus et
-          magnis dis parturient montes, nascetur ridiculus mus...
-        </p>
-      </div>
-      <!-- Masonry Item 6 -->
-      <div class="masonry-item">
-        <div class="hoverbox-9 margin-bottom-20">
-          <a href="#">
-            <img src="{{ asset('frontoffice/') }}images/col-2.jpg" alt="" />
-            <div class="content bg-black-04">
-              <span
-                class="font-family-tertiary font-small fw-normal uppercase text-white"
-                >Feb 6</span
-              >
-            </div>
-          </a>
-        </div>
-        <h5 class="fw-normal"><a href="#">Blog Post with Image</a></h5>
-        <p>
-          Aenean commodo ligula eget dolor. Cum sociis natoque penatibus et
-          magnis dis parturient montes, nascetur ridiculus mus...
-        </p>
-      </div>
+      {% endfor %}
     </div>
     <!-- end masonry -->
     <!-- Pagination -->
     <nav>
-      <ul class="pagination justify-content-center margin-top-70">
-        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-      </ul>
+      {{ knp_pagination_render(posts, "pagination.html.twig") }}
     </nav>
   </div>
   <!-- end container -->
