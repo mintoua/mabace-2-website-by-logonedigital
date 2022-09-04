@@ -6,11 +6,13 @@ use App\Entity\Post;
 use App\Entity\CategoryPost;
 use App\Repository\PostRepository;
 use App\Repository\CategoryPostRepository;
+use App\Services\DefaultService;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class BlogController extends AbstractController
 {
@@ -19,6 +21,7 @@ class BlogController extends AbstractController
     private PostRepository $postRepo,
     private CategoryPostRepository $categoryPostRepo,
     private PaginatorInterface $paginator,
+    private DefaultService $defaultService
     )
     {
         
@@ -27,10 +30,33 @@ class BlogController extends AbstractController
     #[Route('/blog', name: 'app_blog')]
     public function blog(Request $req): Response
     {  
+        $posts = $this->postRepo->findOrder();
+        $cat = $req->get("catSlug", 'Tous');
+        if ($req->get('ajax')){
+            if ($cat != 'Tous' ){
+                $posts = $this->postRepo->findAllServicesByCategory($cat);
 
-        $posts = $this->paginator->paginate($this->postRepo->findOrder(), $req->query->getInt('page', 1),9);
+                return new JsonResponse([
+                    'content'=> $this->renderView ('blog/blogList.html.twig',[
+                        'posts'=> $this->defaultService->toPaginate ($posts, $req, 9 )
+                    ])
+                ]);
+            }
+            else{
+                return new JsonResponse([
+                    'content'=> $this->renderView ('blog/blogList.html.twig',[
+                        'posts'=> $this->defaultService->toPaginate ($posts, $req, 9 )
+                    ])
+                ]);
+            }
+        }
 
-        return $this->render('blog/blog.html.twig', ['posts'=>$posts]);
+        // $posts = $this->paginator->paginate($this->postRepo->findOrder(), $req->query->getInt('page', 1),9);
+        $posts = $this->defaultService->toPaginate ( $posts, $req, 9 );
+        return $this->render('blog/blog.html.twig', [
+            'posts'=>$posts,
+            "categoriesPost"=>$this->categoryPostRepo->findAll()
+        ]);
     }
 
     #[Route('/blog/article/{slug}', name: 'app_blog_detail')]
