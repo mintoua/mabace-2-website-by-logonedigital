@@ -1,0 +1,48 @@
+{% for post in posts %}
+      <div class="col-12 col-sm-3 col-lg-4 col-xl-4 col-xxl-5">
+        <div class="hoverbox-9 margin-bottom-20">
+          <a href="{{ path('app_blog_detail', {slug:post.slug}) }}">
+            <img
+              src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
+              data-src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
+              alt="image faisant référent notre articles {{
+                post.slug
+              }} dans le blog de MA.BA.CE.&#x2161;"
+            />
+            <div class="content bg-black-04">
+              <span
+                class="font-family-tertiary font-small fw-normal uppercase text-white"
+                >{{post.getCreatedAt().format("j")}} {{ post.getCreatedAt().format("M") }} {{post.getCreatedAt().format("Y")}}</span
+              >
+            </div>
+          </a>
+        </div>
+        <div class="d-flex justify-content-between margin-bottom-10">
+              <div class="d-inline-flex">
+                <a style="font-size: 11px;"
+                  class="font-family-tertiary fw-normal uppercase"
+                  >{{ post.categoryPost.designation }}</a
+                >
+              </div>
+              <div class="d-inline-flex">
+                <span style="font-size: 11px;" class="font-small"
+                  >{{ post.getCreatedAt().format("M") }}
+                  {{ post.getCreatedAt().format("j") }},
+                  {{ post.getCreatedAt().format("Y") }}</span
+                >
+              </div>
+            </div>
+        <h5 class="fw-normal">
+          <a href="{{ path('app_blog_detail', {slug:post.slug}) }}">{{ post.title }}</a>
+        </h5>
+        <p>
+          <p style="justify-content:center;">
+          {{ post.content | striptags | slice(0,200)  | raw }} <br />
+          ...
+        </p>
+        </p>
+        <div class="margin-top-20">
+              <a class="button-text-1" href="{{ path('app_blog_detail', {slug:post.slug}) }}">Voir plus</a>
+            </div>
+      </div>
+      {% endfor %}

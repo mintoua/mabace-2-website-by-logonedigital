@@ -63,6 +63,21 @@ class PostRepository extends ServiceEntityRepository
        ;
    }
 
+   public function findAllServicesByCategory($filter){
+        $query = $this
+            ->createQueryBuilder('s')
+            ->select('c','s')
+            ->join('s.categoryPost', 'c');
+
+
+        $query = $query
+            ->andWhere('c.designation LIKE :categorie')
+            ->setParameter('categorie', $filter);
+
+
+        return $query->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */

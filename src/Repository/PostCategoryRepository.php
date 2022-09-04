@@ -21,6 +21,7 @@ class PostCategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, PostCategory::class);
     }
 
+
     public function add(PostCategory $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
@@ -37,6 +38,21 @@ class PostCategoryRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findAllByCategoryPost($filter){
+        $query = $this
+            ->createQueryBuilder('c')
+            ->select('c','p')
+            ->join('p.categoryPost', 'c');
+
+
+        $query = $query
+            ->andWhere('c.designation LIKE :categorie')
+            ->setParameter('categorie', $filter);
+
+
+        return $query->getQuery()->getResult();
     }
 
 //    /**
