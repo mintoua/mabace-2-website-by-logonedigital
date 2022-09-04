@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Client;
 use App\Entity\Service;
 use App\Entity\ServiceCategory;
+use App\Form\ClientType;
 use App\Services\DefaultService;
 use Doctrine\ORM\EntityManagerInterface;
 use Flasher\Prime\FlasherInterface;
@@ -25,6 +27,7 @@ class AnnonceController extends AbstractController
     #[Route('/petites-annonces', name: 'app_services')]
     public function index(Request $request): Response
     {
+
         $_services = $this->entityManager->getRepository (Service::class)->findAll ();
 
         $cat = $request->get("catSlug", 'Tous');
@@ -49,19 +52,32 @@ class AnnonceController extends AbstractController
                 ]);
             }
         }
-
         $categoriesServices = $this->entityManager->getRepository (ServiceCategory::class)->findAll ();
 
         $services = $this->defaultService->toPaginate ( $_services, $request, 9 );
         return $this->render('annonce/services.html.twig',[
             'services'=>$services,
-            'categoriesServices'=>$categoriesServices
+            'categoriesServices'=>$categoriesServices,
         ]);
     }
 
-    #[Route('/petites-annonces/interesse', name: 'app_services_apply')]
-    public function apply(Request $request)
+    #[Route('/petites-annonces/{slug}', name: 'app_services_apply')]
+    public function apply(Request $request, Service $service)
     {
-        dd ("here");
+        $client = new Client();
+
+        $form = $this->createForm(ClientType::class,$client);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+
+            $client->addService ($service);
+            $this->entityManager->persist ($client);
+            $this->entityManager->flush ();
+            return $this->redirectToRoute('app_services');
+        }
+        return $this->render('annonce/apply.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

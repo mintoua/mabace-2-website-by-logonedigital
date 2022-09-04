@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\CategoryPost;
+use App\Entity\Client;
 use App\Entity\Projet;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -61,6 +62,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::subMenu('Services', 'fas fa-list')->setSubItems([
                  MenuItem::linkToCrud('Categorie', 'fa fa-tags', ServiceCategory::class),
                  MenuItem::linkToCrud('Les Services', 'fas fa-newspaper', Service::class),
+                MenuItem::linkToCrud ('Clients','fas fa-user', Client::class)
             ]),
             MenuItem::section  ('',''),
             MenuItem::linkToCrud('Courriel', 'fas fa-envelope', Contact::class)

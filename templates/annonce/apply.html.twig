@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %} {% block title %} Accueil | MA.BA.CE.&#x2161; {%
+    endblock %} {% block body %}
+    <div id="cursor"></div>
+    <!-- Header -->
+
+    <!-- Header -->
+    {{ include("./includes/navbar.html.twig") }}
+
+    <!-- Contact section -->
+    <div class="section">
+        <div class="container">
+                <div class="col-lg-12 col-lg-offset-12 text-center ">
+                    <div class="contact-form text-md-end">
+                        {{ form_start(form) }}
+                            <div class="form-group">
+                                {{ form_widget(form.nom,{'attr': {'placeholder': 'Nom'}}) }}
+                            </div>
+                                {{ form_widget(form.prenom,{'attr': {'placeholder': 'Prénom'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_widget(form.email,{'attr': {'placeholder': 'Email'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_widget(form.tel,{'attr': {'placeholder': 'Tel'}}) }}
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label" for="defaultCheck1">
+                                    {{ form_widget(form.rgpd,{'attr': {'class': 'form-check-input'}}) }}
+                                    J'accepte les conditions générales d'utilisations
+                                </label>
+                            </div>
+                            <div class="form-group">
+
+
+                            </div>
+                            <button type="submit" class="button button-lg button-fancy-1-dark">Soumettre</button>
+                        {{ form_end(form) }}
+                        <!-- Submit result -->
+                        <div class="submit-result">
+                            <span id="success">Thank you! Your Message has been sent.</span>
+                            <span id="error">Something went wrong, Please try again!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end Contact section -->
+
+    {{ include("./includes/footer.html.twig") }}
+    <div class="scrolltotop">
+        <a class="button-circle button-circle-sm button-circle-dark" href="#"
+        ><i class="bi bi-arrow-up"></i
+            ></a>
+    </div>
+    <!-- ***** JAVASCRIPTS ***** -->
+{% endblock %}

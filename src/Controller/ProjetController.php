@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Projet;
+use App\Repository\CategoryPostRepository;
+use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,7 +16,8 @@ class ProjetController extends AbstractController
 {
     public function __construct (
         private EntityManagerInterface $entityManager,
-        private PaginatorInterface $paginator
+        private PaginatorInterface $paginator,
+
     )
     {}
 
@@ -34,12 +37,10 @@ class ProjetController extends AbstractController
     }
 
     #[Route('/nos-projets/{slug}', name: 'app_projet_detail')]
-    public function projetDetail($slug): Response
+    public function projetDetail(Projet $projet): Response
     {
-        $projet = $this->entityManager->getRepository (Projet::class)->findOneBySlug($slug);
-
         return $this->render('projet/projet-single.html.twig',[
-            'projet'=>$projet
+            'projet'=>$projet,
         ]);
     }
 }

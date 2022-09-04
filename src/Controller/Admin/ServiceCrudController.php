@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
@@ -49,6 +50,7 @@ class ServiceCrudController extends AbstractCrudController
                 ->setLabel('Intitulé du service'),
             ImageField::new('image')
                 ->setLabel('Image')
+                ->hideOnIndex ()
                 ->setBasePath('uploads/images/ServiceImages')
                 ->setUploadDir('public/uploads/images/ServiceImages')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')->setRequired(false),
@@ -56,9 +58,11 @@ class ServiceCrudController extends AbstractCrudController
             AssociationField::new('ServiceCategory')->setLabel('Catégorie du service'),
             TextareaField::new('description')
                 ->setLabel('Description du service')
+                ->hideOnIndex ()
                 ->setFormType (CKEditorType::class)
                 ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
                 ->renderAsHtml(),
+            ArrayField::new ('clients','Les Clients')
         ];
     }
 
