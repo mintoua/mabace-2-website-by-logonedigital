@@ -1,0 +1,92 @@
+{% extends "base.html.twig" %} {% block title %} Tous nos artcles dans la
+thématique {{ CategoryPost.designation }}
+| MA.BA.CE.&#x2161; {% endblock %} {% block body %}
+
+<!-- Header -->
+{{ include("./includes/navbar.html.twig") }}
+
+<div class="section-sm bg-grey-lighter">
+  <div class="container text-center">
+    <h3 class="font-family-secondary">
+      Thématique :
+      <span style="text-transform: uppercase">{{
+        CategoryPost.designation
+      }}</span>
+    </h3>
+  </div>
+  <!-- end container -->
+</div>
+<!-- Blog section  -->
+<div class="section">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+        {% for post in posts %}
+        <!-- Projetcs -->
+        <div class="margin-bottom-50">
+          <div class="hoverbox-8">
+            <a href="#">
+              <img
+                src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
+                alt=" {{ post.slug }} "
+              />
+            </a>
+          </div>
+          <div class="margin-top-30">
+            <div class="d-flex justify-content-between margin-bottom-10">
+              <div class="d-inline-flex">
+                <a
+                  class="font-family-tertiary font-small fw-normal uppercase"
+                  >{{ CategoryPost.designation }}</a
+                >
+              </div>
+              <div class="d-inline-flex">
+                <span class="font-small"
+                  >{{ post.getCreatedAt().format("M") }}
+                  {{ post.getCreatedAt().format("j") }},
+                  {{ post.getCreatedAt().format("Y") }}</span
+                >
+              </div>
+            </div>
+            <h5>
+              <a href="{{ path('app_blog_detail', { slug: post.slug }) }}">{{
+                post.title
+              }}</a>
+            </h5>
+            <p>
+              {{ post.content | striptags | slice(0, 400) }}
+            </p>
+            <div class="margin-top-20">
+              <a
+                class="button-text-1"
+                href="{{ path('app_projet_detail', { slug: post.slug }) }}"
+                >Voir plus</a
+              >
+            </div>
+          </div>
+        </div>
+        <!-- Pagination -->
+        {% endfor %}
+        <nav>
+          {{ knp_pagination_render(posts, "pagination.html.twig") }}
+        </nav>
+      </div>
+    </div>
+    <!-- end row -->
+  </div>
+  <!-- end container -->
+</div>
+<!-- end Blog section -->
+
+{{ include("./includes/footer.html.twig") }}
+
+<!-- Scroll to top button -->
+<div class="scrolltotop">
+  <a class="button-circle button-circle-sm button-circle-dark" href="#"
+    ><i class="bi bi-arrow-up"></i
+  ></a>
+</div>
+<!-- end Scroll to top button -->
+
+<!-- ***** JAVASCRIPTS ***** -->
+{% endblock %}

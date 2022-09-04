@@ -106,11 +106,15 @@
     <div class="header-menu-extra">
       <ul class="list-inline">
         <li>
-          <a
-            title="lien vers le formulaire d'authetification"
-            href="{{ path('app_login') }}"
+          {% if app.user %}
+          <a title="se déconnecter" href="{{ path('app_logout') }}"
+            ><i class="bi bi-box-arrow-right"></i
+          ></a>
+          {% else %}
+          <a title="se connecter" href="{{ path('app_login') }}"
             ><i class="bi bi-person-circle"></i
           ></a>
+          {% endif %}
         </li>
         <li>
           <a href="#"
