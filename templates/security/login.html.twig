@@ -14,11 +14,11 @@
             class="home-logo-link"
             style="text-align: center"
           >
-            <img
-              class="form-logo"
-              src="{{ asset('frontoffice/img/') }}Fav-logo-noir.png"
-              alt=""
-            />
+           <img
+            class="form-logo"
+            src="{{ asset('frontoffice/') }}images/logo-5.png"
+            alt="logo mabace deux"
+          />
           </a>
         </div>
         {% if error %}
@@ -57,7 +57,9 @@
         </div>
         <div class="row">
           <div class="col-12 col-lg-4 d-flex justify-content-start">
-            <a href="#" class="form-link forgot-password-link"
+            <a
+              href="{{ path('app_forgot_password') }}"
+              class="form-link forgot-password-link"
               >Mot de passe oublié</a
             >
           </div>
