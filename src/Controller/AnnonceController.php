@@ -8,8 +8,7 @@ use App\Entity\ServiceCategory;
 use App\Form\ClientType;
 use App\Services\DefaultService;
 use Doctrine\ORM\EntityManagerInterface;
-use Flasher\Prime\FlasherInterface;
-use Knp\Component\Pager\PaginatorInterface;
+use Sonata\SeoBundle\Seo\SeoPageInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +21,7 @@ class AnnonceController extends AbstractController
     public function __construct (
         private EntityManagerInterface $entityManager,
         private DefaultService $defaultService,
-    //private SeoPageInterface $seoPage,
+        private SeoPageInterface $seoPage,
     )
     {}
 
@@ -58,7 +57,7 @@ class AnnonceController extends AbstractController
         }
 
 
-        /*$description = "découvrez les annonces de prestations de services chez MA.BA.CA II";
+        $description = "découvrez les annonces de prestations de services chez MA.BA.CA II";
         $this -> seoPage -> setTitle ( "les petites annonces MA.BA.CE II" )
             -> addMeta ( 'property' , 'og:title' , '' )
             ->addMeta('name', 'description', $description)
@@ -67,7 +66,7 @@ class AnnonceController extends AbstractController
             ->setLinkCanonical($this->urlGenerator->generate('app_services',[], urlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:url',  $this->urlGenerator->generate('app_services',[], urlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:description',$description)
-            ->setBreadcrumb('Services', []); */
+            ->setBreadcrumb('Services', []);
 
 
 

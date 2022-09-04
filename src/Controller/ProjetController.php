@@ -3,11 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Projet;
-use App\Repository\CategoryPostRepository;
-use App\Repository\PostRepository;
 use App\Services\DefaultService;
 use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
+use Sonata\SeoBundle\Seo\SeoPageInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +17,7 @@ class ProjetController extends AbstractController
     public function __construct (
         private EntityManagerInterface $entityManager,
         private DefaultService $defaultService,
-        //private SeoPageInterface $seoPage,
+        private SeoPageInterface $seoPage,
     )
     {}
 
@@ -29,7 +27,7 @@ class ProjetController extends AbstractController
         $_projects = $this->defaultService->toCache ('projets','1 day',
             $this->entityManager->getRepository (Projet::class)->findAll ());
 
-       /* $description = "découvrez les projets de MA.BA.CA II";
+        $description = "découvrez les projets de MA.BA.CA II";
         $this -> seoPage -> setTitle ( "les projets de MA.BA.CE II" )
             -> addMeta ( 'property' , 'og:title' , '' )
             ->addMeta('name', 'description', $description)
@@ -38,7 +36,7 @@ class ProjetController extends AbstractController
             ->setLinkCanonical($this->urlGenerator->generate('app_projet',[], urlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:url',  $this->urlGenerator->generate('app_projet',[], urlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:description',$description)
-            ->setBreadcrumb('Projets', []);*/
+            ->setBreadcrumb('Projets', []);
 
         $projects = $this->defaultService->toPaginate ($_projects,$request,3) ;
 
@@ -50,20 +48,20 @@ class ProjetController extends AbstractController
     #[Route('/nos-projets/{slug}', name: 'app_projet_detail')]
     public function projetDetail(Projet $projet): Response
     {
-       /* $this -> seoPage
+        $this -> seoPage
             -> setTitle( $projet->getIntitule() )
             ->addMeta ( 'property' , 'og:title' , $projet->getSlug() )
             ->addMeta ( 'property' , 'og:type' , 'projet' )
             ->addMeta ( 'name' , 'description' , $projet -> getDescription () () )
             ->addMeta ( 'name' , 'keywords' , $projet->getSlug () )
-            ->addMeta('property', 'og:type', 'blog')
+            ->addMeta('property', 'og:type', 'projet')
             ->addMeta('property', 'og:description', $projet->getDescription())
             ->addMeta('name', 'keywords', "mabace2, MABACE II, association")
             ->addMeta('property', 'og:title', $projet->getSlug())
             ->addMeta('property', 'og:image', "https://127.0.0.1:8000/uploads/images/ProjetsImages/". $projet->getImage())
-            ->setLinkCanonical($this->urlGenerator->generate('app_single_product',['slug'=>$projet->getSlug ()], urlGeneratorInterface::ABSOLUTE_URL))
+            ->setLinkCanonical($this->urlGenerator->generate('app_projet_detail',['slug'=>$projet->getSlug ()], urlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:url',  $this->urlGenerator->generate('app_projet_detail',['slug'=>$projet->getSlug ()], urlGeneratorInterface::ABSOLUTE_URL))
-            ->setBreadcrumb('Projets', ["projet"=>$projet]);*/
+            ->setBreadcrumb('Projets', ["projet"=>$projet]);
 
         return $this->render('projet/projet-single.html.twig',[
             'projet'=>$projet,
