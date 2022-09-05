@@ -1,6 +1,5 @@
-{% extends "base.html.twig" %} {% block title %} Accueil | MA.BA.CE.&#x2161; {%
-endblock %}
-{% block javascripts %}
+{% extends "base.html.twig" %} {% block title %} Toutes nos petites annonces |
+MA.BA.CE.&#x2161; {% endblock %} {% block javascripts %}
 
 <script>
   function chooseCategory(cat, slug) {
@@ -53,33 +52,59 @@ endblock %}
   </div>
 </div>
 <div class="sec-center">
-    <div class="dropdown">
-        {% if queryParams is not empty and queryParams.catSlug is not empty %} {% if
-            queryParams.catSlug == "Tous" %}
-            <button id="labelChoosen" class="button button-lg button-radius button-outline-dark-2 dropdown-toggle" type="button"  data-bs-toggle="dropdown" aria-expanded="false">
-                Tous
-            </button>
-        {% else %} {% for cat in categoriesServices %} {% if cat.intitule ==
-            queryParams.catSlug %}
-            <button id="labelChoosen" class="button button-lg button-radius button-outline-dark-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{ cat.intitule }}
-            </button>
-        {% endif %} {% endfor %} {% endif %} {% else%}
-            <button id="labelChoosen" class="button button-lg button-radius button-outline-dark-2 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Filtrer
-            </button>
-        {% endif %}
-        <ul class="dropdown-menu" aria-labelledby="labelChoosen">
-            <li><a class="dropdown-item" href="javascript:chooseCategory(0,'Tous');" >
-                    Tous
-                </a></li>
-            {% for category in categoriesServices %}
-                <li><a class="dropdown-item" href="javascript:chooseCategory({{ category.id }},'{{
-                    category.intitule
-                    }}');">{{ category.intitule }}</a></li>
-            {% endfor %}
-        </ul>
-    </div>
+  <div class="dropdown">
+    {% if queryParams is not empty and queryParams.catSlug is not empty %} {% if
+    queryParams.catSlug == "Tous" %}
+    <button
+      id="labelChoosen"
+      class="button button-lg button-radius button-outline-dark-2 dropdown-toggle"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      Tous
+    </button>
+    {% else %} {% for cat in categoriesServices %} {% if cat.intitule ==
+    queryParams.catSlug %}
+    <button
+      id="labelChoosen"
+      class="button button-lg button-radius button-outline-dark-2 dropdown-toggle"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      {{ cat.intitule }}
+    </button>
+    {% endif %} {% endfor %} {% endif %} {% else%}
+    <button
+      id="labelChoosen"
+      class="button button-lg button-radius button-outline-dark-2 dropdown-toggle"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      Filtrer
+    </button>
+    {% endif %}
+    <ul class="dropdown-menu" aria-labelledby="labelChoosen">
+      <li>
+        <a class="dropdown-item" href="javascript:chooseCategory(0,'Tous');">
+          Tous
+        </a>
+      </li>
+      {% for category in categoriesServices %}
+      <li>
+        <a
+          class="dropdown-item"
+          href="javascript:chooseCategory({{ category.id }},'{{
+            category.intitule
+          }}');"
+          >{{ category.intitule }}</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 <div class="section padding-top-0">
   <div class="container">

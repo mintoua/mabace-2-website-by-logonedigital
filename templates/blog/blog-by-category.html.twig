@@ -1,6 +1,8 @@
-{% extends "base.html.twig" %} {% block title %} Tous nos artcles dans la
-thématique {{ CategoryPost.designation }}
-| MA.BA.CE.&#x2161; {% endblock %} {% block body %}
+{% extends "base.html.twig" %} {% block seo %}
+{{ sonata_seo_title() }}
+{{ sonata_seo_metadatas() }}
+{{ sonata_seo_link_canonical() }}
+{% endblock %} {% block body %}
 
 <!-- Header -->
 {{ include("./includes/navbar.html.twig") }}

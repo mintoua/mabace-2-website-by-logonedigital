@@ -1,0 +1,31 @@
+sonata_seo:
+  encoding: UTF-8
+  page:
+    title: "MA.BA.CE.II"
+    #title_prefix:  'Prefix |'
+    default: sonata.seo.page.default
+    metas:
+      name:
+        keywords: MA.BA.CE.II, cameroun, association culturelle, bamiléké, ouest cameroun, culture africaine, danse africaine, danse traditionnelle africaine
+        robots: index, follow
+
+      property:
+        # Facebook application settings
+        "fb:app_id": "389898079878693"
+        "fb:admins": logonedigital
+
+        # Open Graph information
+        # see http://developers.facebook.com/docs/opengraphprotocol/#types or http://ogp.me/
+        "og:site_name": MA.BA.CE.II
+
+      http-equiv:
+        "Content-Type": text/html; charset=utf-8
+        #'X-Ua-Compatible':      IE=EmulateIE7
+
+      charset:
+        UTF-8: ""
+
+    head:
+      "xmlns": http://www.w3.org/1999/xhtml
+      "xmlns:og": http://opengraphprotocol.org/schema/
+      #'xmlns:fb':           "http://www.facebook.com/2008/fbml"

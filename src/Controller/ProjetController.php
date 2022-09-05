@@ -18,6 +18,7 @@ class ProjetController extends AbstractController
         private EntityManagerInterface $entityManager,
         private DefaultService $defaultService,
         private SeoPageInterface $seoPage,
+        private UrlGeneratorInterface $urlGenerator
     )
     {}
 
