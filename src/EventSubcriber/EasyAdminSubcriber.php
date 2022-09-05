@@ -2,6 +2,7 @@
 
 namespace App\EventSubcriber;
 
+use App\Entity\CategoryPost;
 use App\Entity\Post;
 use App\Entity\User;
 use DateTimeImmutable;
@@ -29,13 +30,85 @@ class EasyAdminSubcriber implements EventSubscriberInterface
     {
         return[
             BeforeEntityPersistedEvent::class=>['persistanceProcess'],
-            BeforeEntityUpdatedEvent::class=>['updatedProcess']
+            BeforeEntityUpdatedEvent::class=>['updatedProcess'],
+            AfterEntityPersistedEvent::class => ['clearCacheAfter'],
+            AfterEntityDeletedEvent::class => ['clearCacheAfterDeleted'],
+            AfterEntityUpdatedEvent::class => ['clearCacheAfterUpdated'],
         ];
     }
 
-   
+    /**
+     * permet de supprimer les éléments le cache après l'ajout d'un nouvelle éléments
+     *
+     * @param AfterEntityPersistedEvent $event
+     * @return void
+     */
+    public function clearCacheAfter(AfterEntityPersistedEvent $event):void{
+        $entity = $event->getEntityInstance();
+        if($entity instanceof Post){
+            $this->cache->delete('posts_blog_page');
+            $this->cache->delete('categories_post_blog_page');
+            $this->cache->delete('post_single_blog_page_'.$entity->getSlug());
+            $this->cache->delete('post_category_single_blog_page_'.$entity->getSlug());
+            $this->cache->delete('post_blog_page_by_category');
+            $this->cache->delete('categories_blog_by_category');
+        }
+        if($entity instanceof CategoryPost){
+            $this->cache->delete('posts_blog_page');
+            $this->cache->delete('categories_post_blog_page');
+            $this->cache->delete('post_single_blog_page_'.$entity->getSlug());
+            $this->cache->delete('post_category_single_blog_page_'.$entity->getSlug());
+            $this->cache->delete('post_blog_page_by_category');
+            $this->cache->delete('categories_blog_by_category');
+        }
+    }
 
-    //permet de faire des actions sur l'utisateur lorsqu'il est ajouter depuis le dashboard
+    public function clearCacheAfterUpdated(AfterEntityUpdatedEvent $event):void{
+        $entity = $event->getEntityInstance();
+        if($entity instanceof Post){
+            $this->cache->delete('posts_blog_page');
+            $this->cache->delete('categories_post_blog_page');
+            $this->cache->delete('post_single_blog_page_'.$entity->getSlug());
+            $this->cache->delete('post_category_single_blog_page_'.$entity->getSlug());
+            $this->cache->delete('post_blog_page_by_category');
+            $this->cache->delete('categories_blog_by_category');
+        }
+        if($entity instanceof CategoryPost){
+            $this->cache->delete('posts_blog_page');
+            $this->cache->delete('categories_post_blog_page');
+            $this->cache->delete('post_single_blog_page_'.$entity->getSlug());
+            $this->cache->delete('post_category_single_blog_page_'.$entity->getSlug());
+            $this->cache->delete('post_blog_page_by_category');
+            $this->cache->delete('categories_blog_by_category');
+        }
+    }
+
+    public function clearCacheAfterDeleted(AfterEntityDeletedEvent $event):void{
+        $entity = $event->getEntityInstance();
+        if($entity instanceof Post){
+            $this->cache->delete('posts_blog_page');
+            $this->cache->delete('categories_post_blog_page');
+            $this->cache->delete('post_single_blog_page_'.$entity->getSlug());
+            $this->cache->delete('post_category_single_blog_page_'.$entity->getSlug());
+            $this->cache->delete('post_blog_page_by_category');
+            $this->cache->delete('categories_blog_by_category');
+        }
+        if($entity instanceof CategoryPost){
+            $this->cache->delete('posts_blog_page');
+            $this->cache->delete('categories_post_blog_page');
+            $this->cache->delete('post_single_blog_page_'.$entity->getSlug());
+            $this->cache->delete('post_category_single_blog_page_'.$entity->getSlug());
+            $this->cache->delete('post_blog_page_by_category');
+            $this->cache->delete('categories_blog_by_category');
+        }
+    }
+
+    /**
+     * permet de faire des actions sur l'utisateur lorsqu'il est ajouter depuis le dashboard
+     *
+     * @param BeforeEntityPersistedEvent $event
+     * @return void
+     */
     public function persistanceProcess(BeforeEntityPersistedEvent $event){
         $entity = $event->getEntityInstance();
         if($entity instanceof User){
@@ -45,7 +118,6 @@ class EasyAdminSubcriber implements EventSubscriberInterface
         if($entity instanceof Post){
             $entity->setCreatedAt(new \DateTimeImmutable('now'));
         }
-
     }
 
     /**
