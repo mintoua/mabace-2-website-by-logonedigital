@@ -62,8 +62,6 @@ class BlogController extends AbstractController
             }
         }
 
-       
-
         /** mise en cache */
         $postsCached = $this->cache->get( 'posts_blog_page' , function ( ItemInterface $item ) use($posts, $req) {
             $item->expiresAfter(DateInterval::createFromDateString('30 days'));
@@ -137,6 +135,8 @@ class BlogController extends AbstractController
             ->addMeta('property', 'og:url',  $this->urlGenerator->generate('app_blog_detail',['slug'=>$postCached->getSlug()], urlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:description',$postCached->getContent())
             ->addMeta('property', 'og:image',$urlPackage->getBaseUrl($post->getImage()))
+            ->addMeta('property', 'og:image:width',"300")
+            ->addMeta('property', 'og:image:height',"300")
            ->setBreadcrumb('blog', [
             'post' => $postCached,
             ]);
@@ -178,13 +178,12 @@ class BlogController extends AbstractController
          /**Début partie SEO */
         $this -> seoPage -> setTitle ($CategoryPostCached->getDesignation())
             -> addMeta ('property','og:title',$CategoryPostCached->getDesignation())
-            // ->addMeta('name', 'description', $postCached->getContent())
+            ->addMeta('name', 'description', $CategoryPostCached->getDescription())
             ->addTitleSuffix("MA.BA.CE.&#x2161")
             ->addMeta('property', 'og:title', $CategoryPostCached->getDesignation())
             ->setLinkCanonical($this->urlGenerator->generate('app_blog_by_category',['slug'=>$CategoryPostCached->getSlug()], urlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:url',  $this->urlGenerator->generate('app_blog_by_category',['slug'=>$CategoryPostCached->getSlug()], urlGeneratorInterface::ABSOLUTE_URL))
-            // ->addMeta('property', 'og:description',$postCached->getContent())
-            // ->addMeta('property', 'og:image',$urlPackage->getBaseUrl($post->getImage()))
+            ->addMeta('property', 'og:description',$CategoryPostCached->getDescription())
            ->setBreadcrumb('blog', [
             'blog' => $CategoryPostCached,
             ]);
