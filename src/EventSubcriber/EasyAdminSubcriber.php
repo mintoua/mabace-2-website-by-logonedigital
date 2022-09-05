@@ -65,8 +65,7 @@ class EasyAdminSubcriber implements EventSubscriberInterface
             $this->cache->delete('categories_blog_by_category');
         }
     }
-    public function clearCacheAfter(AfterEntityPersistedEvent $event){
-        $entity = $event->getEntityInstance();
+    
 
     public function clearCacheAfterUpdated(AfterEntityUpdatedEvent $event):void{
         $entity = $event->getEntityInstance();

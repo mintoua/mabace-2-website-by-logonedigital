@@ -8,6 +8,7 @@ use App\Entity\CategoryPost;
 use App\Services\DefaultService;
 use App\Repository\PostRepository;
 use App\Repository\CategoryPostRepository;
+use Sonata\SeoBundle\Seo\SeoPageInterface;
 use Symfony\Contracts\Cache\ItemInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BlogController extends AbstractController
@@ -25,7 +27,9 @@ class BlogController extends AbstractController
     private CategoryPostRepository $categoryPostRepo,
     private PaginatorInterface $paginator,
     private DefaultService $defaultService,
-    private CacheInterface $cache
+    private CacheInterface $cache,
+    private SeoPageInterface $seoPage,
+    private UrlGeneratorInterface $urlGenerator,
     )
     {
         
@@ -54,6 +58,9 @@ class BlogController extends AbstractController
                 ]);
             }
         }
+
+       
+
         /** mise en cache */
         $postsCached = $this->cache->get( 'posts_blog_page' , function ( ItemInterface $item ) use($posts, $req) {
             $item->expiresAfter(DateInterval::createFromDateString('30 days'));
@@ -67,6 +74,20 @@ class BlogController extends AbstractController
             return $this->categoryPostRepo->findAll();
         });
 
+        /** Début partie SEO */
+        $description = "découvrez les annonces de prestations de services chez MA.BA.CA II";
+        $this -> seoPage -> setTitle ("Blog")
+            -> addMeta ('property','og:title','les petites annonces MA.BA.CE II')
+            ->addTitleSuffix("MA.BA.CE.&#x2161")
+            ->addMeta('name', 'description', $description)
+            ->addMeta('property', 'og:title', "actualités MA.BA.CE.II")
+            ->setLinkCanonical($this->urlGenerator->generate('app_blog',[], urlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:url',  $this->urlGenerator->generate('app_blog',[], urlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:description',$description)
+            ->setBreadcrumb('Blog', []);
+        /** Fin partie SEO */
+
+
         return $this->render('blog/blog.html.twig', [
             'posts'=>$this->paginator->paginate($postsCached, $req->query->getInt('page', 1),3),
             "categoriesPost"=>$categoriesPost
@@ -74,12 +95,13 @@ class BlogController extends AbstractController
     }
 
     #[Route('/blog/article/{slug}', name: 'app_blog_detail')]
-    public function blogDetail(Post $post, $slug): Response
-    {
+    public function blogDetail(Post $post, Request $req): Response
+    {   
+         dd($req->headers->referer);
         $this->cache->delete('post_single_blog_page-'.$post->getSlug());
        /** mise en cache */
       ;
-        $postCached = $this->cache->get( 'post_single_blog_page_'.$post->getSlug() , function ( ItemInterface $item ) use($post, $slug) {
+        $postCached = $this->cache->get( 'post_single_blog_page_'.$post->getSlug() , function ( ItemInterface $item ) use($post) {
             $item->expiresAfter(DateInterval::createFromDateString('30 days'));
             return $post;
         });
@@ -94,6 +116,21 @@ class BlogController extends AbstractController
         
         // dd($catPost);
        
+
+        /**Début partie SEO */
+        $this -> seoPage -> setTitle ($postCached->getTitle())
+            -> addMeta ('property','og:title',$postCached->getTitle())
+            ->addMeta('name', 'description', $postCached->getContent())
+            ->addTitleSuffix("MA.BA.CE.&#x2161")
+            ->addMeta('property', 'og:title', $postCached->getTitle())
+            ->setLinkCanonical($this->urlGenerator->generate('app_blog_detail',['slug'=>$postCached->getSlug()], urlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:url',  $this->urlGenerator->generate('app_blog_detail',['slug'=>$postCached->getSlug()], urlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:description',$postCached->getContent())
+            ->addMeta('property', 'og:image',$postCached->getImage())
+           ->setBreadcrumb('blog', [
+            'post' => $postCached,
+            ]);
+        /** Fin partie SEO */
 
         return $this->render('blog/blog-single.html.twig', [
             "post"=>$postCached,

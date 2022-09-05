@@ -1,5 +1,8 @@
-{% extends "base.html.twig" %} {% block title %} {{ post.title }} |
-MA.BA.CE.&#x2161; {% endblock %} {% block body %}
+{% extends "base.html.twig" %} {% block seo %}
+{{ sonata_seo_title() }}
+{{ sonata_seo_metadatas() }}
+{{ sonata_seo_link_canonical() }}
+{% endblock %} {% block body %}
 
 <!-- Header -->
 {{ include("./includes/navbar.html.twig") }}
@@ -26,8 +29,8 @@ MA.BA.CE.&#x2161; {% endblock %} {% block body %}
           <div class="hoverbox-8">
             <a>
               <img
-                src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
-                data-src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
+                src="{{ absolute_url(asset('uploads/images/BlogImages'~asset(post.image))) }}"
+                data-src="{{ absolute_url(asset('uploads/images/BlogImages'~asset(post.image))) }}"
                 alt="image faisant référent notre articles {{
                   post.slug
                 }} dans le blog de MA.BA.CE.&#x2161;"
