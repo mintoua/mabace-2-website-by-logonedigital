@@ -49,14 +49,14 @@ class BlogController extends AbstractController
 
                 return new JsonResponse([
                     'content'=> $this->renderView ('blog/blogList.html.twig',[
-                        'posts'=> $this->defaultService->toPaginate ($posts, $req, 2 )
+                        'posts'=> $this->defaultService->toPaginate ($posts, $req, 9 )
                     ])
                 ]);
             }
             else{
                 return new JsonResponse([
                     'content'=> $this->renderView ('blog/blogList.html.twig',[
-                        'posts'=> $this->defaultService->toPaginate ($posts, $req, 2 )
+                        'posts'=> $this->defaultService->toPaginate ($posts, $req, 9 )
                     ])
                 ]);
             }
@@ -90,7 +90,7 @@ class BlogController extends AbstractController
 
 
         return $this->render('blog/blog.html.twig', [
-            'posts'=>$this->paginator->paginate($postsCached, $req->query->getInt('page', 1),3),
+            'posts'=>$this->paginator->paginate($postsCached, $req->query->getInt('page', 1),9),
             "categoriesPost"=>$categoriesPost
         ]);
     }
@@ -126,7 +126,7 @@ class BlogController extends AbstractController
 
         $urlPackage->getUrl($post->getImage());
 
-        $this -> seoPage -> setTitle ($postCached->getTitle())
+        $this->seoPage->setTitle ($postCached->getTitle())
             -> addMeta ('property','og:title',$postCached->getTitle())
             ->addMeta('name', 'description', $postCached->getContent())
             ->addTitleSuffix("MA.BA.CE.&#x2161")

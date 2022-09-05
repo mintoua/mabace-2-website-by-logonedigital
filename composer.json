@@ -16,6 +16,7 @@
         "friendsofsymfony/http-cache-bundle": "^2.13",
         "guzzlehttp/promises": "^1.5",
         "knplabs/knp-paginator-bundle": "^5.9",
+        "liip/imagine-bundle": "^2.8",
         "mailjet/mailjet-apiv3-php": "^1.5",
         "mercuryseries/flashy-bundle": "^5.1",
         "nyholm/psr7": "^1.5",

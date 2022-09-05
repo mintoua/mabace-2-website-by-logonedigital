@@ -3,9 +3,9 @@
         <div class="hoverbox-9 margin-bottom-20">
           <a href="{{ path('app_blog_detail', {slug:post.slug}) }}">
             <img
-              src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
-              data-src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
-              alt="image faisant référent notre articles {{
+              src="{{ absolute_url(asset('uploads/images/BlogImages'~asset(post.image)) | imagine_filter('blog_page_image')) }}"
+              data-src="{{ absolute_url(asset('uploads/images/BlogImages'~asset(post.image)) | imagine_filter('blog_page_image')) }}"
+              alt="image faisant référent notre article {{
                 post.slug
               }} dans le blog de MA.BA.CE.&#x2161;"
             />

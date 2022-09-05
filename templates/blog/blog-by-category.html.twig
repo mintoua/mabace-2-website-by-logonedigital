@@ -29,8 +29,10 @@
           <div class="hoverbox-8">
             <a href="#">
               <img
-                src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
-                alt=" {{ post.slug }} "
+                src="{{ absolute_url(asset('uploads/images/BlogImages'~asset(post.image)) | imagine_filter('blog_page_category_image'))}}"
+                alt="image faisant référent notre article {{
+                  post.slug
+                }} dans le blog de MA.BA.CE.&#x2161;"
               />
             </a>
           </div>
