@@ -9,19 +9,19 @@
     <!-- Contact section -->
     <div class="section">
         <div class="container">
-                <div class="col-lg-12 col-lg-offset-12 text-center ">
-                    <div class="contact-form text-md-end">
+                    <div class="d-flex justify-content-center text-center">
                         {{ form_start(form) }}
                             <div class="form-group">
-                                {{ form_widget(form.nom,{'attr': {'placeholder': 'Nom'}}) }}
-                            </div>
-                                {{ form_widget(form.prenom,{'attr': {'placeholder': 'Prénom'}}) }}
+                                {{ form_widget(form.nom,{'attr': {'placeholder': 'Nom','class':'form-control form-control-lg'}}) }}
                             </div>
                             <div class="form-group">
-                                {{ form_widget(form.email,{'attr': {'placeholder': 'Email'}}) }}
+                                {{ form_widget(form.prenom,{'attr': {'placeholder': 'Prénom','class':'form-control form-control-lg'}}) }}
                             </div>
                             <div class="form-group">
-                                {{ form_widget(form.tel,{'attr': {'placeholder': 'Tel'}}) }}
+                                {{ form_widget(form.email,{'attr': {'placeholder': 'Email','class':'form-control form-control-lg'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_widget(form.tel,{'attr': {'placeholder': 'Tel','class':'form-control form-control-lg'}}) }}
                             </div>
                             <div class="form-check">
                                 <label class="form-check-label" for="defaultCheck1">
@@ -33,7 +33,7 @@
 
 
                             </div>
-                            <button type="submit" class="button button-lg button-fancy-1-dark">Soumettre</button>
+                            <button type="submit" class="button button-xl button-fullwidth button-fancy-1-dark">Soumettre</button>
                         {{ form_end(form) }}
                         <!-- Submit result -->
                         <div class="submit-result">
@@ -41,7 +41,6 @@
                             <span id="error">Something went wrong, Please try again!</span>
                         </div>
                     </div>
-                </div>
             </div>
             <!-- end row -->
         </div>

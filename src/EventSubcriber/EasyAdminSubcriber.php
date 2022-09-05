@@ -4,6 +4,9 @@ namespace App\EventSubcriber;
 
 use App\Entity\CategoryPost;
 use App\Entity\Post;
+use App\Entity\Projet;
+use App\Entity\Service;
+use App\Entity\ServiceCategory;
 use App\Entity\User;
 use DateTimeImmutable;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityDeletedEvent;
@@ -62,6 +65,8 @@ class EasyAdminSubcriber implements EventSubscriberInterface
             $this->cache->delete('categories_blog_by_category');
         }
     }
+    public function clearCacheAfter(AfterEntityPersistedEvent $event){
+        $entity = $event->getEntityInstance();
 
     public function clearCacheAfterUpdated(AfterEntityUpdatedEvent $event):void{
         $entity = $event->getEntityInstance();
