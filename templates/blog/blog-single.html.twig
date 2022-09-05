@@ -29,8 +29,8 @@
           <div class="hoverbox-8">
             <a>
               <img
-                src="{{ absolute_url(asset('uploads/images/BlogImages'~asset(post.image))) }}"
-                data-src="{{ absolute_url(asset('uploads/images/BlogImages'~asset(post.image))) }}"
+                src="{{ asset('uploads/images/BlogImages'~asset(post.image)) | imagine_filter('blog_image')}}"
+                data-src="{{ absolute_url(asset('uploads/images/BlogImages'~asset(post.image))) | imagine_filter('blog_image')}}"
                 alt="image faisant référent notre articles {{
                   post.slug
                 }} dans le blog de MA.BA.CE.&#x2161;"
@@ -121,7 +121,7 @@
           <div class="popular-post">
             <a href="{{ path('app_blog_detail', { slug: lastPost.slug }) }}">
               <img
-                src="{{ asset('uploads/images/BlogImages'~asset(lastPost.image)) }}"
+                src="{{ asset('uploads/images/BlogImages'~asset(lastPost.image)) | imagine_filter('blog_min_image')}}"
                 alt=" {{ lastPost.slug }} "
               />
             </a>

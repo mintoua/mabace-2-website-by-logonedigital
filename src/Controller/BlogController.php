@@ -49,20 +49,18 @@ class BlogController extends AbstractController
 
                 return new JsonResponse([
                     'content'=> $this->renderView ('blog/blogList.html.twig',[
-                        'posts'=> $this->defaultService->toPaginate ($posts, $req, 2 )
+                        'posts'=> $this->defaultService->toPaginate ($posts, $req, 9 )
                     ])
                 ]);
             }
             else{
                 return new JsonResponse([
                     'content'=> $this->renderView ('blog/blogList.html.twig',[
-                        'posts'=> $this->defaultService->toPaginate ($posts, $req, 2 )
+                        'posts'=> $this->defaultService->toPaginate ($posts, $req, 9 )
                     ])
                 ]);
             }
         }
-
-       
 
         /** mise en cache */
         $postsCached = $this->cache->get( 'posts_blog_page' , function ( ItemInterface $item ) use($posts, $req) {
@@ -92,7 +90,7 @@ class BlogController extends AbstractController
 
 
         return $this->render('blog/blog.html.twig', [
-            'posts'=>$this->paginator->paginate($postsCached, $req->query->getInt('page', 1),3),
+            'posts'=>$this->paginator->paginate($postsCached, $req->query->getInt('page', 1),9),
             "categoriesPost"=>$categoriesPost
         ]);
     }
@@ -128,7 +126,7 @@ class BlogController extends AbstractController
 
         $urlPackage->getUrl($post->getImage());
 
-        $this -> seoPage -> setTitle ($postCached->getTitle())
+        $this->seoPage->setTitle ($postCached->getTitle())
             -> addMeta ('property','og:title',$postCached->getTitle())
             ->addMeta('name', 'description', $postCached->getContent())
             ->addTitleSuffix("MA.BA.CE.&#x2161")
@@ -137,6 +135,8 @@ class BlogController extends AbstractController
             ->addMeta('property', 'og:url',  $this->urlGenerator->generate('app_blog_detail',['slug'=>$postCached->getSlug()], urlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:description',$postCached->getContent())
             ->addMeta('property', 'og:image',$urlPackage->getBaseUrl($post->getImage()))
+            ->addMeta('property', 'og:image:width',"300")
+            ->addMeta('property', 'og:image:height',"300")
            ->setBreadcrumb('blog', [
             'post' => $postCached,
             ]);
@@ -178,13 +178,12 @@ class BlogController extends AbstractController
          /**Début partie SEO */
         $this -> seoPage -> setTitle ($CategoryPostCached->getDesignation())
             -> addMeta ('property','og:title',$CategoryPostCached->getDesignation())
-            // ->addMeta('name', 'description', $postCached->getContent())
+            ->addMeta('name', 'description', $CategoryPostCached->getDescription())
             ->addTitleSuffix("MA.BA.CE.&#x2161")
             ->addMeta('property', 'og:title', $CategoryPostCached->getDesignation())
             ->setLinkCanonical($this->urlGenerator->generate('app_blog_by_category',['slug'=>$CategoryPostCached->getSlug()], urlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:url',  $this->urlGenerator->generate('app_blog_by_category',['slug'=>$CategoryPostCached->getSlug()], urlGeneratorInterface::ABSOLUTE_URL))
-            // ->addMeta('property', 'og:description',$postCached->getContent())
-            // ->addMeta('property', 'og:image',$urlPackage->getBaseUrl($post->getImage()))
+            ->addMeta('property', 'og:description',$CategoryPostCached->getDescription())
            ->setBreadcrumb('blog', [
             'blog' => $CategoryPostCached,
             ]);
