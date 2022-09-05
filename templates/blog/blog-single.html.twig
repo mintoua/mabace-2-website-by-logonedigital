@@ -8,7 +8,9 @@ MA.BA.CE.&#x2161; {% endblock %} {% block body %}
 
 <div class="section-sm bg-grey-lighter">
   <div class="container text-center">
-    <h3 class="font-family-secondary">{{ post.title }}</h3>
+    <h3 class="font-family-secondary">
+      Article &#160;: &#160;{{ post.title }}
+    </h3>
   </div>
   <!-- end container -->
 </div>
@@ -35,10 +37,14 @@ MA.BA.CE.&#x2161; {% endblock %} {% block body %}
           <div class="margin-top-30">
             <div class="d-flex justify-content-between margin-bottom-10">
               <div class="d-inline-flex">
+                Thématique :&#160;
                 <a
+                  href="{{
+                    path('app_blog_by_category', { slug: catPost.slug })
+                  }}"
                   class="font-family-tertiary font-small fw-normal uppercase"
-                  href="#"
-                  >{{ post.categoryPost }}</a
+                >
+                  {{ catPost.designation }}</a
                 >
               </div>
               <div class="d-inline-flex">
@@ -112,7 +118,7 @@ MA.BA.CE.&#x2161; {% endblock %} {% block body %}
           <div class="popular-post">
             <a href="{{ path('app_blog_detail', { slug: lastPost.slug }) }}">
               <img
-                src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
+                src="{{ asset('uploads/images/BlogImages'~asset(lastPost.image)) }}"
                 alt=" {{ lastPost.slug }} "
               />
             </a>
