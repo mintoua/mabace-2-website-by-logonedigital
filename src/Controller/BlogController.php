@@ -45,7 +45,7 @@ class BlogController extends AbstractController
         $cat = $req->get("catSlug", 'Tous');
         if ($req->get('ajax')){
             if ($cat != 'Tous' ){
-                $posts = $this->postRepo->findAllServicesByCategory($cat);
+                $posts = $this->postRepo->findAllPostByCategory($cat);
 
                 return new JsonResponse([
                     'content'=> $this->renderView ('blog/blogList.html.twig',[

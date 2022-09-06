@@ -29,8 +29,9 @@ class ProjetController extends AbstractController
             $this->entityManager->getRepository (Projet::class)->findAll ());
 
         $description = "découvrez les projets de MA.BA.CA II";
-        $this -> seoPage -> setTitle ( "les projets de MA.BA.CE II" )
+        $this -> seoPage -> setTitle ( "Projets" )
             -> addMeta ( 'property' , 'og:title' , '' )
+            ->addTitleSuffix("MA.BA.CE.&#x2161")
             ->addMeta('name', 'description', $description)
             ->addMeta('name', 'keywords', "mabace2, association, projets")
             ->addMeta('property', 'og:title', "projets MA.BA.CE II")
@@ -53,13 +54,14 @@ class ProjetController extends AbstractController
             -> setTitle( $projet->getIntitule() )
             ->addMeta ( 'property' , 'og:title' , $projet->getSlug() )
             ->addMeta ( 'property' , 'og:type' , 'projet' )
-            ->addMeta ( 'name' , 'description' , $projet -> getDescription () () )
+            ->addMeta ( 'name' , 'description' , $projet -> getDescription () )
+            ->addTitleSuffix("MA.BA.CE.&#x2161")
             ->addMeta ( 'name' , 'keywords' , $projet->getSlug () )
             ->addMeta('property', 'og:type', 'projet')
             ->addMeta('property', 'og:description', $projet->getDescription())
-            ->addMeta('name', 'keywords', "mabace2, MABACE II, association")
+            ->addMeta('name', 'keywords', "mabace2, MABACE II, MA.BA.CE.&#x2161, association")
             ->addMeta('property', 'og:title', $projet->getSlug())
-            ->addMeta('property', 'og:image', "https://127.0.0.1:8000/uploads/images/ProjetsImages/". $projet->getImage())
+            ->addMeta('property', 'og:image', "https://mabace-2.com/uploads/images/ProjetsImages/". $projet->getImage())
             ->setLinkCanonical($this->urlGenerator->generate('app_projet_detail',['slug'=>$projet->getSlug ()], urlGeneratorInterface::ABSOLUTE_URL))
             ->addMeta('property', 'og:url',  $this->urlGenerator->generate('app_projet_detail',['slug'=>$projet->getSlug ()], urlGeneratorInterface::ABSOLUTE_URL))
             ->setBreadcrumb('Projets', ["projet"=>$projet]);
