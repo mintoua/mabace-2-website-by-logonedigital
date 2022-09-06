@@ -1,5 +1,12 @@
-{% extends "base.html.twig" %} {% block title %} {{ projet.intitule }} |
-  MA.BA.CE.&#x2161; {% endblock %} {% block body %}
+{% extends "base.html.twig" %}
+
+{% block seo %}
+  {{ sonata_seo_title() }}
+  {{ sonata_seo_metadatas() }}
+  {{ sonata_seo_link_canonical() }}
+{% endblock %}
+
+{% block body %}
 
   <!-- Header -->
   {{ include("./includes/navbar.html.twig") }}
@@ -24,8 +31,8 @@
             <div class="hoverbox-8">
               <a>
                 <img
-                        src="{{ asset('uploads/') }}images/ProjetsImages/{{ projet.image }}"
-                        data-src="{{ asset('uploads/images/ProjetsImages'~asset(projet.image)) }}"
+                        src="{{ asset('uploads/images/ProjetsImages'~asset(projet.image)) | imagine_filter('blog_image')}}"
+                        data-src="{{ absolute_url(asset('uploads/images/ProjetsImages'~asset(projet.image))) | imagine_filter('blog_image')}}"
                         alt="image faisant référent notre projet {{
                         projet.slug
                         }} de MA.BA.CE.&#x2161;"
@@ -84,11 +91,25 @@
               </li>
             </ul>
           </div>
-          
-          <div class="margin-bottom-20">
-            <a href="#">
-              <img src="{{ asset('frontoffice/') }}images/col-3.jpg" alt="" />
-            </a>
+
+          <div class="sidebar-box">
+            <h6 class="font-small fw-normal uppercase">Nos services</h6>
+            <div class="owl-carousel owl-nav-overlay" data-owl-items="1" data-owl-nav="true" data-owl-dots="false">
+              <div>
+                <img                         src="{{ asset('uploads/images/ProjetsImages'~asset(projet.image)) | imagine_filter('blog_image')}}"
+                                             data-src="{{ absolute_url(asset('uploads/images/ProjetsImages'~asset(projet.image))) | imagine_filter('blog_image')}}"
+                                             alt="image faisant référent notre projet {{
+                                             projet.slug
+                                             }} de MA.BA.CE.&#x2161;">
+              </div>
+              <div>
+                <img                         src="{{ asset('uploads/images/ProjetsImages'~asset(projet.image)) }}"
+                                             data-src="{{ absolute_url(asset('uploads/images/ProjetsImages'~asset(projet.image)))}}"
+                                             alt="image faisant référent notre projet {{
+                                             projet.slug
+                                             }} de MA.BA.CE.&#x2161;">
+              </div>
+            </div>
           </div>
 
           <!-- Sidebar box 6 - Facebook Like box -->

@@ -1,5 +1,10 @@
-{% extends "base.html.twig" %} {% block title %} Tous les projets de
-MA.BA.CE.&#x2161; {% endblock %} {% block body %}
+{% extends "base.html.twig" %}
+{% block seo %}
+  {{ sonata_seo_title() }}
+  {{ sonata_seo_metadatas() }}
+  {{ sonata_seo_link_canonical() }}
+{% endblock %}
+{% block body %}
 
 <!-- Header -->
 {{ include("./includes/navbar.html.twig") }}
@@ -21,7 +26,11 @@ MA.BA.CE.&#x2161; {% endblock %} {% block body %}
         <div class="margin-bottom-50">
           <div class="hoverbox-8">
             <a href="#">
-              <img src="{{ asset('uploads/') }}images/ProjetsImages/{{ projet.image }}" alt="" />
+              <img src="{{ absolute_url(asset('uploads/images/ProjetsImages'~asset(projet.image)) | imagine_filter('blog_image')) }}"
+                   data-src="{{ absolute_url(asset('uploads/images/ProjetsImages'~asset(projet.image)) | imagine_filter('blog_image')) }}"
+                   alt="image faisant référent notre projet {{
+                   projet.slug
+                   }} dans le blog de MA.BA.CE.&#x2161;" />
             </a>
           </div>
           <div class="margin-top-30">

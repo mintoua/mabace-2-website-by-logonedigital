@@ -62,7 +62,7 @@ class ServiceCrudController extends AbstractCrudController
                 ->setFormType (CKEditorType::class)
                 ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')
                 ->renderAsHtml(),
-            TextField::new ('clients','Les Clients')
+            TextField::new ('clients','Les Clients')->hideOnForm ()
         ];
     }
 

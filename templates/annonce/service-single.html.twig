@@ -16,7 +16,7 @@
 <div class="section-sm bg-grey-lighter">
   <div class="container text-center">
     <h3 class="font-family-secondary">
-      Article &#160;: &#160;{{ post.title }}
+      Service &#160;: &#160;{{ service.designation }}
     </h3>
   </div>
   <!-- end container -->
@@ -30,42 +30,26 @@
       <div class="col-12 col-lg-8">
         <!-- Blog Post box 1 -->
         <div class="margin-bottom-50">
-          <div class="hoverbox-8">
-            <a>
-              <img
-                src="{{ asset('uploads/images/BlogImages'~asset(post.image)) | imagine_filter('blog_image')}}"
-                data-src="{{ absolute_url(asset('uploads/images/BlogImages'~asset(post.image))) | imagine_filter('blog_image')}}"
-                alt="image faisant référent notre articles {{
-                  post.slug
-                }} dans le blog de MA.BA.CE.&#x2161;"
-              />
-            </a>
-          </div>
           <div class="margin-top-30">
             <div class="d-flex justify-content-between margin-bottom-10">
               <div class="d-inline-flex">
-                Thématique :&#160;
+                Catégorie :&#160;
                 <a
-                  href="{{
-                    path('app_blog_by_category', { slug: catPost.slug })
-                  }}"
+                  href="#"
                   class="font-family-tertiary font-small fw-normal uppercase"
                 >
-                  {{ catPost.designation }}</a
-                >
-              </div>
-              <div class="d-inline-flex">
-                <span class="font-small"
-                  >{{ post.getCreatedAt().format("M") }}
-                  {{ post.getCreatedAt().format("j") }},
-                  {{ post.getCreatedAt().format("Y") }}</span
+                  {{ service.getServiceCategory() }}</a
                 >
               </div>
             </div>
-            <h5>{{ post.title }}</h5>
+            <h5>{{ service.designation }}</h5>
             <p>
-              {{ post.content | raw }}
+              {{ service.description | raw }}
             </p>
+            <a type="button" class="button-text-2 margin-top-20"
+               href="" data-toggle="modal" data-target="#createModal">
+              Intéressé(e)
+            </a>
           </div>
         </div>
         <!-- Pagination -->
@@ -76,7 +60,7 @@
       <div class="col-12 col-lg-4 sidebar-wrapper">
         <!-- Sidebar box 1 - About me -->
         <div class="sidebar-box text-center">
-          <h6 class="font-small fw-normal uppercase">Auteur</h6>
+          <h6 class="font-small fw-normal uppercase">Le prestataire du service</h6>
           <img
             class="img-circle-md margin-bottom-20"
             src="{{ asset('frontoffice/') }}images/image-blank-author.jpg"
@@ -105,69 +89,19 @@
         <div class="sidebar-box">
           <h6 class="font-small fw-normal uppercase">Nos Thématiques</h6>
           <ul class="list-category">
-            {% for category in categoriesPost %}
+            {% for category in servicesCategories %}
             <li>
               <a
-                href="{{
-                  path('app_blog_by_category', { slug: category.slug })
-                }}"
-                >{{ category.designation }}
-                <span>{{ category.posts | length }}</span></a
+                href="#"
+                >{{ category.intitule }}
+                <span>{{ category.services | length }}</span></a
               >
             </li>
             {% endfor %}
           </ul>
         </div>
         <!-- Sidebar box 3 - Popular Posts -->
-        <div class="sidebar-box">
-          <h6 class="font-small fw-normal uppercase">Nos derniers posts</h6>
-          {% for lastPost in lastPosts %}
-          <div class="popular-post">
-            <a href="{{ path('app_blog_detail', { slug: lastPost.slug }) }}">
-              <img
-                src="{{ asset('uploads/images/BlogImages'~asset(lastPost.image)) | imagine_filter('blog_min_image')}}"
-                alt=" {{ lastPost.slug }} "
-              />
-            </a>
-            <div>
-              <h6 class="fw-normal">
-                <a
-                  href="{{ path('app_blog_detail', { slug: lastPost.slug }) }}"
-                  >{{ lastPost.title | slice(0,30) }}</a
-                >
-              </h6>
-              <span
-                >{{ lastPost.getCreatedAt().format("M") }}
-                {{ lastPost.getCreatedAt().format("j") }},
-                {{ lastPost.getCreatedAt().format("Y") }}</span
-              >
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-        {#
-        <div class="sidebar-box">
-          <h6 class="font-small fw-normal uppercase">Nos derniers posts</h6>
-          <div class="popular-post">
-            <a href="#">
-              <img
-                src="{{ asset('uploads/images/BlogImages'~asset(post.image)) }}"
-                alt=""
-              />
-            </a>
-            <div>
-              <h6 class="fw-normal"><a href="#">Blog Post with Image</a></h6>
-              <span>January 07, 2018</span>
-            </div>
-          </div>
-        </div>
-        #}
-        <!-- Sidebar box 4 - Banner Image -->
-        <div class="margin-bottom-20">
-          <a href="#">
-            <img src="{{ asset('frontoffice/') }}images/col-3.jpg" alt="" />
-          </a>
-        </div>
+
 
         <!-- Sidebar box 6 - Facebook Like box -->
         <div class="sidebar-box text-center">
@@ -200,7 +134,8 @@
   <!-- end container -->
 </div>
 <!-- end Blog section -->
-
+  {% set submit_url = path('app_services_apply', { slug: service.slug }) %}
+  {% include 'annonce/modal.html.twig' with {url: submit_url} %}
 {{ include("./includes/footer.html.twig") }}
 
 <!-- Scroll to top button -->
@@ -212,4 +147,7 @@
 <!-- end Scroll to top button -->
 
 <!-- ***** JAVASCRIPTS ***** -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 {% endblock %}

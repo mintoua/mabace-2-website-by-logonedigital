@@ -63,7 +63,7 @@ class PostRepository extends ServiceEntityRepository
        ;
    }
 
-   public function findAllServicesByCategory($filter){
+   public function findAllPostByCategory($filter){
         $query = $this
             ->createQueryBuilder('s')
             ->select('c','s')

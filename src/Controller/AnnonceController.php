@@ -87,16 +87,15 @@ class AnnonceController extends AbstractController
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-
             $client->addService ($service);
             $this->entityManager->persist ($client);
-            $this->entityManager->flush ();
+           // $this->entityManager->flush ();
             return $this->redirectToRoute('app_services');
         }
 
-
-
-        return $this->render('annonce/apply.html.twig', [
+        return $this->render('annonce/service-single.html.twig', [
+            'service'=>$service,
+            'servicesCategories'=> $this->entityManager->getRepository (ServiceCategory::class)->findAll (),
             'form' => $form->createView(),
         ]);
     }

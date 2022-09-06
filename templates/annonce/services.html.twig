@@ -1,5 +1,10 @@
-{% extends "base.html.twig" %} {% block title %} Toutes nos petites annonces |
-MA.BA.CE.&#x2161; {% endblock %} {% block javascripts %}
+{% extends "base.html.twig" %}
+{% block seo %}
+  {{ sonata_seo_title() }}
+  {{ sonata_seo_metadatas() }}
+  {{ sonata_seo_link_canonical() }}
+{% endblock %}
+{% block javascripts %}
 
 <script>
   function chooseCategory(cat, slug) {
