@@ -39,6 +39,9 @@ class Service
     #[ORM\ManyToOne(inversedBy: 'service')]
     private ?Client $clients = null;
 
+    #[ORM\Column]
+    private ?bool $isBest = null;
+
     public function __toString(): string
     {
         // TODO: Implement __toString() method.
@@ -118,6 +121,18 @@ class Service
     public function setClients(?Client $clients): self
     {
         $this->clients = $clients;
+
+        return $this;
+    }
+
+    public function isIsBest(): ?bool
+    {
+        return $this->isBest;
+    }
+
+    public function setIsBest(bool $isBest): self
+    {
+        $this->isBest = $isBest;
 
         return $this;
     }

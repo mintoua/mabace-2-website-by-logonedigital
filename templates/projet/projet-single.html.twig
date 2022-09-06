@@ -64,51 +64,21 @@
 
         <!-- Blog Sidebar -->
         <div class="col-12 col-lg-4 sidebar-wrapper">
-          <!-- Sidebar box 1 - About me -->
-          <div class="sidebar-box text-center">
-            <h6 class="font-small fw-normal uppercase">Auteur</h6>
-            <img
-                    class="img-circle-md margin-bottom-20"
-                    src="{{ asset('frontoffice/') }}images/image-blank-author.jpg"
-                    alt=""
-            />
-            <p>
-              Redigé par l'administrateur du site
-              MA.BA.CE.&#x2161;
-            </p>
-            <ul class="list-inline margin-top-20">
-              <li>
-                <a href="#"><i class="bi bi-facebook"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="bi bi-twitter"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="bi bi-pinterest"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="bi bi-instagram"></i></a>
-              </li>
-            </ul>
-          </div>
+
 
           <div class="sidebar-box">
-            <h6 class="font-small fw-normal uppercase">Nos services</h6>
+            <h6 class="font-small fw-normal uppercase">Nos meilleurs services</h6>
             <div class="owl-carousel owl-nav-overlay" data-owl-items="1" data-owl-nav="true" data-owl-dots="false">
-              <div>
-                <img                         src="{{ asset('uploads/images/ProjetsImages'~asset(projet.image)) | imagine_filter('blog_image')}}"
-                                             data-src="{{ absolute_url(asset('uploads/images/ProjetsImages'~asset(projet.image))) | imagine_filter('blog_image')}}"
-                                             alt="image faisant référent notre projet {{
-                                             projet.slug
-                                             }} de MA.BA.CE.&#x2161;">
-              </div>
-              <div>
-                <img                         src="{{ asset('uploads/images/ProjetsImages'~asset(projet.image)) }}"
-                                             data-src="{{ absolute_url(asset('uploads/images/ProjetsImages'~asset(projet.image)))}}"
-                                             alt="image faisant référent notre projet {{
-                                             projet.slug
-                                             }} de MA.BA.CE.&#x2161;">
-              </div>
+              {% for bestService in bestServices %}
+                <div>
+                  <img                         src="{{ asset('uploads/images/ServiceImages'~asset(bestService.image)) | imagine_filter('blog_image')}}"
+                                               data-src="{{ absolute_url(asset('uploads/images/ServiceImages'~asset(bestService.image))) | imagine_filter('blog_image')}}"
+                                               alt="image faisant référent notre service {{
+                                               bestService.slug
+                                               }} de MA.BA.CE.&#x2161;">
+
+                </div>
+              {% endfor %}
             </div>
           </div>
 

@@ -10,19 +10,15 @@
                 {{ form_start(form,{'action':url }) }}
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name">Nom</label>
                         {{ form_widget(form.nom,{'attr': {'placeholder': 'Nom'}}) }}
                     </div>
                     <div class="form-group">
-                        <label for="name">Prénom</label>
                         {{ form_widget(form.prenom,{'attr': {'placeholder': 'Prénom'}}) }}
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
                         {{ form_widget(form.email,{'attr': {'placeholder': 'Email'}}) }}
                     </div>
                     <div class="form-group">
-                        <label for="tel">Numéro de téléphone</label>
                         {{ form_widget(form.tel,{'attr': {'placeholder': 'Tel'}}) }}
                     </div>
                     <div class="form-check">

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Projet;
+use App\Entity\Service;
 use App\Services\DefaultService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\SeoBundle\Seo\SeoPageInterface;
@@ -25,6 +26,7 @@ class ProjetController extends AbstractController
     #[Route('/nos-projets', name: 'app_projet')]
     public function index(Request $request): Response
     {
+
         $_projects = $this->defaultService->toCache ('projets','1 day',
             $this->entityManager->getRepository (Projet::class)->findAll ());
 
@@ -67,6 +69,7 @@ class ProjetController extends AbstractController
             ->setBreadcrumb('Projets', ["projet"=>$projet]);
 
         return $this->render('projet/projet-single.html.twig',[
+            'bestServices'=>$this->entityManager->getRepository (Service::class)->findByIsBest(1),
             'projet'=>$projet,
         ]);
     }
