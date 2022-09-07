@@ -39,6 +39,7 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('rgpd', CheckboxType::class, [
+                'label'=> false,
                 'constraints' => [
                     new IsTrue(),
                 ],
