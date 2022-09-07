@@ -10,19 +10,23 @@
                 {{ form_start(form,{'action':url }) }}
                 <div class="modal-body">
                     <div class="form-group">
-                        {{ form_widget(form.nom,{'attr': {'placeholder': 'Nom'}}) }}
+                        {{ form_row(form.nom,{'attr': {'placeholder': 'Nom','class':'form-control'}}) }}
                     </div>
                     <div class="form-group">
-                        {{ form_widget(form.prenom,{'attr': {'placeholder': 'Prénom'}}) }}
+                        {{ form_errors(form.prenom) }}
+                        {{ form_row(form.prenom,{'attr': {'placeholder': 'Prénom','class':'form-control'}}) }}
                     </div>
                     <div class="form-group">
-                        {{ form_widget(form.email,{'attr': {'placeholder': 'Email'}}) }}
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email,{'attr': {'placeholder': 'Email','class':'form-control'}}) }}
                     </div>
                     <div class="form-group">
-                        {{ form_widget(form.tel,{'attr': {'placeholder': 'Tel'}}) }}
+                        {{ form_errors(form.tel) }}
+                        {{ form_row(form.tel,{'attr': {'placeholder': 'Tel','class':'form-control'}}) }}
                     </div>
                     <div class="form-check">
-                        {{ form_widget(form.rgpd,{'attr': {'class': 'form-check-input'}}) }}
+                        {{ form_errors(form.rgpd) }}
+                        {{ form_row(form.rgpd,{'attr': {'class': 'form-check-input'}}) }}
                         <label class="form-check-label" for="defaultCheck1">
                             J'accepte les conditions générales d'utilisations
                         </label>

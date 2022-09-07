@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ServiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -36,11 +38,17 @@ class Service
     #[ORM\Column(length: 50)]
     private ?string $slug = null;
 
-    #[ORM\ManyToOne(inversedBy: 'service')]
-    private ?Client $clients = null;
 
     #[ORM\Column]
     private ?bool $isBest = null;
+
+    #[ORM\ManyToMany(targetEntity: Client::class, mappedBy: 'services',orphanRemoval: true)]
+    private Collection $clients;
+
+    public function __construct()
+    {
+        $this->clients = new ArrayCollection();
+    }
 
     public function __toString(): string
     {
@@ -113,17 +121,6 @@ class Service
         return $this;
     }
 
-    public function getClients(): ?Client
-    {
-        return $this->clients;
-    }
-
-    public function setClients(?Client $clients): self
-    {
-        $this->clients = $clients;
-
-        return $this;
-    }
 
     public function isIsBest(): ?bool
     {
@@ -133,6 +130,33 @@ class Service
     public function setIsBest(bool $isBest): self
     {
         $this->isBest = $isBest;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Client>
+     */
+    public function getClients(): Collection
+    {
+        return $this->clients;
+    }
+
+    public function addClient(Client $client): self
+    {
+        if (!$this->clients->contains($client)) {
+            $this->clients->add($client);
+            $client->addService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClient(Client $client): self
+    {
+        if ($this->clients->removeElement($client)) {
+            $client->removeService($this);
+        }
 
         return $this;
     }

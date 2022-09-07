@@ -30,8 +30,14 @@ class Client
     #[ORM\Column]
     private ?bool $rgpd = null;
 
-    #[ORM\OneToMany(mappedBy: 'clients', targetEntity: Service::class, orphanRemoval: true)]
-    private Collection $service;
+    #[ORM\ManyToMany(targetEntity: Service::class, inversedBy: 'clients')]
+    private Collection $services;
+
+    public function __construct()
+    {
+        $this->services = new ArrayCollection();
+    }
+
 
     public function __toString(): string
     {
@@ -39,10 +45,6 @@ class Client
         return $this->getEmail();
     }
 
-    public function __construct()
-    {
-        $this->service = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -112,16 +114,15 @@ class Client
     /**
      * @return Collection<int, Service>
      */
-    public function getService(): Collection
+    public function getServices(): Collection
     {
-        return $this->service;
+        return $this->services;
     }
 
     public function addService(Service $service): self
     {
-        if (!$this->service->contains($service)) {
-            $this->service->add($service);
-            $service->setClients($this);
+        if (!$this->services->contains($service)) {
+            $this->services->add($service);
         }
 
         return $this;
@@ -129,13 +130,10 @@ class Client
 
     public function removeService(Service $service): self
     {
-        if ($this->service->removeElement($service)) {
-            // set the owning side to null (unless already changed)
-            if ($service->getClients() === $this) {
-                $service->setClients(null);
-            }
-        }
+        $this->services->removeElement($service);
 
         return $this;
     }
+
+
 }
