@@ -15,7 +15,7 @@ endblock %} {% block body %}
   <!-- Slider Item 1 -->
   <div
     class="bg-image"
-    data-bg-src="{{ asset('frontoffice/') }}images/home-3.jpg"
+    data-bg-src="{{ asset('frontoffice/') }}images/home-1.jpg"
   >
     <div class="section-xl bg-black-03">
       <div class="container text-center">
@@ -32,7 +32,7 @@ endblock %} {% block body %}
             <a
               class="button button-xl button-radius button-outline-white margin-top-20 button-font-2"
               href="{{ path('app_about') }}"
-              >Explore</a
+              >Explorer</a
             >
           </div>
         </div>
@@ -44,7 +44,7 @@ endblock %} {% block body %}
   <!-- Slider Item 2 -->
   <div
     class="bg-image"
-    data-bg-src="{{ asset('frontoffice/') }}images/home-1.jpg"
+    data-bg-src="{{ asset('frontoffice/') }}images/home-3.jpg"
   >
     <div class="section-xl bg-black-03">
       <div class="container text-center">
@@ -75,6 +75,7 @@ endblock %} {% block body %}
 <!-- end Hero section -->
 
 <!-- Services section -->
+{#
 <div class="section">
   <div class="container">
     <div class="row g-4 icon-5xl text-center">
@@ -110,10 +111,11 @@ endblock %} {% block body %}
   </div>
   <!-- end container -->
 </div>
+#}
 <!-- end Services section -->
 
 <!-- About section -->
-<div class="section padding-top-0">
+<div class="section padding-top-0 margin-top-50">
   <div class="container">
     <div class="row align-items-center g-5">
       <div class="col-12 col-lg-6">
@@ -265,23 +267,24 @@ endblock %} {% block body %}
 
 <!-- Parallax section -->
 <div
-  class="section-xl bg-image parallax"
-  data-bg-src="{{ asset('frontoffice/') }}images/background.jpg"
+  class="section-xl bg-image parallax margin-bottom-50"
+  data-bg-src="{{ asset('frontoffice/') }}images/african-talents.jpg"
 >
   <div class="bg-black-05">
     <div class="container">
       <div class="row align-items-center g-4">
         <div class="col-12 col-lg-8 col-xl-7">
-          <h1 class="fw-light">Feel free to ask any questions</h1>
+          <h1 class="fw-light">Nos services</h1>
           <p class="font-large">
-            Etiam sit amet orci eget eros faucibus tincidunt.
+            Découvrez les différents services proposés par les membres de
+            l'association.
           </p>
         </div>
         <div class="col-12 col-lg-4 col-xl-5 text-lg-end">
           <a
             class="button button-xl button-radius button-reveal-right-outline-white"
-            href="#"
-            ><i class="bi bi-arrow-right"></i><span>Get In Touch</span></a
+            href="{{ path('app_about') }}"
+            ><i class="bi bi-arrow-right"></i><span>Découvrir</span></a
           >
         </div>
       </div>
@@ -292,98 +295,9 @@ endblock %} {% block body %}
 </div>
 <!-- end Parallax section -->
 
-<!-- Testimonial section -->
-<div class="section">
-  <div class="container">
-    <div class="margin-bottom-70">
-      <div class="row text-center">
-        <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-          <h6 class="font-small fw-normal uppercase">Testimonial</h6>
-          <h2>What People Say</h2>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-grid column-2">
-      <!-- Testimonial box 1 -->
-      <div class="testimonial-grid-box">
-        <div class="testimonial-img">
-          <img
-            src="{{ asset('frontoffice/') }}images/img-circle-small.jpg"
-            alt=""
-          />
-        </div>
-        <div class="testimonial-content">
-          <p class="margin-bottom-10 font-small">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-            nascetur ridiculus mus.
-          </p>
-          <h5 class="fw-normal margin-0 line-height-140">Emiley Haley</h5>
-          <span class="font-small fw-normal">Manager - Mono</span>
-        </div>
-      </div>
-      <!-- Testimonial box 2 -->
-      <div class="testimonial-grid-box">
-        <div class="testimonial-img">
-          <img
-            src="{{ asset('frontoffice/') }}images/img-circle-small.jpg"
-            alt=""
-          />
-        </div>
-        <div class="testimonial-content">
-          <p class="margin-bottom-10 font-small">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-            nascetur ridiculus mus.
-          </p>
-          <h5 class="fw-normal margin-0 line-height-140">Andrew Palmer</h5>
-          <span class="font-small fw-normal">Developer - Mono</span>
-        </div>
-      </div>
-      <!-- Testimonial box 3 -->
-      <div class="testimonial-grid-box">
-        <div class="testimonial-img">
-          <img
-            src="{{ asset('frontoffice/') }}images/img-circle-small.jpg"
-            alt=""
-          />
-        </div>
-        <div class="testimonial-content">
-          <p class="margin-bottom-10 font-small">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-            nascetur ridiculus mus.
-          </p>
-          <h5 class="fw-normal margin-0 line-height-140">Anna Mullen</h5>
-          <span class="font-small fw-normal">Designer - Mono</span>
-        </div>
-      </div>
-      <!-- Testimonial box 4 -->
-      <div class="testimonial-grid-box">
-        <div class="testimonial-img">
-          <img
-            src="{{ asset('frontoffice/') }}images/img-circle-small.jpg"
-            alt=""
-          />
-        </div>
-        <div class="testimonial-content">
-          <p class="margin-bottom-10 font-small">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-            nascetur ridiculus mus.
-          </p>
-          <h5 class="fw-normal margin-0 line-height-140">John Smith</h5>
-          <span class="font-small fw-normal">Marketer - Mono</span>
-        </div>
-      </div>
-    </div>
-    <!-- end testimonial-grid -->
-  </div>
-  <!-- end row -->
-</div>
-<!-- end Testimonial section -->
-
 <!-- Clients section -->
+
+{#
 <div class="section bg-grey-lighter">
   <div class="container">
     <div
@@ -445,6 +359,8 @@ endblock %} {% block body %}
   </div>
   <!-- end container -->
 </div>
+#}
+
 <!-- end Clients section -->
 
 {{ include("./includes/footer.html.twig") }}

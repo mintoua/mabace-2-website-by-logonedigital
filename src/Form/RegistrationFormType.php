@@ -14,20 +14,33 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstname',TextType::class)
-            ->add('lastname',TextType::class)
-            ->add('email', EmailType::class)
+            ->add('firstname',TextType::class, [
+                "constraints"=>[
+                    new NotNull()
+                ]
+            ])
+            ->add('lastname',TextType::class, [
+                "constraints"=>[
+                    new NotNull()
+                ]
+            ])
+            ->add('email', EmailType::class, [
+                "constraints"=>[
+                    new NotNull(),
+                    new Email()
+                ]
+            ])
             ->add('rgpd', CheckboxType::class, [
                 'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
+                    new IsTrue(),
                 ],
             ])
         ;

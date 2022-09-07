@@ -29,6 +29,11 @@ class DefaultController extends AbstractController
     {
         return $this->render('default/index.html.twig');
     }
+    #[Route('/form', name: 'app_form')]
+    public function formTemplate(): Response
+    {
+        return $this->render('default/form_template.html.twig');
+    }
 
     #[Route('/a-propos', name: 'app_about')]
     public function about(): Response

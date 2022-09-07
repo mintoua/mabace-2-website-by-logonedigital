@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %} {% block title %} Accueil | MA.BA.CE.&#x2161; {%
+endblock %} {% block body %}
+<div id="cursor"></div>
+<!-- Header -->
+
+<!-- end Header -->
+
+<style>
+  /* .container-form {
+    position: relative;
+    top: 0%;
+  } */
+  .form-title {
+    color: #432918;
+  }
+  .button {
+    background-color: #432918;
+  }
+</style>
+
+<div class="container-form row justify-content-center">
+  <div class="col-12 col-sm-4 col-lg-4 col-xl-5 col-xxl-6">
+    <p class="text-center">
+      <a href="{{ path('app_home') }}" class="">
+        <img
+          class=""
+          src="{{ asset('frontoffice/') }}images/logo-5.png"
+          alt="logo mabace deux"
+        />
+      </a>
+    </p>
+    <h1 class="text-center text-uppercase fs-1 form-title">se connecter</h1>
+    <form class="form-style-2">
+      <div class="mb-3">
+        <label>Name</label>
+        <input type="text" placeholder="Your name" />
+      </div>
+      <div class="mb-3">
+        <label>Email address</label>
+        <input type="email" placeholder="Enter your email" required />
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="button button-md button-dark w-100">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Scroll to top button -->
+<div class="scrolltotop">
+  <a class="button-circle button-circle-sm button-circle-dark" href="#"
+    ><i class="bi bi-arrow-up"></i
+  ></a>
+</div>
+<!-- end Scroll to top button -->
+
+<!-- ***** JAVASCRIPTS ***** -->
+{% endblock %}
