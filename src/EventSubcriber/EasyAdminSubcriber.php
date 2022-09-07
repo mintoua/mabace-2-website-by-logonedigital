@@ -48,6 +48,22 @@ class EasyAdminSubcriber implements EventSubscriberInterface
      */
     public function clearCacheAfter(AfterEntityPersistedEvent $event):void{
         $entity = $event->getEntityInstance();
+
+        if($entity instanceof Service){
+            $this->cache->delete ('services');
+            $this->cache->delete ('service_categories');
+        }
+
+        if($entity instanceof ServiceCategory){
+            $this->cache->delete ('services');
+            $this->cache->delete ('service_categories');
+        }
+
+        if ($entity instanceof Projet)
+        {
+            $this->cache->delete ('projets');
+        }
+
         if($entity instanceof Post){
             $this->cache->delete('posts_blog_page');
             $this->cache->delete('categories_post_blog_page');
@@ -69,6 +85,22 @@ class EasyAdminSubcriber implements EventSubscriberInterface
 
     public function clearCacheAfterUpdated(AfterEntityUpdatedEvent $event):void{
         $entity = $event->getEntityInstance();
+
+        if($entity instanceof Service){
+            $this->cache->delete ('services');
+            $this->cache->delete ('service_categories');
+        }
+
+        if($entity instanceof ServiceCategory){
+            $this->cache->delete ('services');
+            $this->cache->delete ('service_categories');
+        }
+
+        if ($entity instanceof Projet)
+        {
+            $this->cache->delete ('projets');
+        }
+
         if($entity instanceof Post){
             $this->cache->delete('posts_blog_page');
             $this->cache->delete('categories_post_blog_page');
@@ -89,6 +121,21 @@ class EasyAdminSubcriber implements EventSubscriberInterface
 
     public function clearCacheAfterDeleted(AfterEntityDeletedEvent $event):void{
         $entity = $event->getEntityInstance();
+        if($entity instanceof Service){
+            $this->cache->delete ('services');
+            $this->cache->delete ('service_categories');
+        }
+
+        if($entity instanceof ServiceCategory){
+            $this->cache->delete ('services');
+            $this->cache->delete ('service_categories');
+        }
+
+        if ($entity instanceof Projet)
+        {
+            $this->cache->delete ('projets');
+        }
+
         if($entity instanceof Post){
             $this->cache->delete('posts_blog_page');
             $this->cache->delete('categories_post_blog_page');
@@ -115,6 +162,8 @@ class EasyAdminSubcriber implements EventSubscriberInterface
      */
     public function persistanceProcess(BeforeEntityPersistedEvent $event){
         $entity = $event->getEntityInstance();
+
+
         if($entity instanceof User){
             $entity->setPassword(md5(uniqid()));
             $entity->setCreatedAt(new \DateTimeImmutable('now'));

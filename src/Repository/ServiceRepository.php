@@ -40,6 +40,7 @@ class ServiceRepository extends ServiceEntityRepository
         }
     }
 
+
     public function findAllServicesByCategory($filter){
         $query = $this
             ->createQueryBuilder('s')

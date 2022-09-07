@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Regex;
@@ -44,7 +45,6 @@ class ClientType extends AbstractType
             ])
             ->add('tel')
             ->add('email',EmailType::class,[
-                'required'=>false,
                 "constraints" => [
                     new NotNull(),
                     new NotBlank(),
@@ -55,11 +55,9 @@ class ClientType extends AbstractType
             ])
             ->add('rgpd', CheckboxType::class, [
                 'label'=> false,
-                'constraints' => [
-                    new \Symfony\Component\Validator\Constraints\IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
+                "constraints" => [
+                        new IsTrue(['message'=>"vous n'avez pas acceptez les conditions générales d'utilisatioin"])
+                    ]
             ])
         ;
     }

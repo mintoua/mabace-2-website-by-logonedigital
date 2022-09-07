@@ -30,6 +30,17 @@
       <div class="col-12 col-lg-8">
         <!-- Blog Post box 1 -->
         <div class="margin-bottom-50">
+          <div class="hoverbox-8">
+            <a>
+              <img
+                      src="{{ asset('uploads/images/ServiceImages'~asset(service.image)) | imagine_filter('blog_image')}}"
+                      data-src="{{ absolute_url(asset('uploads/images/ServiceImages'~asset(service.image))) | imagine_filter('blog_image')}}"
+                      alt="image faisant référent notre services {{
+                      service.slug
+                      }} dans le blog de MA.BA.CE.&#x2161;"
+              />
+            </a>
+          </div>
           <div class="margin-top-30">
             <div class="d-flex justify-content-between margin-bottom-10">
               <div class="d-inline-flex">
@@ -58,41 +69,29 @@
 
       <!-- Blog Sidebar -->
       <div class="col-12 col-lg-4 sidebar-wrapper">
-        <!-- Sidebar box 1 - About me -->
-        <div class="sidebar-box text-center">
-          <h6 class="font-small fw-normal uppercase">Le prestataire du service</h6>
-          <img
-            class="img-circle-md margin-bottom-20"
-            src="{{ asset('frontoffice/') }}images/image-blank-author.jpg"
-            alt=""
-          />
-          <p>
-            Cette articles a été redigé par l'administrateur du site
-            MA.BA.CE.&#x2161;
-          </p>
-          <ul class="list-inline margin-top-20">
-            <li>
-              <a href="#"><i class="bi bi-facebook"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="bi bi-twitter"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="bi bi-pinterest"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="bi bi-instagram"></i></a>
-            </li>
-          </ul>
-        </div>
         <!-- Sidebar box 2 - Categories -->
         <div class="sidebar-box">
-          <h6 class="font-small fw-normal uppercase">Nos Thématiques</h6>
+          <h6 class="font-small fw-normal uppercase">Nos meilleurs services</h6>
+          <div class="owl-carousel owl-nav-overlay" data-owl-items="1" data-owl-nav="true" data-owl-dots="false">
+            {% for bestService in bestServices %}
+            <div>
+              <img                         src="{{ asset('uploads/images/ServiceImages'~asset(bestService.image)) | imagine_filter('blog_image')}}"
+                                           data-src="{{ absolute_url(asset('uploads/images/ServiceImages'~asset(bestService.image))) | imagine_filter('blog_image')}}"
+                                           alt="image faisant référent notre service {{
+                                           bestService.slug
+                                           }} de MA.BA.CE.&#x2161;">
+
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="sidebar-box">
+          <h6 class="font-small fw-normal uppercase">Catégories de Services</h6>
           <ul class="list-category">
             {% for category in servicesCategories %}
             <li>
               <a
-                href="#"
+                href="{{ path('app_services') }}"
                 >{{ category.intitule }}
                 <span>{{ category.services | length }}</span></a
               >

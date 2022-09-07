@@ -8,6 +8,7 @@ use App\Entity\ServiceCategory;
 use App\Form\ClientType;
 use App\Services\DefaultService;
 use Doctrine\ORM\EntityManagerInterface;
+use Flasher\Prime\FlasherInterface;
 use Sonata\SeoBundle\Seo\SeoPageInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,7 +23,8 @@ class AnnonceController extends AbstractController
         private EntityManagerInterface $entityManager,
         private DefaultService $defaultService,
         private SeoPageInterface $seoPage,
-        private UrlGeneratorInterface $urlGenerator
+        private UrlGeneratorInterface $urlGenerator,
+        private FlasherInterface $flasher,
     )
     {}
 
@@ -86,17 +88,33 @@ class AnnonceController extends AbstractController
         $form = $this->createForm(ClientType::class,$client);
 
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $client->addService ($service);
-            $this->entityManager->persist ($client);
-           // $this->entityManager->flush ();
-            return $this->redirectToRoute('app_services');
+        if($form->isSubmitted() ) {
+            if ( $form -> isValid () ) {
+                $this->flasher->addSuccess("Votre demande a bien été prise en compte.");
+                $client -> addService ( $service );
+                $this -> entityManager -> persist ( $client );
+                $this -> entityManager -> flush ();
+                return $this -> redirectToRoute ( 'app_services' );
+            }else{
+                $this->flasher->addError  ("Une error s'est produit! Veuillez postuler à nouveau!");
+
+                return $this->render('annonce/service-single.html.twig', [
+                    'service'=>$service,
+                    'bestServices'=>$this->entityManager->getRepository (Service::class)->findByIsBest(1),
+                    'servicesCategories'=> $this->entityManager->getRepository (ServiceCategory::class)->findAll (),
+                    'form' => $form->createView(),
+                ]);
+            }
         }
+
+
 
         return $this->render('annonce/service-single.html.twig', [
             'service'=>$service,
+            'bestServices'=>$this->entityManager->getRepository (Service::class)->findByIsBest(1),
             'servicesCategories'=> $this->entityManager->getRepository (ServiceCategory::class)->findAll (),
             'form' => $form->createView(),
         ]);
     }
+
 }

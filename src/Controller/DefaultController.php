@@ -53,12 +53,18 @@ class DefaultController extends AbstractController
 
         $form->handleRequest($req);
 
-        if($form->isSubmitted() and $form->isValid()){
+        if($form->isSubmitted() ){
+            if ($form->isValid()){
 
-                    $em->persist($contact);
-                    $em->flush();
-                    $this->flasher->addSuccess("Votre demande a bien été prise en compte.");
-                    return $this->redirectToRoute('app_contact');
+                $em->persist($contact);
+                $em->flush();
+                $this->flasher->addSuccess("Votre demande a bien été prise en compte.");
+                return $this->redirectToRoute('app_contact');
+            }
+            else{
+                $this->flasher->addError("Formulaire veuillez saisir à nouveau!");
+                return $this->redirectToRoute('app_contact');
+            }
         }
 
         return $this->render('default/contact.html.twig', [
