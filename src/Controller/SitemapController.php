@@ -36,31 +36,52 @@ class SitemapController extends AbstractController
         // $urls []= ['loc'=> $this->generateUrl("app_category_job"),"priority"=>0.9,];
         
         //ajout des urls dynamique
-        // foreach($this->jobRepo->findAll() as $job){
-        //     $images = [
-        //         "loc" => "/public/uploads/images/jobImages/".$job->getImage(),
-        //         "title"=>$job->getSlug()
-        //     ];
-        //     $urls []= [
-        //         "loc"=>$this->generateUrl("app_job_detail", [
-        //             "slug"=>$job->getSlug()
-        //         ]),
-        //         'images' => $images,
-        //         "priority"=>0.9,
-        //         "changefreq"=>"monthly",
-        //         "lastmod" =>$job->getUpdatedAt() ? $job->getUpdatedAt()->format('Y-m-d') :$job->getCreatedAt()->format('Y-m-d')
-        //     ];
-        // }
-        // foreach($this->categoryJobRepo->findAll() as $category){
-        //     $urls []= [
-        //         "loc"=>$this->generateUrl("app_job_by_category", [
-        //             "slug"=>$category->getSlug()
-        //         ]),
-        //         "priority"=>0.9,
-        //         "changefreq"=>"monthly",
-        //         "lastmod" =>$category->getUpdatedAt() ? $category->getUpdatedAt()->format('Y-m-d') :$category->getCreatedAt()->format('Y-m-d')
-        //     ];
-        // }
+        foreach($this->postRepo->findAll() as $post){
+            $images = [
+                "loc" => "/public/uploads/images/BlogImages/".$post->getImage(),
+                "title"=>$post->getSlug()
+            ];
+            $urls []= [
+                "loc"=>$this->generateUrl("app_blog_detail", [
+                    "slug"=>$post->getSlug()
+                ]),
+                'images' => $images,
+                "priority"=>0.9,
+                "changefreq"=>"monthly",
+                "lastmod" =>$post->getUpdatedAt() ? $post->getUpdatedAt()->format('Y-m-d') :$post->getCreatedAt()->format('Y-m-d')
+            ];
+        }
+        foreach($this->serviceRepo->findAll() as $service){
+            $images = [
+                "loc" => "/public/uploads/images/ServiceImages/".$service->getImage(),
+                "title"=>$service->getSlug()
+            ];
+            $urls []= [
+                "loc"=>$this->generateUrl("app_services_apply", [
+                    "slug"=>$service->getSlug()
+                ]),
+                'images' => $images,
+                "priority"=>0.9,
+                "changefreq"=>"monthly",
+                "lastmod" =>$post->getCreatedAt()->format('Y-m-d')
+            ];
+        }
+        foreach($this->projetRepo->findAll() as $projet){
+            $images = [
+                "loc" => "/public/uploads/images/ProjetsImages/".$projet->getImage(),
+                "title"=>$projet->getSlug()
+            ];
+            $urls []= [
+                "loc"=>$this->generateUrl("app_projet_detail", [
+                    "slug"=>$projet->getSlug()
+                ]),
+                'images' => $images,
+                "priority"=>0.9,
+                "changefreq"=>"monthly",
+                "lastmod" =>$projet->getCreatedAt()->format('Y-m-d')
+            ];
+        }
+       
 
         $response = new Response(
             $this->renderView('sitemap/index.html.twig', ['urls' => $urls,
