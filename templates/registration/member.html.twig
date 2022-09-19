@@ -2,59 +2,128 @@
 endblock %} {% block body %}
 <div id="cursor"></div>
 {{ include("./includes/navbar.html.twig") }}
+<style>
+  .btn-position {
+    position: relative;
+    left: 125px;
+  }
+  @media (max-width: 1199px) {
+    .btn-position {
+      position: relative;
+      left: 100px;
+    }
+    @media (max-width: 991px) {
+      .btn-position {
+        position: relative;
+        left: 80px;
+      }
+    }
+    @media (max-width: 575px) {
+      .btn-position {
+        position: relative;
+        left: 0;
+      }
+    }
+  }
+  .rgpd-btn {
+    position: relative;
+    left: 60px;
+  }
+  .rgbp-label {
+    margin-left: -210px;
+  }
+  @media (max-width: 1199px) {
+    .rgpd-btn {
+      position: relative;
+      left: 50px;
+    }
+    .rgbp-label {
+      margin-left: -200px;
+    }
+  }
+  @media (max-width: 1195px) {
+    .rgbp-label {
+      margin-left: -160px;
+    }
+  }
 
+  @media (max-width: 991px) {
+    .rgpd-btn {
+      position: relative;
+      left: 40px;
+    }
+    .rgbp-label {
+      margin-left: -100px;
+    }
+  }
+  @media (max-width: 575px) {
+    .rgpd-btn {
+      left: 0;
+    }
+    .rgbp-label {
+      margin-left: 0;
+      margin-bottom: 20px;
+    }
+  }
+</style>
 <div class="section">
   <div class="container">
     <div class="row g-4">
       <div class="col-12 col-md-4">
         <div class="margin-bottom-30">
-          <h6 class="fw-normal margin-0">Phone:</h6>
-          <p>+(987) 654 321 01</p>
+          <h6 class="fw-normal margin-0">Téléphone:</h6>
+          <p>+(237) 71 67 29 69</p>
         </div>
         <div class="margin-bottom-30">
           <h6 class="fw-normal margin-0">Email:</h6>
-          <p>contact@email.com</p>
+          <p>contact@mabacedeux.com</p>
         </div>
         <div>
           <h6 class="fw-normal margin-0">Address:</h6>
-          <p>121 King St, Melbourne VIC 3000</p>
+          <p>MA.BA.CE.&#x2161; S/C BP/25003 YAOUNDE</p>
         </div>
       </div>
       <div class="col-12 col-md-8">
-        <div class="contact-form text-md-end">
-          {{ form_start(form) }}
-          <div class="row gx-3 gy-0">
-            <div class="col-12 col-sm-6">
-              {{
-                form_row(form.firstname, {
-                  label: false,
-                  attr: {
-                    placeholder: "Nom"
-                  }
-                })
-              }}
-            </div>
-            <div class="col-12 col-sm-6">
-              {{
-                form_row(form.lastname, {
-                  label: false,
-                  attr: {
-                    placeholder: "Prénom"
-                  }
-                })
-              }}
-            </div>
+        {{ form_start(form) }}
+        <div class="row">
+          <div class="col-12">
+            {{
+              form_row(form.firstname, {
+                label: false,
+                attr: {
+                  placeholder: "Nom"
+                }
+              })
+            }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            {{
+              form_row(form.lastname, {
+                label: false,
+                attr: {
+                  placeholder: "Prénom"
+                }
+              })
+            }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
             {{
               form_row(form.email, {
                 label: false,
                 attr: {
-                  placeholder: "E-mail"
+                  placeholder: "Email"
                 }
               })
             }}
-            <div class="col-12 col-md-8">
-              <div class="col-12 col-sm-6">
-                {{
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-6 rgpd-btn">
+            {{
                 form_row(form.rgpd, {
                 label: false,
                 attr: {
@@ -62,24 +131,22 @@ endblock %} {% block body %}
                                             
                 }
                 })
-                }}
-              </div>
-              <div class="col-12 col-sm-6">
-                J'accepte les
-                <a href="#" class="cgu-link"
-                  >conditions générales d'utilisation</a
-                >
-              </div>
-            </div>
+            }}
           </div>
-          <button
-            class="button button-lg button-radius button-outline-dark-2"
-            type="submit"
-          >
-            Envoyer ma demande
-          </button>
-          {{ form_end(form) }}
+          <div class="col-12 col-sm-6 rgbp-label">
+            J'accepte les
+            <a href="{{ path('app_cgu') }}" class="cgu-link"
+              >conditions générales d'utilisation</a
+            >
+          </div>
         </div>
+        <button
+          class="btn-position button button-lg button-radius button-outline-dark-2 position"
+          type="submit"
+        >
+          Envoyer
+        </button>
+        {{ form_end(form) }}
       </div>
     </div>
     <!-- end row -->

@@ -81,7 +81,7 @@
           })
         }}
       </div>
-      {#
+
       <div class="row mb-3">
         <div class="col-1 col-lg-1">
           {{
@@ -96,10 +96,12 @@
         </div>
         <div class="col-11 cgu-wrapper">
           J'accepte les
-          <a href="#" class="cgu-link">conditions générales d'utilisation</a>
+          <a href="{{ path('app_cgu') }}" class="cgu-link"
+            >conditions générales d'utilisation</a
+          >
         </div>
       </div>
-      #}
+
       <div class="mb-3">
         <button type="submit" formnovalidate class="btn btn-success btn-form">
           créer mon compte
