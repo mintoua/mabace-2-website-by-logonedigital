@@ -1,10 +1,4 @@
-{% extends "base.html.twig" %}
-{% block seo %}
-  {{ sonata_seo_title() }}
-  {{ sonata_seo_metadatas() }}
-  {{ sonata_seo_link_canonical() }}
-{% endblock %}
-{% block javascripts %}
+{% extends "base.html.twig" %} {% block javascripts %}
 
 <script>
   function chooseCategory(cat, slug) {
@@ -40,7 +34,7 @@
 
 <div
   class="section-lg bg-image bg-image-gradient-top parallax"
-  data-bg-src="{{ asset('frontoffice/') }}images/background.jpg"
+  data-bg-src="{{ asset('frontoffice/') }}images/image-1.jpg"
 >
   <div class="bg-white-06">
     <div class="container text-center">

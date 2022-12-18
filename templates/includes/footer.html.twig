@@ -1,19 +1,47 @@
 <footer>
   <div class="section-sm bg-dark">
-    <div class="container">
-      <div class="row g-2">
-        <div class="col-12 col-md-6 text-center text-md-start">
-          <p>&copy; 2022 FlaTheme, All Rights Reserved.</p>
-        </div>
-        <div class="col-12 col-md-6 text-center text-md-end">
-          <ul class="list-inline-dash">
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">CGU</a></li>
-            <li><a href="#">FAQ</a></li>
-          </ul>
-        </div>
-      </div>
-      <!-- end row -->
+    <div class="container text-center">
+      <ul class="list-inline-sm margin-bottom-10">
+        <li>
+          <a
+            class="button-circle button-circle-sm button-circle-white-3"
+            href="#"
+          >
+            <i class="bi bi-facebook"></i>
+          </a>
+        </li>
+        <li>
+          <a
+            class="button-circle button-circle-sm button-circle-white-3"
+            href="#"
+          >
+            <i class="bi bi-linkedin"></i>
+          </a>
+        </li>
+        <li>
+          <a
+            class="button-circle button-circle-sm button-circle-white-3 fw-bold text-uppercase"
+            href="{{ path('app_cgu') }}"
+          >
+            cgu
+          </a>
+        </li>
+      </ul>
+      <p>
+        &copy;
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        <span class="fw-bold text-uppercase">MA.BA.CE.&#x2161;</span>, All
+        Rights Reserved. created by
+        <a
+          class="fw-bold text-uppercase"
+          href="https://logonedigital.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >logonedigital</a
+        >&#160;.
+      </p>
     </div>
     <!-- end container -->
   </div>

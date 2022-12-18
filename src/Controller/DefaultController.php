@@ -3,16 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
-use App\Entity\Service;
-use App\Entity\ServiceCategory;
 use App\Form\ContactType;
-use App\Services\CurlService;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ServiceRepository;
 use Flasher\Prime\FlasherInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use Sonata\SeoBundle\Seo\SeoPageInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class DefaultController extends AbstractController
@@ -20,24 +20,54 @@ class DefaultController extends AbstractController
 
     public function __construct (
         private EntityManagerInterface $entityManager,
-        private FlasherInterface $flasher
+        private FlasherInterface $flasher,
+        private SeoPageInterface $seoPage,
+        private UrlGeneratorInterface $urlGenerator,
+        private ServiceRepository $serviceRepo,
     )
     {}
 
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
-        return $this->render('default/index.html.twig');
-    }
-    #[Route('/form', name: 'app_form')]
-    public function formTemplate(): Response
-    {
-        return $this->render('default/form_template.html.twig');
+        $description = "MA.BA.CE.II est une association culturelle au rythme classique qui a vu le jour il y a 50 ans 
+        déjà vers les années 70. Elle est basée au Cameroun dans la ville de Yaoundé. Elle regroupe la communauté de bagangté, 
+        peuple du Cameroun en pays bamiléké, humble et bienveillant qui se sont réunis pour favoriser les activités des membres, 
+        afin de pallier à certaines difficultés rencontrées (chômage).";
+
+        $this->seoPage->setTitle("ASSOCIATION CULTURELLE")
+            -> addMeta ('property','og:title','ASSOCIATION CULTURELLE MA.BA.CE.&#x2161')
+            ->addTitleSuffix("MA.BA.CE.&#x2161")
+            ->addMeta('name', 'description', $description)
+            ->setLinkCanonical($this->urlGenerator->generate('app_home',[], urlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:url',  $this->urlGenerator->generate('app_home',[], urlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:description',$description)
+            ->setBreadcrumb('Accueil', []);
+        
+        
+
+        return $this->render('default/index.html.twig', [
+            'annonces'=>$this->serviceRepo->findAll()
+        ]);
     }
 
     #[Route('/a-propos', name: 'app_about')]
     public function about(): Response
     {
+        $description = "MA.BA.CE.II est une association culturelle au rythme classique qui a vu le jour il y a 50 ans 
+        déjà vers les années 70. Elle est basée au Cameroun dans la ville de Yaoundé. Elle regroupe la communauté de bagangté, 
+        peuple du Cameroun en pays bamiléké, humble et bienveillant qui se sont réunis pour favoriser les activités des membres, 
+        afin de pallier à certaines difficultés rencontrées (chômage).";
+
+        $this->seoPage->setTitle("ASSOCIATION CULTURELLE")
+            ->addMeta('property','og:title','ASSOCIATION CULTURELLE MA.BA.CE.&#x2161')
+            ->addTitleSuffix("MA.BA.CE.&#x2161")
+            ->addMeta('name', 'description', $description)
+            ->setLinkCanonical($this->urlGenerator->generate('app_about',[], urlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:url',  $this->urlGenerator->generate('app_about',[], urlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:description',$description)
+            ->setBreadcrumb('A propos', []);
+
         return $this->render('default/about-us.html.twig');
     }
 
@@ -67,9 +97,26 @@ class DefaultController extends AbstractController
             }
         }
 
+        $description = "Entrer en contact avec notre association culturelle MA.BA.CE.&#x2161";
+
+        $this->seoPage->setTitle("Contact")
+            ->addMeta('property','og:title','ASSOCIATION CULTURELLE MA.BA.CE.&#x2161')
+            ->addTitleSuffix("MA.BA.CE.&#x2161")
+            ->addMeta('name', 'description', $description)
+            ->setLinkCanonical($this->urlGenerator->generate('app_contact',[], urlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:url',  $this->urlGenerator->generate('app_contact',[], urlGeneratorInterface::ABSOLUTE_URL))
+            ->addMeta('property', 'og:description',$description)
+            ->setBreadcrumb('Contact', []);
+
         return $this->render('default/contact.html.twig', [
             'form'=>$form->createView()
         ]);
+    }
+
+    #[Route('/mentions-legales', name: 'app_cgu')]
+    public function cgu(): Response
+    {
+        return $this->render('default/mention-legal.html.twig');
     }
 
 

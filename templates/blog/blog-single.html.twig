@@ -1,12 +1,7 @@
-{% extends "base.html.twig" %} {% block seo %}
-{{ sonata_seo_title() }}
-{{ sonata_seo_metadatas() }}
-{{ sonata_seo_link_canonical() }}
-{% endblock %} {% block body %}
+{% extends "base.html.twig" %} {% block body %}
 
 <!-- Header -->
 {{ include("./includes/navbar.html.twig") }}
-<!-- Header -->
 <!-- end Header -->
 
 <div class="section-sm bg-grey-lighter">
@@ -53,7 +48,7 @@
                 <span class="font-small"
                   >{{ post.getCreatedAt().format("M") }}
                   {{ post.getCreatedAt().format("j") }},
-                  {{ post.getCreatedAt().format("Y") }}</span
+                  {{ post.getCreatedAt().format("Y") }}.</span
                 >
               </div>
             </div>
@@ -84,12 +79,6 @@
           <ul class="list-inline margin-top-20">
             <li>
               <a href="#"><i class="bi bi-facebook"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="bi bi-twitter"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="bi bi-pinterest"></i></a>
             </li>
             <li>
               <a href="#"><i class="bi bi-instagram"></i></a>
@@ -172,15 +161,6 @@
           <ul class="list-inline">
             <li>
               <a href="#"><i class="bi bi-facebook"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="bi bi-twitter"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="bi bi-pinterest"></i></a>
-            </li>
-            <li>
-              <a href="#"><i class="bi bi-behance"></i></a>
             </li>
             <li>
               <a href="#"><i class="bi bi-instagram"></i></a>

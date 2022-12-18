@@ -111,8 +111,8 @@ class AnnonceController extends AbstractController
 
         return $this->render('annonce/service-single.html.twig', [
             'service'=>$service,
-            'bestServices'=>$this->entityManager->getRepository (Service::class)->findByIsBest(1),
-            'servicesCategories'=> $this->entityManager->getRepository (ServiceCategory::class)->findAll (),
+            'bestServices'=>$this->entityManager->getRepository(Service::class)->findByIsBest(1),
+            'servicesCategories'=>$this->entityManager->getRepository (ServiceCategory::class)->findAll(),
             'form' => $form->createView(),
         ]);
     }

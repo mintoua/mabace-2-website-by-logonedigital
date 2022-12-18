@@ -57,10 +57,15 @@ input {
 }
 
 .form-link {
-  color: #acc90f;
+  color: #000;
 }
 .form-link:hover {
-  color: #acc90f;
+  color: #000;
+}
+
+.help-text {
+  color: lightgray;
+  font-size: 10px;
 }
 
 .custom-form .seperator {
@@ -102,7 +107,7 @@ input {
   display: inline-block;
   width: 50px;
   padding: none;
-  color: #acc90f;
+  color: #f18f34;
 }
 
 .create-by-link {
@@ -113,32 +118,36 @@ input {
 
 .__dev {
   margin-left: 2px;
-  color: #acc90f;
+  color: #f18f34;
   transition: text-decoration 0.5s;
 }
 
 .__dev:hover {
   text-decoration: underline;
-  color: #acc90f;
+  color: #f18f34;
 }
 .cgu-link {
   margin-left: 2px;
-  color: #3daa35;
+  color: #f18f34;
   transition: text-decoration 0.5s;
 }
 
 .cgu-link:hover {
   text-decoration: underline;
-  color: #3daa35;
+  color: #f18f34;
 }
 
 .cgu-wrapper {
-  color: #acc90f;
+  color: #000;
 }
 
 .create-by-link {
-  color: #3daa35;
+  color: #f18f34;
 }
+
+/* label.required {
+  display: none;
+} */
 
 #user_password_first_help {
   font-size: 10px !important;
@@ -169,14 +178,14 @@ input {
 .btn-form {
   width: 100%;
   text-transform: uppercase;
-  background-color: #3daa35;
+  background-color: #f18f34;
   outline: none;
   border: none;
   touch-action: manipulation;
   transition: background-color 0.5s;
 }
 .btn-form:hover {
-  background-color: #acc90f;
+  background-color: #f18f34;
 }
 
 .fl-message {

@@ -1,14 +1,12 @@
-{% extends "base.html.twig" %} {% block title %} Accueil | MA.BA.CE.&#x2161; {%
-endblock %} {% block body %}
+{% extends "base.html.twig" %} {% block body %}
+
+<!-- Custom Cursor -->
 <div id="cursor"></div>
-<!-- Header -->
+<!-- end Custom Cursor -->
 
 <!-- Header -->
 {{ include("./includes/navbar.html.twig") }}
-
-<!-- Custom Cursor -->
-
-<!-- end Custom Cursor -->
+<!-- end Header -->
 
 <!-- Google Maps -->
 {#
@@ -22,72 +20,79 @@ endblock %} {% block body %}
 </div>
 #}
 <!-- end Google Maps -->
-
+<style>
+  .btn-position {
+    position: relative;
+    left: 125px;
+  }
+  @media (max-width: 1199px) {
+  .btn-position {
+    position: relative;
+    left: 100px;
+  }
+ @media (max-width: 988px) {
+  .btn-position {
+    position: relative;
+    left: 80px;
+  }
+ }
+ @media (max-width: 575px) {
+  .btn-position {
+    position: relative;
+    left: 0;
+  }
+ }
+}
+</style>
 <!-- Contact section -->
 <div class="section">
   <div class="container">
     <div class="row g-4">
       <div class="col-12 col-md-4">
         <div class="margin-bottom-30">
-          <h6 class="fw-normal margin-0">Phone:</h6>
-          <p>+(987) 654 321 01</p>
+          <h6 class="fw-normal margin-0">Téléphone:</h6>
+          <p>+(237) 71 67 29 69</p>
         </div>
         <div class="margin-bottom-30">
           <h6 class="fw-normal margin-0">Email:</h6>
-          <p>contact@email.com</p>
+          <p>contact@mabacedeux.com</p>
         </div>
         <div>
           <h6 class="fw-normal margin-0">Address:</h6>
-          <p>121 King St, Melbourne VIC 3000</p>
+          <p>MA.BA.CE.&#x2161; S/C BP/25003 YAOUNDE </p>
         </div>
       </div>
       <div class="col-12 col-md-8">
-        <div class="contact-form text-md-end">
-          {{ form_start(form) }}
-            <div class="row gx-3 gy-0">
-              <div class="col-12 col-sm-6">
-                {{
+        {{ form_start(form) }}
+        {{
                 form_row(form.nom, {
                   label: false,
                   attr: {
-                    class: "form-input",
-                    placeholder: "Nom et Prénom"
+                    placeholder: "Nom complet"
                   }
                 })
-                }}
-              </div>
-              <div class="col-12 col-sm-6">
-                {{
+              }}
+        {{
                 form_row(form.email, {
                   label: false,
                   attr: {
-                    class: "form-input",
                     placeholder: "Email"
                   }
                 })
-                }}
-              </div>
-            </div>
-            {{
-            form_row(form.message, {
-              label: false,
-              attr: {
-                placeholder: "Laissez un message..."
-              }
-            })
+              }}
+        {{
+              form_row(form.message, {
+                label: false,
+                attr: {
+                  placeholder: "Comment pouvons-nous vous aider ?",
+                  id: "message"
+                }
+              })
             }}
-            <button
-              class="button button-lg button-radius button-outline-dark-2"
-              type="submit"
-            >
-              Send Message
-            </button>
-          {{ form_end(form) }}
-          <!-- Submit result -->
-          <div class="submit-result">
-            <span id="success">Thank you! Your Message has been sent.</span>
-            <span id="error">Something went wrong, Please try again!</span>
-          </div>
+        <button class="btn-position button button-lg button-radius button-outline-dark-2 position" type="submit">
+            Envoyer
+        </button>
+      {{ form_end(form) }}
         </div>
       </div>
     </div>
@@ -98,10 +103,18 @@ endblock %} {% block body %}
 <!-- end Contact section -->
 
 {{ include("./includes/footer.html.twig") }}
-<div class="scrolltotop">
-  <a class="button-circle button-circle-sm button-circle-dark" href="#"
-    ><i class="bi bi-arrow-up"></i
-  ></a>
-</div>
-<!-- ***** JAVASCRIPTS ***** -->
-{% endblock %}
+{% block javascripts %}
+<script src="https://www.google.com/recaptcha/api.js?render=6Lc96AYfAAAAAAJsKTsNdyF4yBBWVnt5rWll8Dbe"></script>
+<script>
+  grecaptcha.ready(function () {
+    grecaptcha
+      .execute("6Lc96AYfAAAAAAJsKTsNdyF4yBBWVnt5rWll8Dbe", {
+        action: "homepage",
+      })
+      .then(function (token) {
+        console.log(document.getElementById("contact_captcha"));
+        document.getElementById("contact_captcha").value = token;
+      });
+  });
+</script>
+{% endblock %} {% endblock %}

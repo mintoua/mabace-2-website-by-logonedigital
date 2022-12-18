@@ -5,7 +5,15 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    {% block seo %} {% endblock %}
+    {{
+      sonata_seo_title()
+    }}
+    {{
+      sonata_seo_metadatas()
+    }}
+    {{
+      sonata_seo_link_canonical()
+    }}
     <title>{% block title %}MA.BA.CE.II{% endblock %}</title>
 
     <link
