@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Doctrine\DBAL\Types\StringType;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Contracts\Cache\CacheInterface;
@@ -23,6 +24,12 @@ class DefaultService
             $request->query->getInt('page',1),
             $limit
         );
+    }
+
+    public function matriculeGenerator($lastname, $firstname):String{
+        
+        $matricule = substr( date("Y"), -2).strtolower(substr($lastname,0,3)).strtolower(substr($firstname,0,3));
+        return $matricule;
     }
 
     public function toCache($cacheName,$period,$item){

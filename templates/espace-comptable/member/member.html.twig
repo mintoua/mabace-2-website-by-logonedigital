@@ -16,14 +16,21 @@
 
       <!-- Begin Page Content -->
       <div class="container-fluid">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Membres</h1>
+          <a
+            href="{{path("app_dashboard_add_member")}}"
+            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+            ><i class="fas fa-user-plus"></i> Ajouter Membre</a
+          >
+        </div>
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-              DataTables Example
+              Liste Membres
             </h6>
           </div>
           <div class="card-body">
@@ -36,33 +43,36 @@
               >
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Matricule</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Email</th>
+                    <th>Action</th>
                   </tr>
                 </tfoot>
                 <tbody>
+                  {% for membre in membres %}
                   <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
+                    <td>{{ membre.lastname }}</td>
+                    <td>{{ membre.firstname }}</td>
+                    <td>{{ membre.email }}</td>
+                    <td>{{ membre.matricule |upper }}</td>
+                    <td class="d-flex justify-content-center">
+                      <a href="{{path("app_dashboard_member_profil")}}"><i class="fas fa-eye"></i></a>
+                      <a href="#"><i class="fas fa-user-edit ml-2 mr-2"></i></a>
+                      <a href="#"><i class="fas fa-trash-alt"></i></a>
+                    </td>
                   </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
