@@ -67,9 +67,9 @@
                     <td>{{ membre.email }}</td>
                     <td>{{ membre.matricule |upper }}</td>
                     <td class="d-flex justify-content-center">
-                      <a href="{{path("app_dashboard_member_profil")}}"><i class="fas fa-eye"></i></a>
-                      <a href="#"><i class="fas fa-user-edit ml-2 mr-2"></i></a>
-                      <a href="#"><i class="fas fa-trash-alt"></i></a>
+                      <a href="{{path("app_dashboard_member_profil",{matricule:membre.matricule})}}"><i class="fas fa-eye"></i></a>
+                      <a href="{{path("app_dashboard_member_edit",{matricule:membre.matricule})}}"><i class="fas fa-user-edit ml-2 mr-2"></i></a>
+                      <a href="{{path("app_dashboard_member_delete",{matricule:membre.matricule})}}"><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
                   {% endfor %}

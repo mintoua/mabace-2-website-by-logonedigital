@@ -28,7 +28,7 @@ class MembreController extends AbstractController
         
     }
 
-    #[Route("/dashoard/membre", name:"app_dashboard_member")]
+    #[Route(path:"/dashoard/membre", name:"app_dashboard_member")]
     public function membre():Response{
         return $this->render("espace-comptable/member/member.html.twig",[
             "membres"=>$this->memberRepo->findAll()
@@ -55,8 +55,34 @@ class MembreController extends AbstractController
         ]);
     }
 
-    #[Route(path:"/dashoard/member_profil", name:"app_dashboard_member_profil")]
-    public function memberDetail():Response{
-        return $this->render("espace-comptable/member/member_profil.html.twig");
+    #[Route(path:"/dashoard/member_profil/{matricule}", name:"app_dashboard_member_profil")]
+    public function memberDetail(Member $member):Response{
+
+        return $this->render("espace-comptable/member/member_profil.html.twig", [
+            "member"=>$member
+        ]);
+    }
+
+    #[Route(path:"/dashoard/member_delete/{matricule}", name:"app_dashboard_member_delete")]
+    public function deleteMember(Member $member):Response{
+        $this->em->remove($member);
+        $this->em->flush();
+        $this->flasher->addSuccess("ce member à bien été supprimer");
+        return $this->redirectToRoute("app_dashboard_member");
+    }
+
+    #[Route(path:"/dashboard/member_edit/{matricule}", name:"app_dashboard_member_edit")]
+    public function editMember(Member $member,Request $request):Response{
+        $form = $this->createForm(MemberType::class, $member);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() and $form->isValid()){
+            $this->em->flush();
+            return $this->redirectToRoute("app_dashboard_member");
+        }
+
+        return $this->render("espace-comptable/member/member_edit.html.twig",[
+            "form"=>$form->createView()
+        ]);
     }
 }
