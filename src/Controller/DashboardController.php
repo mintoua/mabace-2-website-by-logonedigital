@@ -30,9 +30,5 @@ class DashboardController extends AbstractController
         return $this->render("espace-comptable/emprunts.html.twig");
     }
 
-    #[Route("/dashoard/membre", name:"app_dashboard_membre")]
-    public function membre():Response{
-
-        return $this->render("espace-comptable/membre.html.twig");
-    }
+    
 }

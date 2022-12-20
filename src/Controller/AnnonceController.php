@@ -39,6 +39,7 @@ class AnnonceController extends AbstractController
         $cat = $request->get("catSlug", 'Tous');
         if ( $request -> get ( 'ajax' ) ){
 
+            
             if ($cat != 'Tous' ){
 
                 $_services = $this->entityManager->getRepository (Service::class)
