@@ -26,7 +26,7 @@ class DashboardController extends AbstractController
 
     #[Route("/dashoard/emprunt", name:"app_dashboard_emprunts")]
     public function emprunt():Response{
-
+        
         return $this->render("espace-comptable/emprunts.html.twig");
     }
 
