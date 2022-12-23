@@ -23,12 +23,5 @@ class DashboardController extends AbstractController
     public function totine():Response{
         return $this->render("espace-comptable/tontine.html.twig");
     }
-
-    #[Route("/dashoard/emprunt", name:"app_dashboard_emprunts")]
-    public function emprunt():Response{
-        
-        return $this->render("espace-comptable/emprunts.html.twig");
-    }
-
     
 }

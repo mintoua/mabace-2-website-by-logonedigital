@@ -17,13 +17,19 @@
       <!-- Begin Page Content -->
       <div class="container-fluid">
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Emprunts</h1>
+          <a
+            href="{{path("app_dashboard_add_member")}}"
+            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+            ><i class="fas fa-user-plus"></i> Ajouter</a
+          >
+        </div>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-              DataTables Example
+              Listes des Emprunts
             </h6>
           </div>
           <div class="card-body">
@@ -36,32 +42,32 @@
               >
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>Membre</th>
+                    <th>Type</th>
+                    <th>Montant</th>
+                    <th>Taux</th>
+                    <th>Date début / Date fin</th>
+                    <th>Etat</th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>Membre</th>
+                    <th>Type</th>
+                    <th>Montant</th>
+                    <th>Taux</th>
+                    <th>Date début / Date fin</th>
+                    <th>Etat</th>
                   </tr>
                 </tfoot>
                 <tbody>
                   <tr>
                     <td>Tiger Nixon</td>
                     <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
+                    <td>589</td>
+                    <td>6%</td>
                     <td>2011/04/25</td>
-                    <td>$320,800</td>
+                    <td>Remboursé</td>
                   </tr>
                 </tbody>
               </table>

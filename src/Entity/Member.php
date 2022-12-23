@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MemberRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MemberRepository::class)]
@@ -27,6 +29,18 @@ class Member
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $email = null;
+
+    #[ORM\OneToMany(mappedBy: 'membre', targetEntity: Emprunt::class)]
+    private Collection $emprunts;
+
+    #[ORM\OneToMany(mappedBy: 'membre', targetEntity: Sanction::class)]
+    private Collection $sanctions;
+
+    public function __construct()
+    {
+        $this->emprunts = new ArrayCollection();
+        $this->sanctions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +103,66 @@ class Member
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Emprunt>
+     */
+    public function getEmprunts(): Collection
+    {
+        return $this->emprunts;
+    }
+
+    public function addEmprunt(Emprunt $emprunt): self
+    {
+        if (!$this->emprunts->contains($emprunt)) {
+            $this->emprunts->add($emprunt);
+            $emprunt->setMembre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmprunt(Emprunt $emprunt): self
+    {
+        if ($this->emprunts->removeElement($emprunt)) {
+            // set the owning side to null (unless already changed)
+            if ($emprunt->getMembre() === $this) {
+                $emprunt->setMembre(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sanction>
+     */
+    public function getSanctions(): Collection
+    {
+        return $this->sanctions;
+    }
+
+    public function addSanction(Sanction $sanction): self
+    {
+        if (!$this->sanctions->contains($sanction)) {
+            $this->sanctions->add($sanction);
+            $sanction->setMembre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSanction(Sanction $sanction): self
+    {
+        if ($this->sanctions->removeElement($sanction)) {
+            // set the owning side to null (unless already changed)
+            if ($sanction->getMembre() === $this) {
+                $sanction->setMembre(null);
+            }
+        }
 
         return $this;
     }
