@@ -20,47 +20,58 @@
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 col-md-6 col-auto">
             {{ form_start(form) }}
-            <h1 class="text-uppercase text-center">Ajouter un membre</h1>
+            <h1 class="text-uppercase text-center">Ajouter une Tontine</h1>
             <div class="mb-3">
               {{
-                form_row(form.lastname, {
+                form_row(form.intituleTontine, {
                   label: false,
                   attr: {
                     class: "form-control",
-                    placeholder: "Nom"
+                    placeholder: "Nom tontine"
+                  }
+                })
+              }}
+            </div>
+
+            <div class="mb-3">
+              {{
+                form_row(form.montant, {
+                  label: false,
+                  attr: {
+                    class: "form-control",
+                    placeholder: "Montant contisation"
                   }
                 })
               }}
             </div>
             <div class="mb-3">
               {{
-                form_row(form.firstname, {
+                form_row(form.description, {
                   label: false,
                   attr: {
                     class: "form-control",
-                    placeholder: "Prénom"
+                    placeholder: "description"
                   }
                 })
               }}
             </div>
             <div class="mb-3">
               {{
-                form_row(form.email, {
+                form_row(form.typeTontine, {
                   label: false,
                   attr: {
                     class: "form-control",
-                    placeholder: "Email"
+                    placeholder: "Type Tontine"
                   }
                 })
               }}
             </div>
             <div class="mb-3">
               {{
-                form_row(form.cni, {
-                  label: false,
+                form_row(form.obligatoire, {
+                  label: "obligatoire",
                   attr: {
-                    class: "form-control",
-                    placeholder: "Numéro de CNI"
+                    class: "form-check-input",
                   }
                 })
               }}

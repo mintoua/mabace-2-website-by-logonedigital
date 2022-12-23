@@ -3,11 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\MemberRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MemberRepository::class)]
 class Member
 {
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -27,6 +31,19 @@ class Member
 
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $email = null;
+
+    #[ORM\OneToMany(mappedBy: 'membre', targetEntity: CalendrierBenef::class)]
+    private Collection $calendrierBenefs;
+
+    public function __construct()
+    {
+        $this->calendrierBenefs = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getLastname()." ".$this->getFirstname();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +106,36 @@ class Member
     public function setEmail(?string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CalendrierBenef>
+     */
+    public function getCalendrierBenefs(): Collection
+    {
+        return $this->calendrierBenefs;
+    }
+
+    public function addCalendrierBenef(CalendrierBenef $calendrierBenef): self
+    {
+        if (!$this->calendrierBenefs->contains($calendrierBenef)) {
+            $this->calendrierBenefs->add($calendrierBenef);
+            $calendrierBenef->setMembre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendrierBenef(CalendrierBenef $calendrierBenef): self
+    {
+        if ($this->calendrierBenefs->removeElement($calendrierBenef)) {
+            // set the owning side to null (unless already changed)
+            if ($calendrierBenef->getMembre() === $this) {
+                $calendrierBenef->setMembre(null);
+            }
+        }
 
         return $this;
     }
