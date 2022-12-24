@@ -1,5 +1,5 @@
-{% extends "base_compta.html.twig" %} {% block body %}
-
+{% extends "base_compta.html.twig" %} {% block title %} tontine {% endblock %}
+{% block body %}
 <!-- Page Wrapper -->
 <div id="wrapper">
   <!-- Sidebar -->
@@ -20,48 +20,25 @@
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 col-md-6 col-auto">
             {{ form_start(form) }}
-            <h1 class="text-uppercase text-center">Ajouter un membre</h1>
+            <h1 class="text-uppercase text-center">Modifier bénéficière</h1>
             <div class="mb-3">
               {{
-                form_row(form.lastname, {
+                form_row(form.dateBenef, {
                   label: false,
-                  attr: {
-                    class: "form-control",
-                    placeholder: "Nom"
-                  }
                 })
               }}
             </div>
             <div class="mb-3">
               {{
-                form_row(form.firstname, {
+                form_row(form.tontine, {
                   label: false,
-                  attr: {
-                    class: "form-control",
-                    placeholder: "Prénom"
-                  }
                 })
               }}
             </div>
             <div class="mb-3">
               {{
-                form_row(form.email, {
+                form_row(form.membre, {
                   label: false,
-                  attr: {
-                    class: "form-control",
-                    placeholder: "Email"
-                  }
-                })
-              }}
-            </div>
-            <div class="mb-3">
-              {{
-                form_row(form.cni, {
-                  label: false,
-                  attr: {
-                    class: "form-control",
-                    placeholder: "Numéro de CNI"
-                  }
                 })
               }}
             </div>
@@ -126,4 +103,29 @@
   </div>
 </div>
 
+{% endblock %} {% block javascript %}
+<!-- Bootstrap core JavaScript-->
+<script src="{{ asset('espace-compta/') }}vendor/jquery/jquery.min.js"></script>
+<script src="{{
+    asset('espace-compta/')
+  }}vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{{
+    asset('espace-compta/')
+  }}vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{{ asset('espace-compta/') }}js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="{{
+    asset('espace-compta/')
+  }}vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="{{
+    asset('espace-compta/')
+  }}vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="{{ asset('espace-compta/') }}js/demo/datatables-demo.js"></script>
 {% endblock %}
