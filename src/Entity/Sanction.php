@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\SanctionRepository;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: SanctionRepository::class)]
+class Sanction
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $type = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $raison = null;
+
+    #[ORM\ManyToOne(inversedBy: 'sanctions')]
+    private ?Member $membre = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $intitule = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getRaison(): ?string
+    {
+        return $this->raison;
+    }
+
+    public function setRaison(string $raison): self
+    {
+        $this->raison = $raison;
+
+        return $this;
+    }
+
+    public function getMembre(): ?Member
+    {
+        return $this->membre;
+    }
+
+    public function setMembre(?Member $membre): self
+    {
+        $this->membre = $membre;
+
+        return $this;
+    }
+
+    public function getIntitule(): ?string
+    {
+        return $this->intitule;
+    }
+
+    public function setIntitule(string $intitule): self
+    {
+        $this->intitule = $intitule;
+
+        return $this;
+    }
+}
