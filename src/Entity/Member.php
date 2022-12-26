@@ -41,7 +41,10 @@ class Member
         $this->emprunts = new ArrayCollection();
         $this->sanctions = new ArrayCollection();
     }
-
+    public function __toString () : string
+    {
+       return $this->lastname.' '.$this->firstname;
+    }
     public function getId(): ?int
     {
         return $this->id;

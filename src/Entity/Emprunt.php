@@ -20,10 +20,10 @@ class Emprunt
     private ?float $montant = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?\DateTime $createdAt = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $endedAt = null;
+    private ?\DateTime $endedAt = null;
 
     #[ORM\Column]
     private ?float $tauxInteret = null;
@@ -66,24 +66,24 @@ class Emprunt
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getEndedAt(): ?\DateTimeImmutable
+    public function getEndedAt(): ?\DateTime
     {
         return $this->endedAt;
     }
 
-    public function setEndedAt(\DateTimeImmutable $endedAt): self
+    public function setEndedAt(\DateTime $endedAt): self
     {
         $this->endedAt = $endedAt;
 
