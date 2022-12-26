@@ -14,12 +14,12 @@ class DashboardController extends AbstractController
         return $this->render('espace-comptable/index.html.twig');
     }
 
-    #[Route("/dashoard/page-blank", name:"blank_page")]
+    #[Route("/dashboard/page-blank", name:"blank_page")]
     public function pageBlank():Response{
         return $this->render("espace-comptable/blank.html.twig");
     }
 
-    #[Route("/dashoard/tontine", name:"dashboard_tontine")]
+    #[Route("/dashboard/tontine", name:"dashboard_tontine")]
     public function totine():Response{
         return $this->render("espace-comptable/tontine.html.twig");
     }

@@ -37,6 +37,9 @@ class Emprunt
     #[ORM\Column]
     private ?bool $etat = null;
 
+    #[ORM\OneToOne(mappedBy: 'emprunt', cascade: ['persist', 'remove'])]
+    private ?Remboursement $remboursement = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +137,28 @@ class Emprunt
     public function setEtat(bool $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getRemboursement(): ?Remboursement
+    {
+        return $this->remboursement;
+    }
+
+    public function setRemboursement(?Remboursement $remboursement): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($remboursement === null && $this->remboursement !== null) {
+            $this->remboursement->setEmprunt(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($remboursement !== null && $remboursement->getEmprunt() !== $this) {
+            $remboursement->setEmprunt($this);
+        }
+
+        $this->remboursement = $remboursement;
 
         return $this;
     }

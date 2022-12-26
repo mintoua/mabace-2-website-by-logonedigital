@@ -83,7 +83,7 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Gérer vos emprunts:</h6>
         <a class="collapse-item" href="{{ path('app_dashboard_emprunts') }}">Emprunts</a>
-        <a class="collapse-item" href="cards.html">Remboursements</a>
+        <a class="collapse-item" href="{{ path('app_dashboard_remboursements') }}">Remboursements</a>
       </div>
     </div>
   </li>
@@ -117,7 +117,7 @@
     </div>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="tables.html">
+    <a class="nav-link" href="{{ path('app_dashboard_sanctions') }}">
       <i class="fas fa-tools"></i>
       <span>Sanctions</span></a
     >

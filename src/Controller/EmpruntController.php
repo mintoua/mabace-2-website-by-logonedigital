@@ -22,7 +22,7 @@ class EmpruntController extends AbstractController
     )
     {}
 
-    #[Route('/dashoard/emprunt', name: 'app_dashboard_emprunts')]
+    #[Route('/dashboard/emprunt', name: 'app_dashboard_emprunts')]
     public function index(): Response
     {
         return $this->render("espace-comptable/emprunts.html.twig",[
@@ -30,7 +30,7 @@ class EmpruntController extends AbstractController
         ]);
     }
 
-    #[Route('/dashoard/emprunt/{matricule}', name: 'app_dashboard_add_emprunt')]
+    #[Route('/dashboard/emprunt/{matricule}', name: 'app_dashboard_add_emprunt')]
     public function addEmprunt(Request $request, Member $member)
     {
         //dd($member);
@@ -52,5 +52,13 @@ class EmpruntController extends AbstractController
         return $this->render("espace-comptable/emprunt/emprunt_new.html.twig",[
             "form"=>$form->createView()
         ]);
+    }
+
+    #[Route(path:"/dashboard/emprunt/supprime/{id}", name:"app_dashboard_emprunt_delete")]
+    public function deleteMember(Emprunt $emprunt):Response{
+        $this->em->remove($emprunt);
+        $this->em->flush();
+        $this->flasher->addSuccess("Emprunt supprimé");
+        return $this->redirectToRoute("app_dashboard_emprunts");
     }
 }
