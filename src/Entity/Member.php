@@ -35,9 +35,13 @@ class Member
     #[ORM\OneToMany(mappedBy: 'membre', targetEntity: CalendrierBenef::class)]
     private Collection $calendrierBenefs;
 
+    #[ORM\OneToMany(mappedBy: 'membre', targetEntity: Beneficiere::class)]
+    private Collection $beneficieres;
+
     public function __construct()
     {
         $this->calendrierBenefs = new ArrayCollection();
+        $this->beneficieres = new ArrayCollection();
     }
 
     public function __toString()
@@ -134,6 +138,36 @@ class Member
             // set the owning side to null (unless already changed)
             if ($calendrierBenef->getMembre() === $this) {
                 $calendrierBenef->setMembre(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Beneficiere>
+     */
+    public function getBeneficieres(): Collection
+    {
+        return $this->beneficieres;
+    }
+
+    public function addBeneficiere(Beneficiere $beneficiere): self
+    {
+        if (!$this->beneficieres->contains($beneficiere)) {
+            $this->beneficieres->add($beneficiere);
+            $beneficiere->setMembre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBeneficiere(Beneficiere $beneficiere): self
+    {
+        if ($this->beneficieres->removeElement($beneficiere)) {
+            // set the owning side to null (unless already changed)
+            if ($beneficiere->getMembre() === $this) {
+                $beneficiere->setMembre(null);
             }
         }
 

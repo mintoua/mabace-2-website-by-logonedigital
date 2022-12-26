@@ -30,6 +30,14 @@ class CalendrierBenef
     #[ORM\JoinColumn(nullable: false)]
     private ?Tontine $tontine = null;
 
+    #[ORM\OneToMany(mappedBy: 'calendrierBenef', targetEntity: Beneficiere::class)]
+    private Collection $beneficieres;
+
+    public function __construct()
+    {
+        $this->beneficieres = new ArrayCollection();
+    }
+
   
 
     
@@ -71,6 +79,36 @@ class CalendrierBenef
     public function setTontine(?Tontine $tontine): self
     {
         $this->tontine = $tontine;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Beneficiere>
+     */
+    public function getBeneficieres(): Collection
+    {
+        return $this->beneficieres;
+    }
+
+    public function addBeneficiere(Beneficiere $beneficiere): self
+    {
+        if (!$this->beneficieres->contains($beneficiere)) {
+            $this->beneficieres->add($beneficiere);
+            $beneficiere->setCalendrierBenef($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBeneficiere(Beneficiere $beneficiere): self
+    {
+        if ($this->beneficieres->removeElement($beneficiere)) {
+            // set the owning side to null (unless already changed)
+            if ($beneficiere->getCalendrierBenef() === $this) {
+                $beneficiere->setCalendrierBenef(null);
+            }
+        }
 
         return $this;
     }
