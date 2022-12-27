@@ -3262,6 +3262,7 @@
         },
         {
             "name": "php-flasher/flasher",
+<<<<<<< HEAD
             "version": "v1.10.3",
             "source": {
                 "type": "git",
@@ -3272,6 +3273,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/php-flasher/flasher/zipball/9eba1ff54739482b02a7beff35bd3b37510ec118",
                 "reference": "9eba1ff54739482b02a7beff35bd3b37510ec118",
+=======
+            "version": "v1.10.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-flasher/flasher.git",
+                "reference": "ddc8f44aa2bc1fed129fdb6f1e71819adae57d55"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-flasher/flasher/zipball/ddc8f44aa2bc1fed129fdb6f1e71819adae57d55",
+                "reference": "ddc8f44aa2bc1fed129fdb6f1e71819adae57d55",
+>>>>>>> 505d298cbaeb81dfe47a62fa8a417c512f0da3b3
                 "shasum": ""
             },
             "require": {
@@ -3318,7 +3331,11 @@
                 "toastr"
             ],
             "support": {
+<<<<<<< HEAD
                 "source": "https://github.com/php-flasher/flasher/tree/v1.10.3"
+=======
+                "source": "https://github.com/php-flasher/flasher/tree/v1.10.1"
+>>>>>>> 505d298cbaeb81dfe47a62fa8a417c512f0da3b3
             },
             "funding": [
                 {
@@ -3342,6 +3359,7 @@
                     "type": "patreon"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-27T00:42:21+00:00"
         },
         {
@@ -3356,6 +3374,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/php-flasher/flasher-symfony/zipball/27b4dda500cd49c194e9de1a08dd4e1021e3d149",
                 "reference": "27b4dda500cd49c194e9de1a08dd4e1021e3d149",
+=======
+            "time": "2022-12-26T11:22:42+00:00"
+        },
+        {
+            "name": "php-flasher/flasher-symfony",
+            "version": "v1.10.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-flasher/flasher-symfony.git",
+                "reference": "60016f122f195438606a4a39f90b89be7dd7c9de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-flasher/flasher-symfony/zipball/60016f122f195438606a4a39f90b89be7dd7c9de",
+                "reference": "60016f122f195438606a4a39f90b89be7dd7c9de",
+>>>>>>> 505d298cbaeb81dfe47a62fa8a417c512f0da3b3
                 "shasum": ""
             },
             "require": {
@@ -3428,7 +3462,11 @@
                     "type": "patreon"
                 }
             ],
+<<<<<<< HEAD
             "time": "2022-12-27T04:58:09+00:00"
+=======
+            "time": "2022-12-25T22:21:10+00:00"
+>>>>>>> 505d298cbaeb81dfe47a62fa8a417c512f0da3b3
         },
         {
             "name": "php-http/client-common",
