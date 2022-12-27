@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Sanction;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,7 +21,7 @@ class SanctionType extends AbstractType
                     'Type 2'=>'Type 2',
                 ]
             ])
-            ->add('raison',TextType::class)
+            ->add('raison',TextareaType::class,[])
             ->add('intitule')
         ;
     }

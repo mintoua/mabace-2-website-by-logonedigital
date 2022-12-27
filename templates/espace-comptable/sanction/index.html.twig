@@ -57,14 +57,14 @@
                 <tbody>
                 {% for sanction in sanctions %}
                   <tr>
-                    <td>{{ emprunt.membre }}</td>
-                    <td>{{ emprunt.type }}</td>
-                    <td>{{ emprunt.intitule }} </td>
-                    <td>{{ emprunt.raison }}</td>
+                    <td>{{ sanction.membre }}</td>
+                    <td>{{ sanction.type }}</td>
+                    <td>{{ sanction.intitule }} </td>
+                    <td>{{ sanction.raison }}</td>
                     <td class="d-flex justify-content-center">
                       <a href=""><i class="fas fa-eye"></i></a>
-                      <a href=""><i class="fas fa-user-edit ml-2 mr-2"></i></a>
-                      <a href=""><i class="fas fa-trash-alt"></i></a>
+                      <a href="{{ path('app_dashboard_edit_sanction',{id:sanction.id})}}"><i class="fas fa-edit ml-2 mr-2"></i></a>
+                      <a href="{{ path('app_delete_sanction',{id:sanction.id})}} "><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
                 {% endfor %}

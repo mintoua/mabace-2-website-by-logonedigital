@@ -30,7 +30,7 @@ class SanctionController extends AbstractController
         ]);
     }
 
-    #[Route('/dashboard/sanction/{matricule}', name: 'app_dashboard_add_sanction')]
+    #[Route('/dashboard/sanction/ajouter/{matricule}', name: 'app_dashboard_add_sanction')]
     public function addSanction(Request $request, Member $member){
 
         $sanction = new Sanction();
@@ -49,5 +49,31 @@ class SanctionController extends AbstractController
         return $this->render("espace-comptable/sanction/sanction_new.html.twig",[
             "form"=>$form->createView()
         ]);
+    }
+
+    #[Route('/dashboard/sanction/modifier/{id}', name: 'app_dashboard_edit_sanction')]
+    public function editSanction(Request $request, Sanction $sanction){
+
+        $form = $this->createForm(SanctionType::class, $sanction);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() and $form->isValid()){
+            $this->em->flush();
+
+            return $this->redirectToRoute('app_dashboard_sanctions');
+        }
+
+        return $this->render("espace-comptable/sanction/sanction_new.html.twig",[
+            "form"=>$form->createView()
+        ]);
+    }
+
+    #[Route('/dashboard/sanction/supprimer/{id}', name: 'app_delete_sanction')]
+    public function deleteSanction(Sanction $sanction){
+
+        $this->em->remove($sanction);
+        $this->em->flush();
+        $this->flasher->addSuccess("Suppression réussie");
+        return $this->redirectToRoute("app_dashboard_sanctions");
     }
 }

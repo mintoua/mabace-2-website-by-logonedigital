@@ -25,7 +25,7 @@ class EmpruntController extends AbstractController
     #[Route('/dashboard/emprunt', name: 'app_dashboard_emprunts')]
     public function index(): Response
     {
-        return $this->render("espace-comptable/emprunts.html.twig",[
+        return $this->render("espace-comptable/emprunt/emprunts.html.twig",[
             "emprunts"=>$this->doctrine->getRepository(Emprunt::class)->findAll()
         ]);
     }
@@ -54,11 +54,27 @@ class EmpruntController extends AbstractController
         ]);
     }
 
-    #[Route(path:"/dashboard/emprunt/supprime/{id}", name:"app_dashboard_emprunt_delete")]
-    public function deleteMember(Emprunt $emprunt):Response{
+    #[Route(path:"/dashboard/emprunt/supprimer/{id}", name:"app_dashboard_emprunt_delete")]
+    public function deleteEmprunt(Emprunt $emprunt):Response{
         $this->em->remove($emprunt);
         $this->em->flush();
         $this->flasher->addSuccess("Emprunt supprimé");
         return $this->redirectToRoute("app_dashboard_emprunts");
+    }
+
+    #[Route(path:"/dashboard/emprunt/modifier/{id}", name:"app_dashboard_emprunt_edit")]
+    public function editEmprunt(Emprunt $emprunt,Request $request):Response{
+
+        $form = $this->createForm(EmpruntType::class, $emprunt);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() and $form->isValid()){
+            $this->em->flush();
+            return $this->redirectToRoute("app_dashboard_emprunts");
+        }
+
+        return $this->render("espace-comptable/emprunt/emprunt_new.html.twig",[
+            "form"=>$form->createView()
+        ]);
     }
 }

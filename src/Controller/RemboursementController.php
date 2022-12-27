@@ -30,7 +30,7 @@ class RemboursementController extends AbstractController
 
     #[Route('/dashboad/emprunt/ajouter-remboursement/{id}', name: 'app_add_remboursement')]
     public function addRefund(Emprunt $emprunt){
-dd($emprunt);
+
         $refund = new Remboursement();
         $refund->setRefundAt(new \DateTime('now'));
         $refund->setEmprunt($emprunt);
@@ -42,5 +42,14 @@ dd($emprunt);
 
         $this->flasher->addSuccess("Remboursement Enregistré avec succés");
         return $this->redirectToRoute('app_dashboard_remboursements');
+    }
+
+    #[Route('/dashboard/remboursement/supprimer/{id}', name: 'app_delete_remboursement')]
+    public function deleteRefund(Remboursement $refund){
+
+        $this->em->remove($refund);
+        $this->em->flush();
+        $this->flasher->addSuccess("Suppression réussie");
+        return $this->redirectToRoute("app_dashboard_remboursements");
     }
 }
