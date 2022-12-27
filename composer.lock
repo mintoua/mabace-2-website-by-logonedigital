@@ -3262,16 +3262,16 @@
         },
         {
             "name": "php-flasher/flasher",
-            "version": "v1.8.2",
+            "version": "v1.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-flasher/flasher.git",
-                "reference": "a0fe150811967874e121b028c949666e2d91c149"
+                "reference": "ddc8f44aa2bc1fed129fdb6f1e71819adae57d55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-flasher/flasher/zipball/a0fe150811967874e121b028c949666e2d91c149",
-                "reference": "a0fe150811967874e121b028c949666e2d91c149",
+                "url": "https://api.github.com/repos/php-flasher/flasher/zipball/ddc8f44aa2bc1fed129fdb6f1e71819adae57d55",
+                "reference": "ddc8f44aa2bc1fed129fdb6f1e71819adae57d55",
                 "shasum": ""
             },
             "require": {
@@ -3279,6 +3279,9 @@
             },
             "type": "library",
             "autoload": {
+                "files": [
+                    "helpers.php"
+                ],
                 "psr-4": {
                     "Flasher\\Prime\\": ""
                 }
@@ -3315,39 +3318,55 @@
                 "toastr"
             ],
             "support": {
-                "source": "https://github.com/php-flasher/flasher/tree/v1.8.2"
+                "source": "https://github.com/php-flasher/flasher/tree/v1.10.1"
             },
             "funding": [
                 {
+                    "url": "https://www.paypal.com/paypalme/yoeunes",
+                    "type": "custom"
+                },
+                {
                     "url": "https://github.com/yoeunes",
                     "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/yoeunes",
+                    "type": "ko_fi"
+                },
+                {
+                    "url": "https://opencollective.com/php-flasher",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/yoeunes",
+                    "type": "patreon"
                 }
             ],
-            "time": "2022-12-07T22:10:03+00:00"
+            "time": "2022-12-26T11:22:42+00:00"
         },
         {
             "name": "php-flasher/flasher-symfony",
-            "version": "v1.8.2",
+            "version": "v1.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-flasher/flasher-symfony.git",
-                "reference": "15898c8b8169ad8616b5909b7e1b7b31738e6871"
+                "reference": "60016f122f195438606a4a39f90b89be7dd7c9de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-flasher/flasher-symfony/zipball/15898c8b8169ad8616b5909b7e1b7b31738e6871",
-                "reference": "15898c8b8169ad8616b5909b7e1b7b31738e6871",
+                "url": "https://api.github.com/repos/php-flasher/flasher-symfony/zipball/60016f122f195438606a4a39f90b89be7dd7c9de",
+                "reference": "60016f122f195438606a4a39f90b89be7dd7c9de",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3",
-                "php-flasher/flasher": "^1.8",
-                "symfony/config": "^2.0|^3.0|^4.0|^5.0|^6.0",
-                "symfony/console": "^2.0|^3.0|^4.0|^5.0|^6.0",
-                "symfony/dependency-injection": "^2.0|^3.0|^4.0|^5.0|^6.0",
-                "symfony/http-kernel": "^2.0|^3.0|^4.0|^5.0|^6.0",
-                "symfony/translation": "^2.0|^3.0|^4.0|^5.0|^6.0",
-                "symfony/twig-bundle": "^2.0|^3.0|^4.0|^5.0|^6.0"
+                "php-flasher/flasher": "^1.10",
+                "symfony/config": "^2.0 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
+                "symfony/console": "^2.0 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
+                "symfony/dependency-injection": "^2.0 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
+                "symfony/http-kernel": "^2.0 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
+                "symfony/translation": "^2.0 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
+                "symfony/twig-bundle": "^2.0 || ^3.0 || ^4.0 || ^5.0 || ^6.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -3385,15 +3404,31 @@
                 "yoeunes"
             ],
             "support": {
-                "source": "https://github.com/php-flasher/flasher-symfony/tree/v1.8.2"
+                "source": "https://github.com/php-flasher/flasher-symfony/tree/v1.10.1"
             },
             "funding": [
                 {
+                    "url": "https://www.paypal.com/paypalme/yoeunes",
+                    "type": "custom"
+                },
+                {
                     "url": "https://github.com/yoeunes",
                     "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/yoeunes",
+                    "type": "ko_fi"
+                },
+                {
+                    "url": "https://opencollective.com/php-flasher",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/yoeunes",
+                    "type": "patreon"
                 }
             ],
-            "time": "2022-11-21T20:31:08+00:00"
+            "time": "2022-12-25T22:21:10+00:00"
         },
         {
             "name": "php-http/client-common",
