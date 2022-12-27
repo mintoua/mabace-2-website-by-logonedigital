@@ -3262,16 +3262,16 @@
         },
         {
             "name": "php-flasher/flasher",
-            "version": "v1.8.2",
+            "version": "v1.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-flasher/flasher.git",
-                "reference": "a0fe150811967874e121b028c949666e2d91c149"
+                "reference": "9eba1ff54739482b02a7beff35bd3b37510ec118"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-flasher/flasher/zipball/a0fe150811967874e121b028c949666e2d91c149",
-                "reference": "a0fe150811967874e121b028c949666e2d91c149",
+                "url": "https://api.github.com/repos/php-flasher/flasher/zipball/9eba1ff54739482b02a7beff35bd3b37510ec118",
+                "reference": "9eba1ff54739482b02a7beff35bd3b37510ec118",
                 "shasum": ""
             },
             "require": {
@@ -3279,6 +3279,9 @@
             },
             "type": "library",
             "autoload": {
+                "files": [
+                    "helpers.php"
+                ],
                 "psr-4": {
                     "Flasher\\Prime\\": ""
                 }
@@ -3315,39 +3318,55 @@
                 "toastr"
             ],
             "support": {
-                "source": "https://github.com/php-flasher/flasher/tree/v1.8.2"
+                "source": "https://github.com/php-flasher/flasher/tree/v1.10.3"
             },
             "funding": [
                 {
+                    "url": "https://www.paypal.com/paypalme/yoeunes",
+                    "type": "custom"
+                },
+                {
                     "url": "https://github.com/yoeunes",
                     "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/yoeunes",
+                    "type": "ko_fi"
+                },
+                {
+                    "url": "https://opencollective.com/php-flasher",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/yoeunes",
+                    "type": "patreon"
                 }
             ],
-            "time": "2022-12-07T22:10:03+00:00"
+            "time": "2022-12-27T00:42:21+00:00"
         },
         {
             "name": "php-flasher/flasher-symfony",
-            "version": "v1.8.2",
+            "version": "v1.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-flasher/flasher-symfony.git",
-                "reference": "15898c8b8169ad8616b5909b7e1b7b31738e6871"
+                "reference": "27b4dda500cd49c194e9de1a08dd4e1021e3d149"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-flasher/flasher-symfony/zipball/15898c8b8169ad8616b5909b7e1b7b31738e6871",
-                "reference": "15898c8b8169ad8616b5909b7e1b7b31738e6871",
+                "url": "https://api.github.com/repos/php-flasher/flasher-symfony/zipball/27b4dda500cd49c194e9de1a08dd4e1021e3d149",
+                "reference": "27b4dda500cd49c194e9de1a08dd4e1021e3d149",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3",
-                "php-flasher/flasher": "^1.8",
-                "symfony/config": "^2.0|^3.0|^4.0|^5.0|^6.0",
-                "symfony/console": "^2.0|^3.0|^4.0|^5.0|^6.0",
-                "symfony/dependency-injection": "^2.0|^3.0|^4.0|^5.0|^6.0",
-                "symfony/http-kernel": "^2.0|^3.0|^4.0|^5.0|^6.0",
-                "symfony/translation": "^2.0|^3.0|^4.0|^5.0|^6.0",
-                "symfony/twig-bundle": "^2.0|^3.0|^4.0|^5.0|^6.0"
+                "php-flasher/flasher": "^1.10",
+                "symfony/config": "^2.0 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
+                "symfony/console": "^2.0 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
+                "symfony/dependency-injection": "^2.0 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
+                "symfony/http-kernel": "^2.0 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
+                "symfony/translation": "^2.0 || ^3.0 || ^4.0 || ^5.0 || ^6.0",
+                "symfony/twig-bundle": "^2.0 || ^3.0 || ^4.0 || ^5.0 || ^6.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -3385,15 +3404,31 @@
                 "yoeunes"
             ],
             "support": {
-                "source": "https://github.com/php-flasher/flasher-symfony/tree/v1.8.2"
+                "source": "https://github.com/php-flasher/flasher-symfony/tree/v1.10.3"
             },
             "funding": [
                 {
+                    "url": "https://www.paypal.com/paypalme/yoeunes",
+                    "type": "custom"
+                },
+                {
                     "url": "https://github.com/yoeunes",
                     "type": "github"
+                },
+                {
+                    "url": "https://ko-fi.com/yoeunes",
+                    "type": "ko_fi"
+                },
+                {
+                    "url": "https://opencollective.com/php-flasher",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://www.patreon.com/yoeunes",
+                    "type": "patreon"
                 }
             ],
-            "time": "2022-11-21T20:31:08+00:00"
+            "time": "2022-12-27T04:58:09+00:00"
         },
         {
             "name": "php-http/client-common",
@@ -10693,16 +10728,16 @@
         },
         {
             "name": "twig/extra-bundle",
-            "version": "v3.4.0",
+            "version": "v3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/twig-extra-bundle.git",
-                "reference": "2e58256b0e9fe52f30149347c0547e4633304765"
+                "reference": "edfcdbdc943b52101011d57ec546af393dc56537"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/2e58256b0e9fe52f30149347c0547e4633304765",
-                "reference": "2e58256b0e9fe52f30149347c0547e4633304765",
+                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/edfcdbdc943b52101011d57ec546af393dc56537",
+                "reference": "edfcdbdc943b52101011d57ec546af393dc56537",
                 "shasum": ""
             },
             "require": {
@@ -10725,7 +10760,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.2-dev"
+                    "dev-master": "3.5-dev"
                 }
             },
             "autoload": {
@@ -10756,7 +10791,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.4.0"
+                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.5.0"
             },
             "funding": [
                 {
@@ -10768,20 +10803,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-04T13:58:53+00:00"
+            "time": "2022-12-27T12:23:36+00:00"
         },
         {
             "name": "twig/twig",
-            "version": "v3.4.3",
+            "version": "v3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "c38fd6b0b7f370c198db91ffd02e23b517426b58"
+                "reference": "3ffcf4b7d890770466da3b2666f82ac054e7ec72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/c38fd6b0b7f370c198db91ffd02e23b517426b58",
-                "reference": "c38fd6b0b7f370c198db91ffd02e23b517426b58",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3ffcf4b7d890770466da3b2666f82ac054e7ec72",
+                "reference": "3ffcf4b7d890770466da3b2666f82ac054e7ec72",
                 "shasum": ""
             },
             "require": {
@@ -10796,7 +10831,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "3.5-dev"
                 }
             },
             "autoload": {
@@ -10832,7 +10867,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.4.3"
+                "source": "https://github.com/twigphp/Twig/tree/v3.5.0"
             },
             "funding": [
                 {
@@ -10844,7 +10879,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-28T08:42:51+00:00"
+            "time": "2022-12-27T12:28:18+00:00"
         },
         {
             "name": "webmozart/assert",
