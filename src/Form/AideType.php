@@ -19,9 +19,7 @@ class AideType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('idMembre', MemberType::class, [
-                'label' => 'Identification du membre'
-            ])
+            ->add('idMembre', TextType::class)
             ->add('typeAide', ChoiceType::class,[
                 'choices' => [
                     'aide décès' => 'décès',
@@ -32,15 +30,15 @@ class AideType extends AbstractType
                 ]
             ]) 
             ->add('created_at', DateType::class, [
-                'label' => 'date d\'enregistrement',
                 'constraints' =>[
-                    new DateTime()
+                    new NotNull()
                 ]
             ])
-            ->add('description')
-
-            ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
-
+            ->add('description', TextType::class, [
+                'constraints' =>[
+                    new NotNull()
+                ]
+            ])
         ;
     }
 

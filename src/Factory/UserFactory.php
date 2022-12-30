@@ -10,6 +10,6 @@ final class UserFactory extends ModelFactory
 
             'isVerified' => true,
         ];
-    }
 
+    }
 }

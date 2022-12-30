@@ -35,10 +35,18 @@ class Member
     #[ORM\OneToMany(mappedBy: 'membre', targetEntity: CalendrierBenef::class)]
     private Collection $calendrierBenefs;
 
+    // #[ORM\OneToMany(mappedBy: 'idMembre', targetEntity: Aide::class)]
+    // private Collection $aides;  
     public function __construct()
     {
         $this->calendrierBenefs = new ArrayCollection();
+        // $this->aides = new ArrayCollection();
     }
+
+
+    // public function getAides() : Collection{
+    //     return $this->aides;
+    // }
 
     public function __toString()
     {

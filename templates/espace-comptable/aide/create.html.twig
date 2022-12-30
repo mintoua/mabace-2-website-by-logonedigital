@@ -1,0 +1,110 @@
+{% extends "base_compta.html.twig" %}
+{% block body %}
+
+	<!-- Page Wrapper -->
+	<div
+		id="wrapper">
+		<!-- Sidebar -->
+		{{ include("./includes/sidebar.html.twig") }}
+		<!-- End of Sidebar -->
+
+		<!-- Content Wrapper -->
+			<div
+			id="content-wrapper" class="d-flex flex-column"> <!-- Main Content -->
+			<div id="content">
+
+				<div id="add_aide_page" class="container">
+					<h1>Enregistrer une nouvelle aide</h1>
+					<div class="form container col-lg-8 offset-lg-0">
+						{{ form_start(form) }}
+						<div class="mb-3">
+							{{
+            form_row(form.idMembre, {
+             label: 'Matricule du membre',
+             attr: {
+              class: "form-control",
+              placeholder: "matricule du membre"
+             }
+            })
+          }}
+						</div>
+
+						<div class="mb-3">
+							{{
+            form_row(form.typeAide, {
+             label: 'Type d\'aide',
+             attr: {
+              class: "form-select",
+             }
+            })
+          }}
+        </div>
+
+			  <div class="mb-3">
+          {{
+            form_row(form.created_at, {
+             label: 'Date d\'enregistrement',
+             attr: {
+              class: "form-control",
+             }
+            })
+          }}
+						</div>
+
+						<div class="mb-3">
+							{{
+            form_row(form.description, {
+             label: 'description',
+             attr: {
+              class: "form-control",
+             }
+            })
+          }}
+						</div>
+
+						<div class="mb-3">
+							<button type="submit" class="btn btn-primary w-100">
+								Enregistrer l'aide
+							</button>
+						</div>
+						{{ form_end(form) }}
+					</div>
+				</div>
+
+				<!-- Footer -->
+				{{ include("./includes/footer-compta.html.twig") }}
+				<!-- End of Footer -->
+			</div>
+			<!-- End of Content Wrapper -->
+		</div>
+		<!-- End of Page Wrapper -->
+
+		<!-- Scroll to Top Button-->
+		<a class="scroll-to-top rounded" href="#page-top">
+			<i class="fas fa-angle-up"></i>
+		</a>
+
+		<!-- Logout Modal-->
+		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						Select "Logout" below if you are ready to end your current session.
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button" data-dismiss="modal">
+							Cancel
+						</button>
+						<a class="btn btn-primary" href="login.html">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

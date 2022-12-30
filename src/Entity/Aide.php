@@ -17,9 +17,8 @@ class Aide
     #[ORM\Column(type: Types::STRING)]
     private string $typeAide;
 
-    #[ORM\ManyToOne(inversedBy: 'getAides')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Member $idMembre = null;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $idMembre = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
@@ -44,12 +43,12 @@ class Aide
         return $this;
     }
 
-    public function getIdMembre(): ?Member
+    public function getIdMembre(): ?String
     {
         return $this->idMembre;
     }
 
-    public function setIdMembre(?Member $idMembre): self
+    public function setIdMembre(?String $idMembre): self
     {
         $this->idMembre = $idMembre;
 
