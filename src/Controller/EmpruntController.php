@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Emprunt;
 use App\Entity\Member;
 use App\Form\EmpruntType;
+use App\Repository\EmpruntRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +20,7 @@ class EmpruntController extends AbstractController
         private ManagerRegistry $doctrine,
         private EntityManagerInterface $em,
         private FlasherInterface $flasher,
+        private EmpruntRepository $empruntRepository
     )
     {}
 
@@ -31,21 +33,28 @@ class EmpruntController extends AbstractController
     }
 
     #[Route('/dashboard/emprunt/{matricule}', name: 'app_dashboard_add_emprunt')]
-    public function addEmprunt(Request $request, Member $member)
+    public function addEmprunt(Request $request, Member $member )
     {
         //dd($member);
+        
         $emprunt = new Emprunt();
+        
         $form = $this->createForm(EmpruntType::class, $emprunt);
         $form->handleRequest($request);
 
         if($form->isSubmitted() and $form->isValid()){
+            $num = count($this->empruntRepository->getEmpruntByTypeOfMember($member->getId(),$emprunt->getType()));
+            if($num == 3){
+                $this->flasher->addError("Ce membre n'a plus droit à ce type d'emprunt");
+            return $this->redirectToRoute('app_dashboard_member');
+            }
             $emprunt->setMembre($member);
             $emprunt->setCreatedAt(new \DateTime('now'));
             $emprunt->setEtat(0);
-
+    
             $this->em->persist($emprunt);
             $this->em->flush();
-
+            
             $this->flasher->addSuccess("Emprunt Attribué avec succés");
             return $this->redirectToRoute('app_dashboard_emprunts');
         }

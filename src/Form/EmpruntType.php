@@ -21,6 +21,7 @@ class EmpruntType extends AbstractType
             ->add('type',ChoiceType::class,[
                 'choices' => [
                     'Crédit Scolaire' => 'Crédit Scolaire',
+                    'Crédit Familiale' => 'Crédit Familiale'
                 ],
                 'empty_data' => 'friend'])
             ->add('montant',MoneyType::class,[

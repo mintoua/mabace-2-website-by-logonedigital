@@ -39,6 +39,17 @@ class EmpruntRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function getEmpruntByTypeOfMember($memberId, $type): array
+    {
+        return $this->createQueryBuilder('e')
+        ->where('e.membre = :memberId')
+        ->andWhere('e.type LIKE :type')
+        ->setParameter('memberId',$memberId)
+        ->setParameter('type',$type)
+        ->getQuery()
+        ->getResult();
+    }
 //    /**
 //     * @return Emprunt[] Returns an array of Emprunt objects
 //     */
