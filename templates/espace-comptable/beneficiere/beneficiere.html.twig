@@ -16,15 +16,21 @@
 
       <!-- Begin Page Content -->
       <div class="container-fluid">
-        <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Emprunts</h1>
+          <h1 class="h3 mb-0 text-gray-800">Membres</h1>
+          <a
+            href="{{path("app_dashboard_add_member")}}"
+            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+            ><i class="fas fa-user-plus"></i> Ajouter Membre</a
+          >
         </div>
+        <!-- Page Heading -->
+
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-              Listes des Emprunts
+              Liste Membres
             </h6>
           </div>
           <div class="card-body">
@@ -35,39 +41,38 @@
                 width="100%"
                 cellspacing="0"
               >
-
                 <thead>
                   <tr>
-                    <th>Membre</th>
-                    <th>Type</th>
-                    <th>Intitule</th>
-                    <th>Raison</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Matricule</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                    <th>Membre</th>
-                    <th>Type</th>
-                    <th>Intitule</th>
-                    <th>Raison</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Email</th>
                     <th>Action</th>
                   </tr>
                 </tfoot>
                 <tbody>
-                {% for sanction in sanctions %}
+                  {% for membre in membres %}
                   <tr>
-                    <td>{{ sanction.membre }}</td>
-                    <td>{{ sanction.type }}</td>
-                    <td>{{ sanction.intitule }} </td>
-                    <td>{{ sanction.raison }}</td>
+                    <td>{{ membre.lastname }}</td>
+                    <td>{{ membre.firstname }}</td>
+                    <td>{{ membre.email }}</td>
+                    <td>{{ membre.matricule |upper }}</td>
                     <td class="d-flex justify-content-center">
-                      <a href=""><i class="fas fa-eye"></i></a>
-                      <a href=""><i class="fas fa-user-edit ml-2 mr-2"></i></a>
-                      <a href=""><i class="fas fa-trash-alt"></i></a>
+                      <a href="{{path("app_dashboard_member_profil",{matricule:membre.matricule})}}"><i class="fas fa-eye"></i></a>
+                      <a href="{{path("app_dashboard_member_edit",{matricule:membre.matricule})}}"><i class="fas fa-user-edit ml-2 mr-2"></i></a>
+                      <a href="{{path("app_dashboard_member_delete",{matricule:membre.matricule})}}"><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
-                {% endfor %}
+                  {% endfor %}
                 </tbody>
               </table>
             </div>

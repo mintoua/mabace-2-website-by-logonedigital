@@ -38,15 +38,11 @@ class Member
     #[ORM\OneToMany(mappedBy: 'membre', targetEntity: Sanction::class)]
     private Collection $sanctions;
 
-    public function __construct()
-    {
-        $this->emprunts = new ArrayCollection();
-        $this->sanctions = new ArrayCollection();
-    }
-    public function __toString () : string
-    {
-       return $this->lastname.' '.$this->firstname;
-    }
+   
+    // public function __toString () : string
+    // {
+    //    return $this->lastname.' '.$this->firstname;
+    // }
     #[ORM\OneToMany(mappedBy: 'membre', targetEntity: CalendrierBenef::class)]
     private Collection $calendrierBenefs;
 
@@ -55,6 +51,8 @@ class Member
 
     public function __construct()
     {
+        $this->emprunts = new ArrayCollection();
+        $this->sanctions = new ArrayCollection();
         $this->calendrierBenefs = new ArrayCollection();
         $this->beneficieres = new ArrayCollection();
     }
