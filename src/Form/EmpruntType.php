@@ -8,6 +8,8 @@ use Doctrine\DBAL\Types\DateType as TypesDateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,12 +21,17 @@ class EmpruntType extends AbstractType
             ->add('type',ChoiceType::class,[
                 'choices' => [
                     'Crédit Scolaire' => 'Crédit Scolaire',
+                    'Crédit Familiale' => 'Crédit Familiale'
                 ],
                 'empty_data' => 'friend'])
-            ->add('montant')
-            ->add('endedAt',DateType::class)
-            ->add('tauxInteret')
-            ->add('tauxInteretDelai')
+            ->add('montant',MoneyType::class,[
+                'currency'=>'XAF'
+            ])
+            ->add('endedAt',DateType::class,[
+                'widget' => 'single_text',
+            ])
+            ->add('tauxInteret',PercentType::class)
+            ->add('tauxInteretDelai',PercentType::class)
         ;
     }
 
