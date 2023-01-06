@@ -30,6 +30,11 @@ class MemberType extends AbstractType
                     new NotNull()
                 ]  
             ])
+            ->add('matricule', TextType::class, [
+                "constraints"=>[
+                    new NotNull()
+                ]  
+            ])
         ;
     }
 
