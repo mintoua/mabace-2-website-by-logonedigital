@@ -42,7 +42,6 @@ class MembreController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() and $form->isValid()){
-            $member->setMatricule($this->defaultService->matriculeGenerator($member->getLastname(), $member->getFirstname()));
             
             $this->em->persist($member);
             $this->em->flush();

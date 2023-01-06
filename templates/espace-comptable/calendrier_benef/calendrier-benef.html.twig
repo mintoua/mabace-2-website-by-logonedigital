@@ -47,6 +47,7 @@
                     <th>Nom Tontine</th>
                     <th>Nom et prénom</th>
                     <th>Matricule</th>
+                    <th>Etat</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -56,6 +57,7 @@
                     <th>Nom Tontine</th>
                     <th>Nom et prénom</th>
                     <th>Matricule</th>
+                    <th>Etat</th>
                     <th>Action</th>
                   </tr>
                 </tfoot>
@@ -68,6 +70,7 @@
                     <td>{{ benef.tontine}}</td>
                     <td>{{ benef.membre}}</td>
                     <td>{{ benef.membre.matricule | upper}}</td>   
+                    <td></td> 
                     <td class="d-flex justify-content-center">
                        <a href="{{path("app_dashboard_calendrier_benef_update",{id:benef.id})}}"><i class="fas fa-user-edit ml-2 mr-2"></i></a>
                       <a href="{{path("app_dashboard_calendrier_benef_delete",{id:benef.id})}}"><i class="fas fa-trash-alt"></i></a> 

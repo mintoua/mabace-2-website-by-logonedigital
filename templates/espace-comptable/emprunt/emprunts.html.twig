@@ -18,13 +18,13 @@
       <div class="container-fluid">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Remboursements</h1>
+          <h1 class="h3 mb-0 text-gray-800">Emprunts</h1>
         </div>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-              Listes des Remboursements
+              Listes des Emprunts
             </h6>
           </div>
           <div class="card-body">
@@ -39,26 +39,46 @@
                 <thead>
                   <tr>
                     <th>Membre</th>
-                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Montant</th>
+                    <th>Taux</th>
+                    <th>Date début / Date fin</th>
+                    <th>Etat</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
                     <th>Membre</th>
-                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Montant</th>
+                    <th>Taux</th>
+                    <th>Date début / Date fin</th>
+                    <th>Etat</th>
                     <th>Action</th>
                   </tr>
                 </tfoot>
                 <tbody>
-                {% for remboursement in remboursements %}
+                {% for emprunt in emprunts %}
                   <tr>
-                    <td>{{ remboursement.emprunt.membre }}</td>
-                    <td>Remboursé le {{ remboursement.refundAt | date("d-m-y") }}</td>
+                    <td>{{ emprunt.membre }}</td>
+                    <td>{{ emprunt.type }}</td>
+                    <td>{{ emprunt.montant }} FCFA</td>
+                    <td>{{ emprunt.tauxInteret }}%</td>
+                    <td>{{ emprunt.createdAt | date("d-m-y") }} / {{ emprunt.endedAt | date("d-m-y") }}</td>
+                    {% if not emprunt.etat %}
+                    <td>
+                      <a href="{{ path("app_add_remboursement",{id:emprunt.id})}}"
+                          class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+                          > Non Remboursé</a>
+                    </td>
+                    {% else %}
+                    <td> Remboursé </td>
+                    {% endif %}
                     <td class="d-flex justify-content-center">
                       <a href=""><i class="fas fa-eye"></i></a>
-                      <a href=""><i class="fas fa-user-edit ml-2 mr-2"></i></a>
-                      <a href=""><i class="fas fa-trash-alt"></i></a>
+                      <a href="{{ path('app_dashboard_emprunt_edit',{id:emprunt.id})}}"><i class="fas fa-edit ml-2 mr-2"></i></a>
+                      <a href="{{ path('app_dashboard_emprunt_delete',{id:emprunt.id})}}"><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
                 {% endfor %}

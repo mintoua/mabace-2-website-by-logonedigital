@@ -18,13 +18,13 @@
       <div class="container-fluid">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Emprunts</h1>
+          <h1 class="h3 mb-0 text-gray-800">Sanctions</h1>
         </div>
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-              Listes des Emprunts
+              Listes des Sanctions
             </h6>
           </div>
           <div class="card-body">
@@ -63,8 +63,8 @@
                     <td>{{ sanction.raison }}</td>
                     <td class="d-flex justify-content-center">
                       <a href=""><i class="fas fa-eye"></i></a>
-                      <a href=""><i class="fas fa-user-edit ml-2 mr-2"></i></a>
-                      <a href=""><i class="fas fa-trash-alt"></i></a>
+                      <a href="{{ path('app_dashboard_edit_sanction',{id:sanction.id})}}"><i class="fas fa-edit ml-2 mr-2"></i></a>
+                      <a href="{{ path('app_delete_sanction',{id:sanction.id})}} "><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>
                 {% endfor %}
