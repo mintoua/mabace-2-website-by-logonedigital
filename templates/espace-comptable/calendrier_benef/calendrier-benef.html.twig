@@ -47,7 +47,7 @@
                     <th>Nom Tontine</th>
                     <th>Nom et prénom</th>
                     <th>Matricule</th>
-                    <th>Etat</th>
+                    <th>A bouffer</th>
                     <th>Action</th>
                   </tr>
                 </thead>
@@ -57,7 +57,7 @@
                     <th>Nom Tontine</th>
                     <th>Nom et prénom</th>
                     <th>Matricule</th>
-                    <th>Etat</th>
+                    <th>A bouffer</th>
                     <th>Action</th>
                   </tr>
                 </tfoot>
@@ -70,7 +70,16 @@
                     <td>{{ benef.tontine}}</td>
                     <td>{{ benef.membre}}</td>
                     <td>{{ benef.membre.matricule | upper}}</td>   
-                    <td></td> 
+                    {% if not benef.etat %}
+                    <td >
+                      <a href="{{ path("app_dashboard_add_benef",{matricule:benef.membre.matricule, id:benef.id})}}"
+                          class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+                          > Non</a>
+                    </td>
+                    {% else %}
+                    <td> Oui </td>
+                    {% endif %}
+                    
                     <td class="d-flex justify-content-center">
                        <a href="{{path("app_dashboard_calendrier_benef_update",{id:benef.id})}}"><i class="fas fa-user-edit ml-2 mr-2"></i></a>
                       <a href="{{path("app_dashboard_calendrier_benef_delete",{id:benef.id})}}"><i class="fas fa-trash-alt"></i></a> 

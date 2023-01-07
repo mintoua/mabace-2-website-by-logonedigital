@@ -43,33 +43,38 @@
               >
                 <thead>
                   <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
+                    <th>Nom et Prénom</th>
                     <th>Matricule</th>
+                    <td>Nom tontine</td>
+                    <td>Gain</td>
+                    <th>Date</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
-                    <th>Email</th>
+                    <th>Nom et Prénom</th>
+                    <th>Matricule</th>
+                    <td>Nom tontine</td>
+                    <td>Gain</td>
+                    <th>Date</th>
                     <th>Action</th>
                   </tr>
                 </tfoot>
                 <tbody>
-                  {% for membre in membres %}
+                  {% for benef in benefs %}
                   <tr>
-                    <td>{{ membre.lastname }}</td>
-                    <td>{{ membre.firstname }}</td>
-                    <td>{{ membre.email }}</td>
-                    <td>{{ membre.matricule |upper }}</td>
+                    <td>{{ benef.membres }}</td>
+                    <td>{{ benef.membres.matricule }}</td>
+                    <td>{{ benef.calendrierBenef.tontine }}</td>
+                    <td>{{  benef.calendrierBenef.tontine.montant }}</td>
+                    <td>
+                      {{ benef.calendrierBenef.dateBenef.format("M") }}
+                      {{ benef.calendrierBenef.dateBenef.format("j") }},
+                      {{ benef.calendrierBenef.dateBenef.format("Y") }}
+                    </td>
                     <td class="d-flex justify-content-center">
-                      <a href="{{path("app_dashboard_member_profil",{matricule:membre.matricule})}}"><i class="fas fa-eye"></i></a>
-                      <a href="{{path("app_dashboard_member_edit",{matricule:membre.matricule})}}"><i class="fas fa-user-edit ml-2 mr-2"></i></a>
-                      <a href="{{path("app_dashboard_member_delete",{matricule:membre.matricule})}}"><i class="fas fa-trash-alt"></i></a>
+                      <a href="{{path("app_dashboard_calendrier_benef_delete",{id:benef.id})}}"><i class="fas fa-trash-alt"></i></a> 
                     </td>
                   </tr>
                   {% endfor %}

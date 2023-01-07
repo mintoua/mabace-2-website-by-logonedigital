@@ -13,28 +13,18 @@ class Beneficiere
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'beneficieres')]
-    private ?Member $membre = null;
+    
 
     #[ORM\ManyToOne(inversedBy: 'beneficieres')]
     #[ORM\JoinColumn(nullable: false)]
     private ?CalendrierBenef $calendrierBenef = null;
 
+    #[ORM\ManyToOne(inversedBy: 'benefs')]
+    private ?Member $membres = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMembre(): ?Member
-    {
-        return $this->membre;
-    }
-
-    public function setMembre(?Member $membre): self
-    {
-        $this->membre = $membre;
-
-        return $this;
     }
 
     public function getCalendrierBenef(): ?CalendrierBenef
@@ -45,6 +35,18 @@ class Beneficiere
     public function setCalendrierBenef(?CalendrierBenef $calendrierBenef): self
     {
         $this->calendrierBenef = $calendrierBenef;
+
+        return $this;
+    }
+
+    public function getMembres(): ?Member
+    {
+        return $this->membres;
+    }
+
+    public function setMembres(?Member $membres): self
+    {
+        $this->membres = $membres;
 
         return $this;
     }

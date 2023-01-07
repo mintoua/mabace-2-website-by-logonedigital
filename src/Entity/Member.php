@@ -48,15 +48,20 @@ class Member
     #[ORM\OneToMany(mappedBy: 'membre', targetEntity: CalendrierBenef::class)]
     private Collection $calendrierBenefs;
 
-    #[ORM\OneToMany(mappedBy: 'membre', targetEntity: Beneficiere::class)]
-    private Collection $beneficieres;
+    
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $etat = null;
+
+    #[ORM\OneToMany(mappedBy: 'membres', targetEntity: Beneficiere::class)]
+    private Collection $benefs;
 
     public function __construct()
     {
         $this->emprunts = new ArrayCollection();
         $this->sanctions = new ArrayCollection();
         $this->calendrierBenefs = new ArrayCollection();
-        $this->beneficieres = new ArrayCollection();
+        $this->benefs = new ArrayCollection();
     }
 
     public function __toString()
@@ -219,30 +224,46 @@ class Member
         return $this;
     }
 
+ 
+   
+
+
+    public function isEtat(): ?bool
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?bool $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Beneficiere>
      */
-    public function getBeneficieres(): Collection
+    public function getBenefs(): Collection
     {
-        return $this->beneficieres;
+        return $this->benefs;
     }
 
-    public function addBeneficiere(Beneficiere $beneficiere): self
+    public function addBenef(Beneficiere $benef): self
     {
-        if (!$this->beneficieres->contains($beneficiere)) {
-            $this->beneficieres->add($beneficiere);
-            $beneficiere->setMembre($this);
+        if (!$this->benefs->contains($benef)) {
+            $this->benefs->add($benef);
+            $benef->setMembres($this);
         }
 
         return $this;
     }
 
-    public function removeBeneficiere(Beneficiere $beneficiere): self
+    public function removeBenef(Beneficiere $benef): self
     {
-        if ($this->beneficieres->removeElement($beneficiere)) {
+        if ($this->benefs->removeElement($benef)) {
             // set the owning side to null (unless already changed)
-            if ($beneficiere->getMembre() === $this) {
-                $beneficiere->setMembre(null);
+            if ($benef->getMembres() === $this) {
+                $benef->setMembres(null);
             }
         }
 

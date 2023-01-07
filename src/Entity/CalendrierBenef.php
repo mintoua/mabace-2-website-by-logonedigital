@@ -33,13 +33,13 @@ class CalendrierBenef
     #[ORM\OneToMany(mappedBy: 'calendrierBenef', targetEntity: Beneficiere::class)]
     private Collection $beneficieres;
 
+    #[ORM\Column]
+    private ?bool $etat = null;
+
     public function __construct()
     {
         $this->beneficieres = new ArrayCollection();
     }
-
-  
-
     
 
     public function getId(): ?int
@@ -79,7 +79,6 @@ class CalendrierBenef
     public function setTontine(?Tontine $tontine): self
     {
         $this->tontine = $tontine;
-
         return $this;
     }
 
@@ -109,6 +108,18 @@ class CalendrierBenef
                 $beneficiere->setCalendrierBenef(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isEtat(): ?bool
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(bool $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

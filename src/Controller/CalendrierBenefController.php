@@ -37,6 +37,7 @@ class CalendrierBenefController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() and $form->isValid()){
+            $benef->setEtat(false);
             $this->em->persist($benef);
             $this->em->flush();
             return $this->redirectToRoute("app_dashboard_calendrier_benef");
