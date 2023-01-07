@@ -1,11 +1,11 @@
-{% extends "base_compta.html.twig" %} {% block body %}
-
+{% extends "base_compta.html.twig" %} {% block title %} membres {% endblock %}
+{% block body %}
 <!-- Page Wrapper -->
 <div id="wrapper">
   <!-- Sidebar -->
   {{ include("./includes/sidebar.html.twig") }}
   <!-- End of Sidebar -->
-
+  
   <!-- Content Wrapper -->
   <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
@@ -14,22 +14,59 @@
       {{ include("./includes/navbar-compta.html.twig") }}
       <!-- End of Topbar -->
 
-      <!-- Begin Page Content -->
-      <div class="container-fluid">
-        <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-                  <a
+      <div class="container-fluid rounded bg-white">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Ngué Tougoum</span><span class="text-black-50">655220253</span><span> </span></div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Informations du membre</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="row">
+                      <div class="col-md-4"><p>Nom et Prénom :</p></div>
+                      <div class="col-md-8"><p>Ngué Tougoum Emmanuel</p></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4"><p>N° de CNI :</p></div>
+                      <div class="col-md-8"><p>181JME3185</p></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-4"><p>Matricule membre:</p></div>
+                      <div class="col-md-8"><p>181JME3185</p></div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center "><h4 class="text-right">Quelque actions</h4></div><br>
+                <div class="row">
+                  <div class="col-md-6"><a
             href="{{path("app_dashboard_add_emprunt",{matricule:member.matricule})}}"
-            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-            > Attribuer un emprunt</a
-          >
-                            <a
+            class="btn btn-primary "
+            > Emprunter</a
+          ></div> 
+                <div class="col-md-6"><a
             href="{{path("app_dashboard_add_sanction",{matricule:member.matricule})}}"
-            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+            class="btn btn-primary"
             > Sanctionné</a
-          >
-      </div>
-      <!-- /.container-fluid -->
+          ></div>
+                </div>
+                <div class="row mt-2">
+                  {# <div class="col-md-6"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div> 
+                <div class="col-md-6"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div> #}
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
     </div>
     <!-- End of Main Content -->
 
@@ -81,4 +118,29 @@
   </div>
 </div>
 
+{% endblock %} {% block javascript %}
+<!-- Bootstrap core JavaScript-->
+<script src="{{ asset('espace-compta/') }}vendor/jquery/jquery.min.js"></script>
+<script src="{{
+    asset('espace-compta/')
+  }}vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{{
+    asset('espace-compta/')
+  }}vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{{ asset('espace-compta/') }}js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="{{
+    asset('espace-compta/')
+  }}vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="{{
+    asset('espace-compta/')
+  }}vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="{{ asset('espace-compta/') }}js/demo/datatables-demo.js"></script>
 {% endblock %}
