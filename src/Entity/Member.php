@@ -56,12 +56,19 @@ class Member
     #[ORM\OneToMany(mappedBy: 'membres', targetEntity: Beneficiere::class)]
     private Collection $benefs;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $phone = null;
+
+    #[ORM\ManyToMany(targetEntity: Aide::class, mappedBy: 'membres')]
+    private Collection $aides;
+
     public function __construct()
     {
         $this->emprunts = new ArrayCollection();
         $this->sanctions = new ArrayCollection();
         $this->calendrierBenefs = new ArrayCollection();
         $this->benefs = new ArrayCollection();
+        $this->aides = new ArrayCollection();
     }
 
     public function __toString()
@@ -265,6 +272,45 @@ class Member
             if ($benef->getMembres() === $this) {
                 $benef->setMembres(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(?string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Aide>
+     */
+    public function getAides(): Collection
+    {
+        return $this->aides;
+    }
+
+    public function addAide(Aide $aide): self
+    {
+        if (!$this->aides->contains($aide)) {
+            $this->aides->add($aide);
+            $aide->addMembre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAide(Aide $aide): self
+    {
+        if ($this->aides->removeElement($aide)) {
+            $aide->removeMembre($this);
         }
 
         return $this;

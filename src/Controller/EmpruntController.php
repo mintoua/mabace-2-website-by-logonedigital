@@ -58,7 +58,7 @@ class EmpruntController extends AbstractController
             $this->flasher->addSuccess("Emprunt Attribué avec succés");
             return $this->redirectToRoute('app_dashboard_emprunts');
         }
-        return $this->render("espace-comptable/emprunt/emprunt_new.html.twig",[
+        return $this->render("",[
             "form"=>$form->createView()
         ]);
     }

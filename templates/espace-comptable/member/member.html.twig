@@ -43,28 +43,25 @@
               >
                 <thead>
                   <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
+                    <th>Nom & Prénom</th>
+                    <th>Téléphone</th>
                     <th>Matricule</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Email</th>
-                    <th>Email</th>
+                    <th>Nom & Prénom</th>
+                    <th>Téléphone</th>
+                    <th>Matricule</th>
                     <th>Action</th>
                   </tr>
                 </tfoot>
                 <tbody>
                   {% for membre in membres %}
                   <tr>
-                    <td>{{ membre.lastname }}</td>
-                    <td>{{ membre.firstname }}</td>
-                    <td>{{ membre.email }}</td>
+                    <td>{{ membre }}</td>
+                    <td>{{ membre.phone }}</td>
                     <td>{{ membre.matricule |upper }}</td>
                     <td class="d-flex justify-content-center">
                       <a href="{{path("app_dashboard_member_profil",{matricule:membre.matricule})}}"><i class="fas fa-eye"></i></a>

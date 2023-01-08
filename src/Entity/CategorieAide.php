@@ -2,36 +2,39 @@
 
 namespace App\Entity;
 
-use App\Repository\AideRepository;
+use App\Repository\CategorieAideRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AideRepository::class)]
-class Aide
+#[ORM\Entity(repositoryClass: CategorieAideRepository::class)]
+class CategorieAide
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
+    
     #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
     private ?string $intitule = null;
 
-    #[ORM\ManyToOne(inversedBy: 'aide')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?CategorieAide $categorieAides = null;
-
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\ManyToMany(targetEntity: Member::class, inversedBy: 'aides')]
-    private Collection $membres;
+
+    #[ORM\OneToMany(mappedBy: 'categorieAides', targetEntity: Aide::class, orphanRemoval: true)]
+    private Collection $aide;
+
+    public function __toString()
+    {
+        return $this->intitule;
+    }
 
     public function __construct()
     {
-        $this->membres = new ArrayCollection();
+        $this->aide = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,18 +54,6 @@ class Aide
         return $this;
     }
 
-    public function getCategorieAides(): ?CategorieAide
-    {
-        return $this->categorieAides;
-    }
-
-    public function setCategorieAides(?CategorieAide $categorieAides): self
-    {
-        $this->categorieAides = $categorieAides;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -76,25 +67,31 @@ class Aide
     }
 
     /**
-     * @return Collection<int, Member>
+     * @return Collection<int, Aide>
      */
-    public function getMembres(): Collection
+    public function getAide(): Collection
     {
-        return $this->membres;
+        return $this->aide;
     }
 
-    public function addMembre(Member $membre): self
+    public function addAide(Aide $aide): self
     {
-        if (!$this->membres->contains($membre)) {
-            $this->membres->add($membre);
+        if (!$this->aide->contains($aide)) {
+            $this->aide->add($aide);
+            $aide->setCategorieAides($this);
         }
 
         return $this;
     }
 
-    public function removeMembre(Member $membre): self
+    public function removeAide(Aide $aide): self
     {
-        $this->membres->removeElement($membre);
+        if ($this->aide->removeElement($aide)) {
+            // set the owning side to null (unless already changed)
+            if ($aide->getCategorieAides() === $this) {
+                $aide->setCategorieAides(null);
+            }
+        }
 
         return $this;
     }

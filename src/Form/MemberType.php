@@ -25,6 +25,11 @@ class MemberType extends AbstractType
                     new NotNull()
                 ]
             ])
+            ->add('phone', TextType::class, [
+                "constraints"=>[
+                    new NotNull()
+                ]  
+            ])
             ->add('email', TextType::class, [
                 "constraints"=>[
                     new NotNull()

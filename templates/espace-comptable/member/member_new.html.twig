@@ -56,6 +56,17 @@
             </div>
             <div class="mb-3">
               {{
+                form_row(form.phone, {
+                  label: false,
+                  attr: {
+                    class: "form-control",
+                    placeholder: "Téléphone"
+                  }
+                })
+              }}
+            </div>
+            <div class="mb-3">
+              {{
                 form_row(form.email, {
                   label: false,
                   attr: {

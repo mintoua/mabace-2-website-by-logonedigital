@@ -56,6 +56,28 @@
             </div>
             <div class="mb-3">
               {{
+                form_row(form.matricule, {
+                  label: false,
+                  attr: {
+                    class: "form-control",
+                    placeholder: "Matricule"
+                  }
+                })
+              }}
+            </div>
+            <div class="mb-3">
+              {{
+                form_row(form.phone, {
+                  label: false,
+                  attr: {
+                    class: "form-control",
+                    placeholder: "Téléphone"
+                  }
+                })
+              }}
+            </div>
+            <div class="mb-3">
+              {{
                 form_row(form.cni, {
                   label: false,
                   attr: {
