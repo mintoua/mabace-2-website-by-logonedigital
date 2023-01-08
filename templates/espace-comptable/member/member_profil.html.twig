@@ -17,7 +17,7 @@
       <div class="container-fluid rounded bg-white">
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{member}}</span><span class="text-black-50">{{member.phone}}</span><span> </span></div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">{{member |upper}}</span><span class="text-black-50">{{member.phone}}</span><span> </span></div>
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
@@ -27,17 +27,17 @@
                 <div class="row mt-2">
                     <div class="row">
                       <div class="col-md-4"><p>Nom et Prénom :</p></div>
-                      <div class="col-md-8"><p>{{member}}</p></div>
+                      <div class="col-md-8"><p>{{member | upper}}</p></div>
                       <div class="col-md-4"><p>N° de CNI :</p></div>
-                      <div class="col-md-8"><p>{{member.cni}}</p></div>
+                      <div class="col-md-8"><p>{{member.cni |upper}}</p></div>
                       <div class="col-md-4"><p>Matricule membre:</p></div>
-                      <div class="col-md-8"><p>{{member.matricule}}</p></div>
+                      <div class="col-md-8"><p>{{member.matricule|upper}}</p></div>
                       <div class="col-md-4"><p>Dette membre:</p></div>
-                      <div class="col-md-8"><p>2</p></div>
+                      <div class="col-md-8"><p>{{member.emprunts|length}}</p></div>
                       <div class="col-md-4"><p>Sanction membre:</p></div>
-                      <div class="col-md-8"><p>3</p></div>
+                      <div class="col-md-8"><p>{{member.sanctions|length}}</p></div>
                       <div class="col-md-4"><p>Aide Membre:</p></div>
-                      <div class="col-md-8"><p>3</p></div>
+                      <div class="col-md-8"><p>{{member.aides|length}}</p></div>
                     </div>
                 </div>
                 
