@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\SanctionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SanctionRepository::class)]
 class Sanction
@@ -17,6 +18,11 @@ class Sanction
     #[ORM\Column(length: 100)]
     private ?string $type = null;
 
+    #[Assert\Length(
+        min: 5,
+        max: 1000,
+    )]
+    #[Assert\NotBlank]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $raison = null;
 
@@ -24,6 +30,11 @@ class Sanction
     private ?Member $membre = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\Length(
+        min: 3,
+        max: 32,
+    )]
+    #[Assert\NotBlank]
     private ?string $intitule = null;
 
     public function getId(): ?int

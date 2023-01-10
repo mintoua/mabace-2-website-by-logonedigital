@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EmpruntRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EmpruntRepository::class)]
 class Emprunt
@@ -16,18 +17,25 @@ class Emprunt
     #[ORM\Column(length: 50)]
     private ?string $type = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column]
     private ?float $montant = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column]
     private ?\DateTime $createdAt = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    #[Assert\Type(\DateTime::class)]
     private ?\DateTime $endedAt = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column]
     private ?float $tauxInteret = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column]
     private ?float $tauxInteretDelai = null;
 
