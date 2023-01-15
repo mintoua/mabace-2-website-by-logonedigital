@@ -34,9 +34,7 @@ class EmpruntController extends AbstractController
 
     #[Route('/dashboard/emprunt/{matricule}', name: 'app_dashboard_add_emprunt')]
     public function addEmprunt(Request $request, Member $member )
-    {
-        //dd($member);
-        
+    {        
         $emprunt = new Emprunt();
         
         $form = $this->createForm(EmpruntType::class, $emprunt);
@@ -58,7 +56,7 @@ class EmpruntController extends AbstractController
             $this->flasher->addSuccess("Emprunt Attribué avec succés");
             return $this->redirectToRoute('app_dashboard_emprunts');
         }
-        return $this->render("",[
+        return $this->render("espace-comptable/emprunt/emprunt_new.html.twig",[
             "form"=>$form->createView()
         ]);
     }

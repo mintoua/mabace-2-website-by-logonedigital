@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class EmpruntType extends AbstractType
 {
@@ -23,15 +24,23 @@ class EmpruntType extends AbstractType
                     'Crédit Scolaire' => 'Crédit Scolaire',
                     'Crédit Familiale' => 'Crédit Familiale'
                 ],
+                'label' => 'Type Emprunt',
                 'empty_data' => 'friend'])
             ->add('montant',MoneyType::class,[
-                'currency'=>'XAF'
+                'currency'=>'XAF',
+                'label' => 'Montant'
             ])
             ->add('endedAt',DateType::class,[
                 'widget' => 'single_text',
+                'label' => 'To Be Completed Before',
+                'constraints' => [new NotNull()] 
             ])
-            ->add('tauxInteret',PercentType::class)
-            ->add('tauxInteretDelai',PercentType::class)
+            ->add('tauxInteret',PercentType::class,[
+                
+            ])
+            ->add('tauxInteretDelai',PercentType::class,[
+                'label' => 'Taux Interet après Delai'
+            ])
         ;
     }
 
