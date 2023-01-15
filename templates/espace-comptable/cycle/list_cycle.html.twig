@@ -1,0 +1,175 @@
+{% extends "base_compta.html.twig" %} {% block title %} Cycles {% endblock %}
+{% block body %}
+<!-- Page Wrapper -->
+<div id="wrapper">
+  <!-- Sidebar -->
+  {{ include("./includes/sidebar.html.twig") }}
+  <!-- End of Sidebar -->
+  
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div id="content">
+      <!-- Topbar -->
+      {{ include("./includes/navbar-compta.html.twig") }}
+      <!-- End of Topbar -->
+
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Cycles</h1>
+          <a
+            href="{{path("app_dashboard_cycle_new")}}"
+            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+            ><i class="fas fa-user-plus"></i> Ajouter un cycle</a
+          >
+        </div>
+        <!-- Page Heading -->
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+              Liste des cycles
+            </h6>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table
+                class="table table-bordered"
+                id="dataTable"
+                width="100%"
+                cellspacing="0"
+              >
+                <thead>
+                  <tr>
+                    <th>Nom du cycle</th>
+                    <th>Date de création</th>
+                    <th>Date début</th>
+                    <th>Date Fin</th>
+                    <th>Boucler le cyle</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>Nom du cycle</th>
+                    <th>Date de création</th>
+                    <th>Date début</th>
+                    <th>Date Fin</th>
+                    <th>Boucler le cyle</th>
+                    <th>Action</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  {% for cycle in cycles %}
+                  <tr>
+                    <td>{{ cycle.nomCycle }}</td>
+                    <td>{{ cycle.createdAt.format("M") }}
+                    {{ cycle.createdAt.format("j") }},
+                    {{ cycle.createdAt.format("Y") }}</td>
+                    <td>{{ cycle.dateDeb.format("M") }}
+                    {{ cycle.dateDeb.format("j") }},
+                    {{ cycle.dateDeb.format("Y") }}</td>
+                    <td>{{ cycle.dateFin.format("M") }}
+                    {{ cycle.dateFin.format("j") }},
+                    {{ cycle.dateFin.format("Y") }}</td>
+                    {% if not cycle.etat %}
+                    <td >
+                      <a href="{{ path("app_dashboard_cycle_edit_state",{id:cycle.id})}}"
+                          class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+                          > Non</a>
+                    </td>
+                    {% else %}
+                    <td> Oui </td>
+                    {% endif %}
+                    <td class="d-flex justify-content-center">
+                      <a href="{{path("app_dashboard_cycle_edit",{id:cycle.id})}}"><i class="fas fa-user-edit ml-2 mr-2"></i></a>
+                      <a href="{{path("app_dashboard_cycle_delete",{id:cycle.id})}}"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    {{ include("./includes/footer-compta.html.twig") }}
+    <!-- End of Footer -->
+  </div>
+  <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div
+  class="modal fade"
+  id="logoutModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button
+          class="close"
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Select "Logout" below if you are ready to end your current session.
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">
+          Cancel
+        </button>
+        <a class="btn btn-primary" href="login.html">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block javascript %}
+<!-- Bootstrap core JavaScript-->
+<script src="{{ asset('espace-compta/') }}vendor/jquery/jquery.min.js"></script>
+<script src="{{
+    asset('espace-compta/')
+  }}vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{{
+    asset('espace-compta/')
+  }}vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{{ asset('espace-compta/') }}js/sb-admin-2.min.js"></script>
+
+<!-- Page level plugins -->
+<script src="{{
+    asset('espace-compta/')
+  }}vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="{{
+    asset('espace-compta/')
+  }}vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="{{ asset('espace-compta/') }}js/demo/datatables-demo.js"></script>
+{% endblock %}

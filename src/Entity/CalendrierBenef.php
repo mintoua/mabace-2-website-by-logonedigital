@@ -36,6 +36,9 @@ class CalendrierBenef
     #[ORM\Column]
     private ?bool $etat = null;
 
+    #[ORM\OneToOne(mappedBy: 'calendrierBenef', cascade: ['persist', 'remove'])]
+    private ?Cycle $cycle = null;
+
     public function __construct()
     {
         $this->beneficieres = new ArrayCollection();
@@ -120,6 +123,28 @@ class CalendrierBenef
     public function setEtat(bool $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getCycle(): ?Cycle
+    {
+        return $this->cycle;
+    }
+
+    public function setCycle(?Cycle $cycle): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($cycle === null && $this->cycle !== null) {
+            $this->cycle->setCalendrierBenef(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($cycle !== null && $cycle->getCalendrierBenef() !== $this) {
+            $cycle->setCalendrierBenef($this);
+        }
+
+        $this->cycle = $cycle;
 
         return $this;
     }
