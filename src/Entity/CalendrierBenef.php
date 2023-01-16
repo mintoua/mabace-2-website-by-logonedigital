@@ -36,7 +36,13 @@ class CalendrierBenef
     #[ORM\Column]
     private ?bool $etat = null;
 
-    #[ORM\OneToOne(mappedBy: 'calendrierBenef', cascade: ['persist', 'remove'])]
+   
+
+    #[ORM\Column(nullable: true)]
+    private ?int $rang = null;
+
+    #[ORM\ManyToOne(inversedBy: 'calendrierBenefs')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Cycle $cycle = null;
 
     public function __construct()
@@ -127,6 +133,19 @@ class CalendrierBenef
         return $this;
     }
 
+
+    public function getRang(): ?int
+    {
+        return $this->rang;
+    }
+
+    public function setRang(?int $rang): self
+    {
+        $this->rang = $rang;
+
+        return $this;
+    }
+
     public function getCycle(): ?Cycle
     {
         return $this->cycle;
@@ -134,16 +153,6 @@ class CalendrierBenef
 
     public function setCycle(?Cycle $cycle): self
     {
-        // unset the owning side of the relation if necessary
-        if ($cycle === null && $this->cycle !== null) {
-            $this->cycle->setCalendrierBenef(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($cycle !== null && $cycle->getCalendrierBenef() !== $this) {
-            $cycle->setCalendrierBenef($this);
-        }
-
         $this->cycle = $cycle;
 
         return $this;

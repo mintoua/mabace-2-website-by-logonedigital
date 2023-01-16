@@ -31,8 +31,7 @@ class Member
     #[ORM\Column(length: 100)]
     private ?string $cni = null;
 
-    #[ORM\Column(length: 100, nullable: true)]
-    private ?string $email = null;
+    
 
     #[ORM\OneToMany(mappedBy: 'membre', targetEntity: Emprunt::class)]
     private Collection $emprunts;
@@ -125,18 +124,6 @@ class Member
     public function setCni(string $cni): self
     {
         $this->cni = $cni;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?string $email): self
-    {
-        $this->email = $email;
 
         return $this;
     }

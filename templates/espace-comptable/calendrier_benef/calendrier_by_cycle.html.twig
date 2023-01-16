@@ -1,4 +1,4 @@
-{% extends "base_compta.html.twig" %} {% block title %} membres {% endblock %}
+{% extends "base_compta.html.twig" %} {% block title %} tontine {% endblock %}
 {% block body %}
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -16,15 +16,21 @@
 
       <!-- Begin Page Content -->
       <div class="container-fluid">
-        <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Emprunts</h1>
+          <h1 class="h3 mb-0 text-gray-800">Calendrier bénéficières</h1>
+          <a
+            href="{{path("app_dashboard_calendrier_by_cycle", {id:cycle.id})}}"
+            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
+            ><i class="fas fa-user-plus"></i> Ajouter bénéficières</a
+          >
         </div>
+        <!-- Page Heading -->
+
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-              Listes des Emprunts
+               Bénéficières du cycle: {{cycle.nomCycle}}
             </h6>
           </div>
           <div class="card-body">
@@ -35,53 +41,54 @@
                 width="100%"
                 cellspacing="0"
               >
-
                 <thead>
                   <tr>
-                    <th>Membre</th>
-                    <th>Type</th>
-                    <th>Montant</th>
-                    <th>Taux</th>
-                    <th>Date début / Date fin</th>
-                    <th>Etat</th>
+                    <th>Date</th>
+                    <th>Nom Tontine</th>
+                    <th>Nom et prénom</th>
+                    <th>Matricule</th>
+                    <th>Rang</th>
+                    <th>A bouffer</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                    <th>Membre</th>
-                    <th>Type</th>
-                    <th>Montant</th>
-                    <th>Taux</th>
-                    <th>Date début / Date fin</th>
-                    <th>Etat</th>
+                    <th>Date</th>
+                    <th>Nom Tontine</th>
+                    <th>Nom et prénom</th>
+                    <th>Matricule</th>
+                    <th>Rang</th>
+                    <th>A bouffer</th>
                     <th>Action</th>
                   </tr>
                 </tfoot>
                 <tbody>
-                {% for emprunt in emprunts %}
+                  {% for benef in benefs %}
                   <tr>
-                    <td>{{ emprunt.membre }}</td>
-                    <td>{{ emprunt.type }}</td>
-                    <td>{{ emprunt.montant }} FCFA</td>
-                    <td>{{ emprunt.tauxInteret }}%</td>
-                    <td>{{ emprunt.createdAt | date("d-m-y") }} / {{ emprunt.endedAt | date("d-m-y") }}</td>
-                    {% if not emprunt.etat %}
-                    <td>
-                      <a href="{{ path("app_add_remboursement",{id:emprunt.id})}}"
+                    <td>{{ benef.dateBenef.format("M") }}
+                    {{ benef.dateBenef.format("j") }},
+                    {{ benef.dateBenef.format("Y") }}</td>
+                    <td>{{ benef.tontine}}</td>
+                    <td>{{ benef.membre}}</td>
+                    <td>{{ benef.membre.matricule | upper}}</td>   
+                     <td>{{ benef.rang}}</td>   
+                    {% if not benef.etat %}
+                    <td >
+                      <a href="{{ path("app_dashboard_add_benef",{matricule:benef.membre.matricule, id:benef.id})}}"
                           class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-                          > Non Remboursé</a>
+                          > Non</a>
                     </td>
                     {% else %}
-                    <td> Remboursé </td>
+                    <td> Oui </td>
                     {% endif %}
+                    
                     <td class="d-flex justify-content-center">
-                      <a href=""><i class="fas fa-eye"></i></a>
-                      <a href=""><i class="fas fa-user-edit ml-2 mr-2"></i></a>
-                      <a href=""><i class="fas fa-trash-alt"></i></a>
+                       <a href="{{path("app_dashboard_calendrier_benef_update",{id:benef.id})}}"><i class="fas fa-user-edit ml-2 mr-2"></i></a>
+                      <a href="{{path("app_dashboard_calendrier_benef_delete",{id:benef.id})}}"><i class="fas fa-trash-alt"></i></a> 
                     </td>
                   </tr>
-                {% endfor %}
+                  {% endfor %}
                 </tbody>
               </table>
             </div>

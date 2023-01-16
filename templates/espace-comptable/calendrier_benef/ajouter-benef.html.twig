@@ -1,5 +1,5 @@
-{% extends "base_compta.html.twig" %} {% block title %} tontine {% endblock %}
-{% block style %}
+{% extends "base_compta.html.twig" %} {% block title %} Ajouter un bénéficière
+au calendrier {% endblock %} {% block style %}
 <link
   href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
   rel="stylesheet"
@@ -50,6 +50,17 @@
               <label for="">Choisir le membre bénéficière</label>
               {{
                 form_row(form.membre, {
+                  label: false,
+                  attr: {
+                    class: "list-members"
+                  }
+                })
+              }}
+            </div>
+            <div class="mb-3">
+              <label for="">Rang</label>
+              {{
+                form_row(form.rang, {
                   label: false,
                   attr: {
                     class: "list-members"
@@ -145,7 +156,6 @@
 <script src="{{ asset('espace-compta/') }}js/demo/datatables-demo.js"></script>
 <script>
   $(document).ready(function () {
-    console.log("hello world");
     $("#benefs_membre").select2();
   });
 </script>

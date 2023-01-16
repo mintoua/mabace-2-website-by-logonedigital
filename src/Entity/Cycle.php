@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CycleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,11 +31,18 @@ class Cycle
     #[ORM\Column(nullable: true)]
     private ?bool $etat = null;
 
-    #[ORM\OneToOne(inversedBy: 'cycle', cascade: ['persist', 'remove'])]
-    private ?CalendrierBenef $calendrierBenef = null;
+   
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $commentaire = null;
+
+    #[ORM\OneToMany(mappedBy: 'cycle', targetEntity: CalendrierBenef::class, orphanRemoval: true)]
+    private Collection $calendrierBenefs;
+
+    public function __construct()
+    {
+        $this->calendrierBenefs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -100,18 +109,6 @@ class Cycle
         return $this;
     }
 
-    public function getCalendrierBenef(): ?CalendrierBenef
-    {
-        return $this->calendrierBenef;
-    }
-
-    public function setCalendrierBenef(?CalendrierBenef $calendrierBenef): self
-    {
-        $this->calendrierBenef = $calendrierBenef;
-
-        return $this;
-    }
-
     public function getCommentaire(): ?string
     {
         return $this->commentaire;
@@ -120,6 +117,36 @@ class Cycle
     public function setCommentaire(?string $commentaire): self
     {
         $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CalendrierBenef>
+     */
+    public function getCalendrierBenefs(): Collection
+    {
+        return $this->calendrierBenefs;
+    }
+
+    public function addCalendrierBenef(CalendrierBenef $calendrierBenef): self
+    {
+        if (!$this->calendrierBenefs->contains($calendrierBenef)) {
+            $this->calendrierBenefs->add($calendrierBenef);
+            $calendrierBenef->setCycle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCalendrierBenef(CalendrierBenef $calendrierBenef): self
+    {
+        if ($this->calendrierBenefs->removeElement($calendrierBenef)) {
+            // set the owning side to null (unless already changed)
+            if ($calendrierBenef->getCycle() === $this) {
+                $calendrierBenef->setCycle(null);
+            }
+        }
 
         return $this;
     }

@@ -3,13 +3,16 @@
 namespace App\Form;
 
 use App\Entity\CalendrierBenef;
+use App\Entity\Cycle;
 use App\Entity\Member;
 use App\Entity\Tontine;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 class BenefsType extends AbstractType
 {
@@ -26,6 +29,12 @@ class BenefsType extends AbstractType
             ])
             ->add('membre',EntityType::class,[
                 'class'=>Member::class,
+            ])
+            ->add('rang',TextType::class,[
+                "constraints"=>[
+                    new NotNull()
+                ]
+
             ])
         ;
     }

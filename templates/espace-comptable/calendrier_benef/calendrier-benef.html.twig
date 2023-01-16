@@ -19,7 +19,7 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 class="h3 mb-0 text-gray-800">Calendrier bénéficières</h1>
           <a
-            href="{{path("app_dashboard_calendrier_benef_add")}}"
+            href="#"
             class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
             ><i class="fas fa-user-plus"></i> Ajouter bénéficières</a
           >
@@ -47,6 +47,7 @@
                     <th>Nom Tontine</th>
                     <th>Nom et prénom</th>
                     <th>Matricule</th>
+                    <th>Rang</th>
                     <th>A bouffer</th>
                     <th>Action</th>
                   </tr>
@@ -57,6 +58,7 @@
                     <th>Nom Tontine</th>
                     <th>Nom et prénom</th>
                     <th>Matricule</th>
+                    <th>Rang</th>
                     <th>A bouffer</th>
                     <th>Action</th>
                   </tr>
@@ -70,6 +72,7 @@
                     <td>{{ benef.tontine}}</td>
                     <td>{{ benef.membre}}</td>
                     <td>{{ benef.membre.matricule | upper}}</td>   
+                     <td>{{ benef.rang}}</td>   
                     {% if not benef.etat %}
                     <td >
                       <a href="{{ path("app_dashboard_add_benef",{matricule:benef.membre.matricule, id:benef.id})}}"

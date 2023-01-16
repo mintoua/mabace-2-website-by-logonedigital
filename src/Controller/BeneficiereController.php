@@ -3,9 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Beneficiere;
-use App\Entity\CalendrierBenef;
-use App\Entity\Member;
 use App\Repository\BeneficiereRepository;
+use App\Repository\CalendrierBenefRepository;
 use App\Repository\MemberRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,9 +17,18 @@ class BeneficiereController extends AbstractController
     public function __construct(
         private BeneficiereRepository $benefRepo,
         private MemberRepository $memberRepository, 
-        private EntityManagerInterface $em
+        private EntityManagerInterface $em,
+        private CalendrierBenefRepository $calendrierBenefRepo
     ){
 
+    }
+
+    #[Route("dashboard/tontine/cycle/beneficière/{id}", name:"app_dashboard_benef_by_cycle")]
+    public function listBenefByCycle(int $id):Response{
+        
+        return $this->render("espace-comptable/beneficiere/beneficiere.html.twig",[
+            "benefs"=>$this->calendrierBenefRepo->listBenefByStateAndCycle($id)
+        ]);
     }
 
     #[Route('/dashboard/beneficiere', name: 'app_dashboard_beneficiere')]

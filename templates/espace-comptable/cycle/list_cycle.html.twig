@@ -84,7 +84,14 @@
                     <td> Oui </td>
                     {% endif %}
                     <td class="d-flex justify-content-center">
-                      <a href="{{path("app_dashboard_cycle_edit",{id:cycle.id})}}"><i class="fas fa-user-edit ml-2 mr-2"></i></a>
+                      <a href="{{path("app_dashboard_benef_by_cycle", {id:cycle.id})}}" class="mr-1" title="liste des personne ayant déjà bouffés"><i class="far fa-check-circle"></i></a>
+                      {% if cycle.calendrierBenefs | length  %}
+                        <a href="{{path("app_dashboard_cycle_calendrier_benef",{id:cycle.id})}}" title="consulter le calendrier associé à ce cycle"><i class="far fa-calendar"></i></a>
+                      {% else %}
+                       <a href="{{path("app_dashboard_calendrier_by_cycle", {id:cycle.id})}}" title="ajouter un bénécière au calendrier"><i class="fas fa-user-plus"></i></a>
+                      {% endif %}
+                      
+                      <a href="{{path("app_dashboard_cycle_edit",{id:cycle.id})}}"><i class="far fa-edit ml-1 mr-1"></i></a>
                       <a href="{{path("app_dashboard_cycle_delete",{id:cycle.id})}}"><i class="fas fa-trash-alt"></i></a>
                     </td>
                   </tr>

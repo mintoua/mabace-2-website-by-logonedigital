@@ -17,12 +17,8 @@
       <!-- Begin Page Content -->
       <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Membres</h1>
-          <a
-            href="{{path("app_dashboard_add_member")}}"
-            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-            ><i class="fas fa-user-plus"></i> Ajouter Membre</a
-          >
+          <h1 class="h3 mb-0 text-gray-800">Bénéficières</h1>
+          
         </div>
         <!-- Page Heading -->
 
@@ -30,7 +26,7 @@
         <div class="card shadow mb-4">
           <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-              Liste Membres
+              Liste des bénéfières
             </h6>
           </div>
           <div class="card-body">
@@ -64,14 +60,14 @@
                 <tbody>
                   {% for benef in benefs %}
                   <tr>
-                    <td>{{ benef.membres }}</td>
-                    <td>{{ benef.membres.matricule }}</td>
-                    <td>{{ benef.calendrierBenef.tontine }}</td>
-                    <td>{{  benef.calendrierBenef.tontine.montant }}</td>
+                    <td>{{ benef.membre }}</td>
+                    <td>{{ benef.membre.matricule }}</td>
+                    <td>{{ benef.tontine }}</td>
+                    <td>{{  benef.tontine.montant }}</td>
                     <td>
-                      {{ benef.calendrierBenef.dateBenef.format("M") }}
-                      {{ benef.calendrierBenef.dateBenef.format("j") }},
-                      {{ benef.calendrierBenef.dateBenef.format("Y") }}
+                      {{ benef.dateBenef.format("M") }}
+                      {{ benef.dateBenef.format("j") }},
+                      {{ benef.dateBenef.format("Y") }}
                     </td>
                     <td class="d-flex justify-content-center">
                       <a href="{{path("app_dashboard_calendrier_benef_delete",{id:benef.id})}}"><i class="fas fa-trash-alt"></i></a> 

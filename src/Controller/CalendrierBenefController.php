@@ -29,30 +29,33 @@ class CalendrierBenefController extends AbstractController
         ]);
     }
 
-    #[Route(path:"/dashboard/calendrier_beneficieres/add_benef", name:"app_dashboard_calendrier_benef_add")]
-    public function addBenef(Request $request):Response
-    {
-        $benef = new CalendrierBenef();
-        $form = $this->createForm(BenefsType::class, $benef);
-        $form->handleRequest($request);
+    // #[Route(path:"/dashboard/calendrier_beneficieres/add_benef", name:"app_dashboard_calendrier_benef_add")]
+    // public function addBenef(Request $request):Response
+    // {
+    //     $benef = new CalendrierBenef();
+    //     $form = $this->createForm(BenefsType::class, $benef);
+    //     $form->handleRequest($request);
 
-        if($form->isSubmitted() and $form->isValid()){
-            $benef->setEtat(false);
-            $this->em->persist($benef);
-            $this->em->flush();
-            return $this->redirectToRoute("app_dashboard_calendrier_benef");
-        }
+    //     if($form->isSubmitted() and $form->isValid()){
+    //         $benef->setEtat(false);
+    //         $this->em->persist($benef);
+    //         $this->em->flush();
+    //         return $this->redirectToRoute("app_dashboard_calendrier_benef");
+    //     }
 
-        return $this->render("espace-comptable/calendrier_benef/ajouter-benef.html.twig",[
-            "form"=>$form->createView()
-        ]);
-    }
+    //     return $this->render("espace-comptable/calendrier_benef/ajouter-benef.html.twig",[
+    //         "form"=>$form->createView()
+    //     ]);
+    // }
 
     #[Route(path:"/dashboard/calendrier_beneficieres/delete/{id}", name:"app_dashboard_calendrier_benef_delete")]
     public function deleteBenef(CalendrierBenef $benef):Response{
         $this->em->remove($benef);
         $this->em->flush();
-        return $this->redirectToRoute("app_dashboard_calendrier_benef");
+        
+        return $this->redirectToRoute("app_dashboard_cycle_calendrier_benef", [
+                "id"=>$benef->getCycle()->getId()
+            ],301);
     }
 
 
@@ -65,7 +68,9 @@ class CalendrierBenefController extends AbstractController
 
         if($form->isSubmitted() and $form->isValid()){
             $this->em->flush();
-            return $this->redirectToRoute("app_dashboard_calendrier_benef");
+            return $this->redirectToRoute("app_dashboard_cycle_calendrier_benef", [
+                "id"=>$benef->getCycle()->getId()
+            ],301);
         }
 
         return $this->render("espace-comptable/calendrier_benef/update-benef.html.twig",[

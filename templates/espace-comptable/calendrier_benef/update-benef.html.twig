@@ -1,5 +1,14 @@
-{% extends "base_compta.html.twig" %} {% block title %} tontine {% endblock %}
-{% block body %}
+{% extends "base_compta.html.twig" %} {% block title %} Modifier bénéficière
+dans un calendrier {% endblock %} {% block style %}
+<link
+  href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+  rel="stylesheet"
+/>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"
+  defer
+></script>
+{% endblock %} {% block body %}
 <!-- Page Wrapper -->
 <div id="wrapper">
   <!-- Sidebar -->
@@ -22,6 +31,7 @@
             {{ form_start(form) }}
             <h1 class="text-uppercase text-center">Modifier bénéficière</h1>
             <div class="mb-3">
+              <label for="">Date d'octroi</label>
               {{
                 form_row(form.dateBenef, {
                   label: false,
@@ -29,6 +39,7 @@
               }}
             </div>
             <div class="mb-3">
+              <label for="">Nom de la tontine</label>
               {{
                 form_row(form.tontine, {
                   label: false,
@@ -36,9 +47,24 @@
               }}
             </div>
             <div class="mb-3">
+              <label for="">Choisir le membre bénéficière</label>
               {{
                 form_row(form.membre, {
                   label: false,
+                  attr: {
+                    class: "list-members"
+                  }
+                })
+              }}
+            </div>
+            <div class="mb-3">
+              <label for="">Rang</label>
+              {{
+                form_row(form.rang, {
+                  label: false,
+                  attr: {
+                    class: "list-members"
+                  }
                 })
               }}
             </div>
@@ -126,6 +152,10 @@
     asset('espace-compta/')
   }}vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-<!-- Page level custom scripts -->
+<script>
+  $(document).ready(function () {
+    $("#benefs_membre").select2();
+  });
+</script>
 <script src="{{ asset('espace-compta/') }}js/demo/datatables-demo.js"></script>
 {% endblock %}

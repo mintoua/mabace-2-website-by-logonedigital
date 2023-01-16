@@ -39,6 +39,39 @@ class CalendrierBenefRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByCycle(int $cycle): array
+   {
+       return $this->createQueryBuilder('c')
+           ->andWhere('c.cycle = :val')
+           ->setParameter('val', $cycle)
+           ->orderBy('c.rang', 'ASC')
+           ->getQuery()
+           ->getResult()
+       ;
+   }
+
+   public function checkRang(int $cycle, int $rang):array{
+    return $this->createQueryBuilder("c")
+        ->andWhere('c.cycle = :val')
+           ->setParameter('val', $cycle)
+           ->andWhere("c.rang = :rang")
+           ->setParameter("rang", $rang)
+           ->orderBy('c.rang', 'ASC')
+           ->getQuery()
+           ->getResult();
+   }
+
+   public function listBenefByStateAndCycle(int $cycle):array{
+    return $this->createQueryBuilder("c")
+        ->andWhere('c.cycle = :val')
+           ->setParameter('val', $cycle)
+           ->andWhere("c.etat = :state")
+           ->setParameter("state",true)
+           ->orderBy('c.rang', 'ASC')
+           ->getQuery()
+           ->getResult();
+   }
+
 //    /**
 //     * @return CalendrierBenef[] Returns an array of CalendrierBenef objects
 //     */
