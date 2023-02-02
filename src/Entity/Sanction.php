@@ -23,6 +23,12 @@ class Sanction
         max: 1000,
     )]
     #[Assert\NotBlank]
+    #[Assert\Positive]
+    #[Assert\Range(
+        min: 1,
+        max: 24,
+        notInRangeMessage: 'Vous devez être entre 1 à 24 semaines',
+    )]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $raison = null;
 

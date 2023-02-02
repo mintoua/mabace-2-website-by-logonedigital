@@ -46,6 +46,7 @@ class Emprunt
     #[ORM\OneToMany(mappedBy: 'emprunt', targetEntity: Remboursement::class)]
     private Collection $remboursements;
 
+    #[Assert\NotBlank]
     #[ORM\Column]
     private ?int $duree = null;
 
