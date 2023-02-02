@@ -14,27 +14,33 @@ class Remboursement
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $refundAt = null;
 
-    #[ORM\OneToOne(inversedBy: 'remboursement', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'remboursements')]
     private ?Emprunt $emprunt = null;
+
+    #[ORM\Column(length: 15)]
+    private ?string $date = null;
+
+    #[ORM\Column]
+    private ?float $interet = null;
+
+    #[ORM\Column]
+    private ?float $amortissement = null;
+
+    #[ORM\Column]
+    private ?float $hebdomadaire = null;
+
+    #[ORM\Column]
+    private ?bool $etat = null;
+
+    public function __construct()
+    {
+        
+    }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getRefundAt(): ?\DateTimeInterface
-    {
-        return $this->refundAt;
-    }
-
-    public function setRefundAt(\DateTimeInterface $refundAt): self
-    {
-        $this->refundAt = $refundAt;
-
-        return $this;
     }
 
     public function getEmprunt(): ?Emprunt
@@ -45,6 +51,66 @@ class Remboursement
     public function setEmprunt(?Emprunt $emprunt): self
     {
         $this->emprunt = $emprunt;
+
+        return $this;
+    }
+
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
+    public function setDate(string $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getInteret(): ?float
+    {
+        return $this->interet;
+    }
+
+    public function setInteret(float $interet): self
+    {
+        $this->interet = $interet;
+
+        return $this;
+    }
+
+    public function getAmortissement(): ?float
+    {
+        return $this->amortissement;
+    }
+
+    public function setAmortissement(float $amortissement): self
+    {
+        $this->amortissement = $amortissement;
+
+        return $this;
+    }
+
+    public function getHebdomadaire(): ?float
+    {
+        return $this->hebdomadaire;
+    }
+
+    public function setHebdomadaire(float $hebdomadaire): self
+    {
+        $this->hebdomadaire = $hebdomadaire;
+
+        return $this;
+    }
+
+    public function isEtat(): ?bool
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(bool $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

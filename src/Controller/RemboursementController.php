@@ -28,20 +28,14 @@ class RemboursementController extends AbstractController
         ]);
     }
 
-    #[Route('/dashboad/emprunt/ajouter-remboursement/{id}', name: 'app_add_remboursement')]
-    public function addRefund(Emprunt $emprunt){
+    #[Route('/dashboad/emprunt/update-remboursement/{id}', name: 'app_update_remboursement')]
+    public function addRefund(Remboursement $echeance){
 
-        $refund = new Remboursement();
-        $refund->setRefundAt(new \DateTime('now'));
-        $refund->setEmprunt($emprunt);
-        
-        $emprunt->setEtat(1);
-        $emprunt->setRemboursement($refund);
-        $this->em->persist($refund);
+        $echeance->setEtat(1);
         $this->em->flush();
 
         $this->flasher->addSuccess("Remboursement Enregistré avec succés");
-        return $this->redirectToRoute('app_dashboard_remboursements');
+        return $this->redirectToRoute('app_dashboard_emprunt_single',["id"=>$echeance->getEmprunt()->getId()]);
     }
 
     #[Route('/dashboard/remboursement/supprimer/{id}', name: 'app_delete_remboursement')]

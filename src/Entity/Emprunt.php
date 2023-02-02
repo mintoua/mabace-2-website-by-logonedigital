@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EmpruntRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -21,15 +23,11 @@ class Emprunt
     #[ORM\Column]
     private ?float $montant = null;
 
-    #[Assert\NotBlank]
-    #[ORM\Column]
-    private ?\DateTime $createdAt = null;
+    #[ORM\Column(length: 50)]
+    private ?string $createdAt = null;
 
-    #[ORM\Column]
-    #[Assert\NotBlank]
-    #[Assert\NotNull]
-    #[Assert\Type(\DateTime::class)]
-    private ?\DateTime $endedAt = null;
+    #[ORM\Column(length: 50)]
+    private ?string $endedAt = null;
 
     #[Assert\NotBlank]
     #[ORM\Column]
@@ -45,9 +43,16 @@ class Emprunt
     #[ORM\Column]
     private ?bool $etat = null;
 
-    #[ORM\OneToOne(mappedBy: 'emprunt', cascade: ['persist', 'remove'])]
-    private ?Remboursement $remboursement = null;
+    #[ORM\OneToMany(mappedBy: 'emprunt', targetEntity: Remboursement::class)]
+    private Collection $remboursements;
 
+    #[ORM\Column]
+    private ?int $duree = null;
+
+    public function __construct()
+    {
+        $this->remboursements = new ArrayCollection();
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -77,24 +82,24 @@ class Emprunt
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTime
+    public function getCreatedAt(): ?string
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTime $createdAt): self
+    public function setCreatedAt(string $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getEndedAt(): ?\DateTime
+    public function getEndedAt(): ?string
     {
         return $this->endedAt;
     }
 
-    public function setEndedAt(\DateTime $endedAt): self
+    public function setEndedAt(string $endedAt): self
     {
         $this->endedAt = $endedAt;
 
@@ -149,25 +154,43 @@ class Emprunt
         return $this;
     }
 
-    public function getRemboursement(): ?Remboursement
+    public function getRemboursements(): Collection
     {
-        return $this->remboursement;
+        return $this->remboursements;
     }
 
-    public function setRemboursement(?Remboursement $remboursement): self
+    public function addRemboursement(Remboursement $remboursement): self
     {
-        // unset the owning side of the relation if necessary
-        if ($remboursement === null && $this->remboursement !== null) {
-            $this->remboursement->setEmprunt(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($remboursement !== null && $remboursement->getEmprunt() !== $this) {
+        if (!$this->remboursements->contains($remboursement)) {
+            $this->remboursements->add($remboursement);
             $remboursement->setEmprunt($this);
         }
 
-        $this->remboursement = $remboursement;
+        return $this;
+    }
+
+    public function removeRemboursement(Remboursement $remboursement): self
+    {
+        if ($this->remboursements->removeElement($remboursement)) {
+            // set the owning side to null (unless already changed)
+            if ($remboursement->getEmprunt() === $this) {
+                $remboursement->setEmprunt(null);
+            }
+        }
 
         return $this;
     }
+
+    public function getDuree(): ?int
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(int $duree): self
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
 }
