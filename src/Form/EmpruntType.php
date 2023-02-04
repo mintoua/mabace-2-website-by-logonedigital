@@ -30,17 +30,9 @@ class EmpruntType extends AbstractType
                 'currency'=>'XAF',
                 'label' => 'Montant'
             ])
-            ->add('endedAt',DateType::class,[
-                'widget' => 'single_text',
-                'label' => 'To Be Completed Before',
-                'constraints' => [new NotNull()] 
-            ])
-            ->add('tauxInteret',PercentType::class,[
-                
-            ])
-            ->add('tauxInteretDelai',PercentType::class,[
-                'label' => 'Taux Interet après Delai'
-            ])
+            ->add('duree')
+            ->add('tauxInteret',PercentType::class)
+            ->add('tauxInteretDelai',PercentType::class)
         ;
     }
 

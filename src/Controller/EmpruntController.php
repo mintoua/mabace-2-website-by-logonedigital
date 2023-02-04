@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Emprunt;
 use App\Entity\Member;
+use App\Entity\Remboursement;
 use App\Form\EmpruntType;
 use App\Repository\EmpruntRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,24 +33,53 @@ class EmpruntController extends AbstractController
         ]);
     }
 
+    #[Route(path:"/dashoard/emprunt_detail/{id}", name:"app_dashboard_emprunt_single")]
+    public function empruntDetail(Emprunt $emprunt):Response{
+
+        return $this->render("espace-comptable/emprunt/emprunt_single.html.twig", [
+            "emprunt"=>$emprunt,
+            "remboursements"=>$emprunt->getRemboursements()
+        ]);
+    }
+
     #[Route('/dashboard/emprunt/{matricule}', name: 'app_dashboard_add_emprunt')]
     public function addEmprunt(Request $request, Member $member )
     {        
         $emprunt = new Emprunt();
-        
+
         $form = $this->createForm(EmpruntType::class, $emprunt);
         $form->handleRequest($request);
 
         if($form->isSubmitted() and $form->isValid()){
+
             $num = count($this->empruntRepository->getEmpruntByTypeOfMember($member->getId(),$emprunt->getType()));
             if($num == 3){
                 $this->flasher->addError("Ce membre n'a plus droit à ce type d'emprunt");
             return $this->redirectToRoute('app_dashboard_member');
             }
             $emprunt->setMembre($member);
-            $emprunt->setCreatedAt(new \DateTime('now'));
+            $startdate  = strtotime("Today");
+            $emprunt->setCreatedAt(date("Y-m-d",$startdate));
+            $endedDate = strtotime("+".$emprunt->getDuree()."week",$startdate);
+            $emprunt->setEndedAt(date("Y-m-d",$endedDate));
             $emprunt->setEtat(0);
-    
+            
+            $interet = ( $emprunt->getMontant() * $emprunt->getTauxInteret() ) / $emprunt->getDuree();
+            $amortissement = $emprunt->getMontant() / $emprunt->getDuree();
+            $hebdomadaire = $interet + $amortissement;
+
+            for ( $week = 1; $week <= $emprunt->getDuree(); $week++){
+                $echellon = new Remboursement();
+                $echellon->setDate(date("Y-m-d",strtotime("+".$week."week",$startdate)));
+                $echellon->setInteret((float)number_format((float)$interet, 3, '.', ''));
+                $echellon->setAmortissement((float)number_format((float)$amortissement, 3, '.', ''));
+                $echellon->setHebdomadaire((float)number_format((float)$hebdomadaire, 3, '.', ''));
+                $echellon->setEtat(0);
+                $echellon->setEmprunt($emprunt);
+                $emprunt->addRemboursement($echellon);
+                $this->em->persist($echellon);
+            }
+
             $this->em->persist($emprunt);
             $this->em->flush();
             
@@ -63,6 +93,9 @@ class EmpruntController extends AbstractController
 
     #[Route(path:"/dashboard/emprunt/supprimer/{id}", name:"app_dashboard_emprunt_delete")]
     public function deleteEmprunt(Emprunt $emprunt):Response{
+        foreach($emprunt->getRemboursements() as $echeance){
+           $this->em->remove($echeance);
+        }
         $this->em->remove($emprunt);
         $this->em->flush();
         $this->flasher->addSuccess("Emprunt supprimé");

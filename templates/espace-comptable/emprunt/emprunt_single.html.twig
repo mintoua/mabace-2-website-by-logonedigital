@@ -5,7 +5,7 @@
   <!-- Sidebar -->
   {{ include("./includes/sidebar.html.twig") }}
   <!-- End of Sidebar -->
-
+  
   <!-- Content Wrapper -->
   <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
@@ -14,20 +14,8 @@
       {{ include("./includes/navbar-compta.html.twig") }}
       <!-- End of Topbar -->
 
-      <!-- Begin Page Content -->
-      <div class="container-fluid">
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Emprunts</h1>
-        </div>
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-          <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">
-              Listes des Emprunts
-            </h6>
-          </div>
-          <div class="card-body">
+      <div class="container-fluid rounded bg-white">
+                <div class="card-body">
             <div class="table-responsive">
               <table
                 class="table table-bordered"
@@ -38,57 +26,40 @@
 
                 <thead>
                   <tr>
-                    <th>Membre</th>
-                    <th>Type</th>
-                    <th>Montant</th>
-                    <th>Taux</th>
-                    <th>Date début / Date fin</th>
-                    <th>Etat</th>
-                    <th>Action</th>
+      <th scope="col">Echéance</th>
+      <th scope="col">Intérêts</th>
+      <th scope="col">Amortissement</th>
+      <th scope="col">Hebdomadaire</th>
+      <th scope="col">Etat</th>
                   </tr>
                 </thead>
-                <tfoot>
-                  <tr>
-                    <th>Membre</th>
-                    <th>Type</th>
-                    <th>Montant</th>
-                    <th>Taux</th>
-                    <th>Date début / Date fin</th>
-                    <th>Etat</th>
-                    <th>Action</th>
-                  </tr>
-                </tfoot>
                 <tbody>
-                {% for emprunt in emprunts %}
-                  <tr>
-                    <td>{{ emprunt.membre }}</td>
-                    <td>{{ emprunt.type }}</td>
-                    <td>{{ emprunt.montant | number_format}} FCFA</td>
-                    <td>{{ emprunt.tauxInteret * 100 }}%</td>
-                    <td>{{ emprunt.createdAt | date("d-m-y") }} / {{ emprunt.endedAt | date("d-m-y") }}</td>
-                    {% if not emprunt.etat %}
-                    <td>
-                      <a href="#"
-                          class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-                          > Non Remboursé</a>
-                    </td>
-                    {% else %}
-                    <td> Remboursé </td>
-                    {% endif %}
-                    <td class="d-flex justify-content-center">
-                      <a href="{{ path('app_dashboard_emprunt_single',{id:emprunt.id})}}"><i class="fas fa-eye"></i></a>
-                      <a href="{{ path('app_dashboard_emprunt_edit',{id:emprunt.id})}}"><i class="fas fa-edit ml-2 mr-2"></i></a>
-                      <a href="{{ path('app_dashboard_emprunt_delete',{id:emprunt.id})}}"><i class="fas fa-trash-alt"></i></a>
-                    </td>
-                  </tr>
-                {% endfor %}
+    {% for echeance in remboursements %}
+    <tr>
+      <th>{{ echeance.date }}</th>
+      <td>{{ echeance.interet | number_format }} FCFA</td>
+      <td>{{ echeance.amortissement | number_format}} FCFA</td>
+      <td>{{ echeance.hebdomadaire | number_format}} FCFA</td>
+  
+      <td>
+      {% if echeance.etat %}
+      <a href="#" class="btn btn-primary disabled" tabindex="-1" aria-disabled="true" role="button" data-bs-toggle="button">Payé</a>
+      {% else %}
+      <a href="{{path("app_update_remboursement",{id:echeance.id})}}" class="btn btn-primary active" role="button" data-bs-toggle="button" aria-pressed="true">Non Payé</a>
+      {% endif %}
+      </td>
+      
+
+    </tr>
+    {% endfor %}
                 </tbody>
               </table>
             </div>
           </div>
-        </div>
-      </div>
-      <!-- /.container-fluid -->
+    </div>
+</div>
+</div>
+</div>
     </div>
     <!-- End of Main Content -->
 
