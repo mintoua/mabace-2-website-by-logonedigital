@@ -1,0 +1,70 @@
+<div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-8 col-md-8 col-auto">
+            {{ form_start(form) }}
+            <h1 class="text-uppercase text-center">Ajouter un membre</h1>
+            <div class="mb-3">
+              {{
+                form_row(form.lastname, {
+                  label: false,
+                  attr: {
+                    class: "form-control",
+                    placeholder: "Nom"
+                  }
+                })
+              }}
+            </div>
+            <div class="mb-3">
+              {{
+                form_row(form.firstname, {
+                  label: false,
+                  attr: {
+                    class: "form-control",
+                    placeholder: "Prénom"
+                  }
+                })
+              }}
+            </div>
+            <div class="mb-3">
+              {{
+                form_row(form.matricule, {
+                  label: false,
+                  attr: {
+                    class: "form-control",
+                    placeholder: "Matricule"
+                  }
+                })
+              }}
+            </div>
+            <div class="mb-3">
+              {{
+                form_row(form.phone, {
+                  label: false,
+                  attr: {
+                    class: "form-control",
+                    placeholder: "Téléphone"
+                  }
+                })
+              }}
+            </div>
+            <div class="mb-3">
+              {{
+                form_row(form.cni, {
+                  label: false,
+                  attr: {
+                    class: "form-control",
+                    placeholder: "Numéro de CNI"
+                  }
+                })
+              }}
+            </div>
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary w-100">
+                Submit
+              </button>
+            </div>
+            {{ form_end(form) }}
+          </div>
+        </div>
+      </div>
