@@ -51,6 +51,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $rgpd = null;
 
+    public function __toString()
+    {
+        return $this->getLastname()." ".$this->getFirstname();
+    }
 
     public function getId(): ?int
     {

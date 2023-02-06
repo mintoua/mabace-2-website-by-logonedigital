@@ -80,13 +80,14 @@ class CycleController extends AbstractController
             "form"=>$form->createView()
         ]);
     }
+    
     #[Route("/dashboard/totine/cycle/delete/{id}", name:"app_dashboard_cycle_delete")]
     public function deleteCycle(Cycle $cycle):Response{
-        
+        //dd('hello world!');
         $this->em->remove($cycle);
         $this->em->flush();
         $this->flasher->addSuccess("Ce cycle à bien été supprimé");
-        return $this->render("app_dashboard_cycle");
+        return $this->redirectToRoute("app_dashboard_cycle");
     }
 
     #[Route("/dashboard/totine/cycle/edit_state/{id}", name:"app_dashboard_cycle_edit_state")]

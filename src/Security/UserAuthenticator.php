@@ -50,7 +50,10 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($this->urlGenerator->generate('admin'));
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        if($this->authChecker->isGranted('ROLE_COMPTABLE') ){
+            return new RedirectResponse($this->urlGenerator->generate('admin'));
+        }
+        return new RedirectResponse($this->urlGenerator->generate('app_dashboard'));
     }
 
     protected function getLoginUrl(Request $request): string

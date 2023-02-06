@@ -20,8 +20,6 @@ security:
       lazy: true
       provider: app_user_provider
       custom_authenticator: App\Security\UserAuthenticator
-      
-        
 
       logout:
         path: app_logout
@@ -42,6 +40,7 @@ security:
     ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
+    - { path: ^/dashboard, roles: ROLE_COMPTABLE }
     # - { path: ^/profile, roles: ROLE_USER }
     - { path: ^/logout, role: PUBLIC_ACCESS }
 
